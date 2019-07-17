@@ -104,8 +104,12 @@
  *
  * :[-1, 0, 1, 2, 3, 4, 5, 6, 7]
  */
-#define SERIAL_PORT 0
+#define SERIAL_PORT -1 //Evg
+//-1 is for USB CDC
+//1 is for TFT
+//6 is for ESP-01S
 
+/// 1 and -1
 /**
  * Select a secondary serial port on the board to use for communication with the host.
  * This allows the connection of wireless adapters (for instance) to non-default port pins.
@@ -113,7 +117,7 @@
  *
  * :[-1, 0, 1, 2, 3, 4, 5, 6, 7]
  */
-//#define SERIAL_PORT_2 -1
+#define SERIAL_PORT_2 1 //Evg
 
 /**
  * This setting determines the communication speed of the printer.
@@ -124,22 +128,25 @@
  *
  * :[2400, 9600, 19200, 38400, 57600, 115200, 250000, 500000, 1000000]
  */
-#define BAUDRATE 250000
+#define BAUDRATE 115200 //Evg
 
 // Enable the Bluetooth serial interface on AT90USB devices
 //#define BLUETOOTH
 
 // Choose the name from boards.h that matches your setup
 #ifndef MOTHERBOARD
-  #define MOTHERBOARD BOARD_RAMPS_14_EFB
+  //#define MOTHERBOARD BOARD_RAMPS_14_EFB
+  #define MOTHERBOARD BOARD_BIGTREE_SKR_PRO_V1_1
 #endif
 
 // Name displayed in the LCD "Ready" message and Info menu
 //#define CUSTOM_MACHINE_NAME "3D Printer"
+#define CUSTOM_MACHINE_NAME "SKR Pro E3"
 
 // Printer's unique ID, used by some programs to differentiate between machines.
 // Choose your own or use a service like http://www.uuidgenerator.net/version4
 //#define MACHINE_UUID "00000000-0000-0000-0000-000000000000"
+#define MACHINE_UUID "3b8b6c3f-fde1-4f85-b1e2-88468176777b"
 
 // @section extruder
 
@@ -148,7 +155,8 @@
 #define EXTRUDERS 1
 
 // Generally expected filament diameter (1.75, 2.85, 3.0, ...). Used for Volumetric, Filament Width Sensor, etc.
-#define DEFAULT_NOMINAL_FILAMENT_DIA 3.0
+//#define DEFAULT_NOMINAL_FILAMENT_DIA 3.0
+#define DEFAULT_NOMINAL_FILAMENT_DIA 1.75
 
 // For Cyclops or any "multi-extruder" that shares a single nozzle.
 //#define SINGLENOZZLE
@@ -402,7 +410,7 @@
 #define TEMP_SENSOR_3 0
 #define TEMP_SENSOR_4 0
 #define TEMP_SENSOR_5 0
-#define TEMP_SENSOR_BED 0
+#define TEMP_SENSOR_BED 1 //Evg
 #define TEMP_SENSOR_CHAMBER 0
 
 // Dummy thermistor constant temperature readings, for use with 998 and 999
@@ -578,8 +586,8 @@
 // @section machine
 
 // Uncomment one of these options to enable CoreXY, CoreXZ, or CoreYZ kinematics
-// either in the usual order or reversed
-//#define COREXY
+// either in the usual order or ed
+#define COREXY //Evg
 //#define COREXZ
 //#define COREYZ
 //#define COREYX
@@ -597,10 +605,10 @@
 // extra connectors. Leave undefined any used for non-endstop and non-probe purposes.
 #define USE_XMIN_PLUG
 #define USE_YMIN_PLUG
-#define USE_ZMIN_PLUG
+//#define USE_ZMIN_PLUG
 //#define USE_XMAX_PLUG
 //#define USE_YMAX_PLUG
-//#define USE_ZMAX_PLUG
+#define USE_ZMAX_PLUG
 
 // Enable pullup for all endstops to prevent a floating state
 #define ENDSTOPPULLUPS
@@ -652,14 +660,14 @@
  *          TMC5130, TMC5130_STANDALONE, TMC5160, TMC5160_STANDALONE
  * :['A4988', 'A5984', 'DRV8825', 'LV8729', 'L6470', 'TB6560', 'TB6600', 'TMC2100', 'TMC2130', 'TMC2130_STANDALONE', 'TMC2160', 'TMC2160_STANDALONE', 'TMC2208', 'TMC2208_STANDALONE', 'TMC2209', 'TMC2209_STANDALONE', 'TMC26X', 'TMC26X_STANDALONE', 'TMC2660', 'TMC2660_STANDALONE', 'TMC5130', 'TMC5130_STANDALONE', 'TMC5160', 'TMC5160_STANDALONE']
  */
-//#define X_DRIVER_TYPE  A4988
-//#define Y_DRIVER_TYPE  A4988
-//#define Z_DRIVER_TYPE  A4988
+//#define X_DRIVER_TYPE  TMC5160 //Evg
+//#define Y_DRIVER_TYPE  TMC5160 //Evg
+//#define Z_DRIVER_TYPE  TMC5160 //Evg
 //#define X2_DRIVER_TYPE A4988
 //#define Y2_DRIVER_TYPE A4988
 //#define Z2_DRIVER_TYPE A4988
 //#define Z3_DRIVER_TYPE A4988
-//#define E0_DRIVER_TYPE A4988
+//#define E0_DRIVER_TYPE TMC5160 //Evg
 //#define E1_DRIVER_TYPE A4988
 //#define E2_DRIVER_TYPE A4988
 //#define E3_DRIVER_TYPE A4988
@@ -709,14 +717,19 @@
  * Override with M92
  *                                      X, Y, Z, E0 [, E1[, E2[, E3[, E4[, E5]]]]]
  */
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 4000, 500 }
+//#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 4000, 500 }
+//#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 4000, 500 }
+//#define DEFAULT_AXIS_STEPS_PER_UNIT   { (200*16)/(2.0*20), (200*16)/(2.0*20), (200*E0_MICROSTEPS/2), 1752 } //Evg
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { (400*64)/(2.0*20), (400*64)/(2.0*20), (400*64/2), 1752 } //Evg
+//http://3dtoday.ru/blogs/akdzg/custom-firmware-marlin-and-pour-it-into-a-3d-printer/
 
 /**
  * Default Max Feed Rate (mm/s)
  * Override with M203
  *                                      X, Y, Z, E0 [, E1[, E2[, E3[, E4[, E5]]]]]
  */
-#define DEFAULT_MAX_FEEDRATE          { 300, 300, 5, 25 }
+//#define DEFAULT_MAX_FEEDRATE          { 300, 300, 5, 25 }
+#define DEFAULT_MAX_FEEDRATE          { 300, 300, 10, 25 } //Evg
 
 /**
  * Default Max Acceleration (change/s) change = mm/s
@@ -1001,7 +1014,7 @@
 // Invert the stepper direction. Change (or reverse the motor connector) if an axis goes the wrong way.
 #define INVERT_X_DIR false
 #define INVERT_Y_DIR true
-#define INVERT_Z_DIR false
+#define INVERT_Z_DIR true
 
 // @section extruder
 
@@ -1026,7 +1039,8 @@
 // :[-1,1]
 #define X_HOME_DIR -1
 #define Y_HOME_DIR -1
-#define Z_HOME_DIR -1
+//#define Z_HOME_DIR -1
+#define Z_HOME_DIR 1 //Evg33
 
 // @section machine
 
@@ -1040,7 +1054,8 @@
 #define Z_MIN_POS 0
 #define X_MAX_POS X_BED_SIZE
 #define Y_MAX_POS Y_BED_SIZE
-#define Z_MAX_POS 200
+//#define Z_MAX_POS 200
+#define Z_MAX_POS 270
 
 /**
  * Software Endstops
@@ -1321,8 +1336,12 @@
 #endif
 
 // Homing speeds (mm/m)
-#define HOMING_FEEDRATE_XY (50*60)
-#define HOMING_FEEDRATE_Z  (4*60)
+//#define HOMING_FEEDRATE_XY (50*60)
+//#define HOMING_FEEDRATE_Z  (4*60)
+#define HOMING_FEEDRATE_XY (100*60) //Evg33
+//#define HOMING_FEEDRATE_Z  (4*60) //=240
+#define HOMING_FEEDRATE_Z  (50*60) //Evg33
+
 
 // Validate that endstops are triggered on homing moves
 #define VALIDATE_HOMING_ENDSTOPS
@@ -1400,6 +1419,7 @@
  *   M502 - Revert settings to "factory" defaults. (Follow with M500 to init the EEPROM.)
  */
 //#define EEPROM_SETTINGS     // Persistent storage with M500 and M501
+#define EEPROM_SETTINGS
 //#define DISABLE_M503        // Saves ~2700 bytes of PROGMEM. Disable for release!
 #define EEPROM_CHITCHAT       // Give feedback on EEPROM commands. Disable to save PROGMEM.
 #if ENABLED(EEPROM_SETTINGS)
@@ -1617,6 +1637,7 @@
  *
  */
 //#define SDSUPPORT
+#define SDSUPPORT
 
 /**
  * SD CARD: SPI SPEED
@@ -1674,6 +1695,7 @@
 //  Set this option if CLOCKWISE causes values to DECREASE
 //
 //#define REVERSE_ENCODER_DIRECTION
+#define REVERSE_ENCODER_DIRECTION //Evg
 
 //
 // This option reverses the encoder direction for navigating LCD menus.
@@ -1696,7 +1718,7 @@
 // If you have a speaker that can produce tones, enable it here.
 // By default Marlin assumes you have a buzzer with a fixed frequency.
 //
-//#define SPEAKER
+#define SPEAKER //Evg
 
 //
 // The duration and frequency for the UI feedback sound.
@@ -1859,7 +1881,7 @@
 // RepRapDiscount FULL GRAPHIC Smart Controller
 // http://reprap.org/wiki/RepRapDiscount_Full_Graphic_Smart_Controller
 //
-//#define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER
+#define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER
 
 //
 // ReprapWorld Graphical LCD
@@ -2147,6 +2169,28 @@
   //#define NEOPIXEL_BKGD_LED_INDEX  0               // Index of the LED to use
   //#define NEOPIXEL_BKGD_COLOR { 255, 255, 255, 0 } // R, G, B, W
 #endif
+
+#if ENABLED(FYSETC_MINI_12864_2_1)
+  //#define HAS_SPI_LCD
+  //#define BEEPER_PIN       PG4
+  //#define BTN_ENC          PA8
+  //#define LCD_PINS_RS    PD10
+  //#define BTN_EN1        PG10
+  //#define BTN_EN2        PF11
+  //#define LCD_PINS_ENABLE PD11
+  //#define LCD_PINS_D4    PG2
+  //#define LCD_SDSS       PB12
+  ///#define SD_DETECT_PIN  PF12
+  //#define LCD_RESET_PIN P1_20   // Must be high or open for LCD to operate normally.
+  #define DOGLCD_CS    PD11
+  #define DOGLCD_A0    PD10
+  #define DOGLCD_SCK   PB13
+  #define DOGLCD_MOSI  PB15
+  #define FORCE_SOFT_SPI
+  #define LCD_BACKLIGHT_PIN -1
+  #define NEOPIXEL_PIN    PG3
+  #define NEOPIXEL_STARTUP_TEST 
+#endif // !FYSETC_MINI_12864_2_1
 
 /**
  * Printer Event LEDs
