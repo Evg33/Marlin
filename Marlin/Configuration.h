@@ -73,7 +73,7 @@
 // User-specified version info of this build to display in [Pronterface, etc] terminal window during
 // startup. Implementation of an idea by Prof Braino to inform user that any changes made to this
 // build by the user have been successfully uploaded into firmware.
-#define STRING_CONFIG_H_AUTHOR "(none, default config)" // Who made the changes.
+#define STRING_CONFIG_H_AUTHOR "(Evg33, RAMPS4D13_190109)" // Who made the changes.
 #define SHOW_BOOTSCREEN
 #define STRING_SPLASH_LINE1 SHORT_BUILD_VERSION // will be shown during bootup in line 1
 #define STRING_SPLASH_LINE2 WEBSITE_URL         // will be shown during bootup in line 2
@@ -104,7 +104,13 @@
  *
  * :[-1, 0, 1, 2, 3, 4, 5, 6, 7]
  */
-#define SERIAL_PORT 0
+//#define SERIAL_PORT -1
+#define SERIAL_PORT -1
+//-1 - Due Nativ
+// 0 - Due Prog
+// 1 - MKS-TFT/NEXTION
+// 2 - ESP8266
+// 3 - hz
 
 /**
  * Select a secondary serial port on the board to use for communication with the host.
@@ -113,7 +119,11 @@
  *
  * :[-1, 0, 1, 2, 3, 4, 5, 6, 7]
  */
-//#define SERIAL_PORT_2 -1
+#define SERIAL_PORT_2 1
+// 0 - Due Prog
+// 1 - MKS-TFT/NEXTION
+// 2 - ESP8266
+// 3 - hz
 
 /**
  * This setting determines the communication speed of the printer.
@@ -131,27 +141,33 @@
 
 // Choose the name from boards.h that matches your setup
 #ifndef MOTHERBOARD
-  #define MOTHERBOARD BOARD_RAMPS_14_EFB
+  //#define MOTHERBOARD BOARD_RAMPS_14_EFB //Evg33
+  #define MOTHERBOARD BOARD_RURAMPS4D_13 //Evg33
 #endif
 
 // Name displayed in the LCD "Ready" message and Info menu
 //#define CUSTOM_MACHINE_NAME "3D Printer"
+#define CUSTOM_MACHINE_NAME "Evg33 3D" //Evg33
 
 // Printer's unique ID, used by some programs to differentiate between machines.
 // Choose your own or use a service like http://www.uuidgenerator.net/version4
 //#define MACHINE_UUID "00000000-0000-0000-0000-000000000000"
+#define MACHINE_UUID "5cb5d076-b0ba-47e0-b117-584814c65522" //Evg33
 
 // @section extruder
 
 // This defines the number of extruders
 // :[1, 2, 3, 4, 5, 6]
-#define EXTRUDERS 1
+//#define EXTRUDERS 1
+#define EXTRUDERS 3 //Evg33
 
 // Generally expected filament diameter (1.75, 2.85, 3.0, ...). Used for Volumetric, Filament Width Sensor, etc.
-#define DEFAULT_NOMINAL_FILAMENT_DIA 3.0
+//#define DEFAULT_NOMINAL_FILAMENT_DIA 3.0
+#define DEFAULT_NOMINAL_FILAMENT_DIA 1.75 //Evg33
 
 // For Cyclops or any "multi-extruder" that shares a single nozzle.
 //#define SINGLENOZZLE
+#define SINGLENOZZLE //Evg33
 
 /**
  * Průša MK2 Single Nozzle Multi-Material Multiplexer, and variants.
@@ -315,7 +331,7 @@
  * Enable and connect the power supply to the PS_ON_PIN.
  * Specify whether the power supply is active HIGH or active LOW.
  */
-//#define PSU_CONTROL
+#define PSU_CONTROL
 //#define PSU_NAME "Power Supply"
 
 #if ENABLED(PSU_CONTROL)
@@ -329,9 +345,10 @@
     #define AUTO_POWER_E_FANS
     #define AUTO_POWER_CONTROLLERFAN
     #define AUTO_POWER_CHAMBER_FAN
-    //#define AUTO_POWER_E_TEMP        50 // (°C) Turn on PSU over this temperature
+    #define AUTO_POWER_E_TEMP        50 // (°C) Turn on PSU over this temperature
     //#define AUTO_POWER_CHAMBER_TEMP  30 // (°C) Turn on PSU over this temperature
-    #define POWER_TIMEOUT 30
+    //#define POWER_TIMEOUT 30
+    #define POWER_TIMEOUT 120
   #endif
 #endif
 
@@ -402,7 +419,8 @@
 #define TEMP_SENSOR_3 0
 #define TEMP_SENSOR_4 0
 #define TEMP_SENSOR_5 0
-#define TEMP_SENSOR_BED 0
+//#define TEMP_SENSOR_BED 0 //Evg33
+#define TEMP_SENSOR_BED 1 //Evg33
 #define TEMP_SENSOR_CHAMBER 0
 
 // Dummy thermistor constant temperature readings, for use with 998 and 999
@@ -450,7 +468,8 @@
 
 // Comment the following line to disable PID and enable bang-bang.
 #define PIDTEMP
-#define BANG_MAX 255     // Limits current to nozzle while in bang-bang mode; 255=full current
+//#define BANG_MAX 255     // Limits current to nozzle while in bang-bang mode; 255=full current
+#define BANG_MAX 200     // 15v->12v=80% (sqrt(256)*12/14.8)^2=168 //Evg33
 #define PID_MAX BANG_MAX // Limits current to nozzle while PID is active (see PID_FUNCTIONAL_RANGE below); 255=full current
 #define PID_K1 0.95      // Smoothing factor within any PID loop
 #if ENABLED(PIDTEMP)
@@ -465,11 +484,26 @@
                                   // is more than PID_FUNCTIONAL_RANGE then the PID will be shut off and the heater will be set to min/max.
 
   // If you are using a pre-configured hotend then you can use one of the value sets by uncommenting it
+  // ZAV 3D Printer //Evg33 
+  // M303 E0 C8 S230 U1
+  // M303 E0 C8 S150 U1
+  // M303 E0 C8 S230 U1 //Kp: 12.74 Ki: 0.83 Kd: 48.91
+  #define DEFAULT_Kp 12.74
+  #define DEFAULT_Ki 0.83
+  #define DEFAULT_Kd 48.91
+
+  //#define DEFAULT_Kp 9.83
+  //#define DEFAULT_Ki 0.65
+  //#define DEFAULT_Kd 37.14
+
+  //#define DEFAULT_Kp 9.27
+  //#define DEFAULT_Ki 0.59
+  //#define DEFAULT_Kd 36.16
 
   // Ultimaker
-  #define DEFAULT_Kp 22.2
-  #define DEFAULT_Ki 1.08
-  #define DEFAULT_Kd 114
+  //#define DEFAULT_Kp 22.2
+  //#define DEFAULT_Ki 1.08
+  //#define DEFAULT_Kd 114
 
   // MakerGear
   //#define DEFAULT_Kp 7.0
@@ -501,6 +535,7 @@
  * the issues involved, don't use bed PID until someone else verifies that your hardware works.
  */
 //#define PIDTEMPBED
+#define PIDTEMPBED //Evg33 нужен только для маленького стола
 
 //#define BED_LIMIT_SWITCHING
 
@@ -511,16 +546,29 @@
  * so don't use it unless you are OK with PWM on your bed. (See the comment on enabling PIDTEMPBED)
  */
 #define MAX_BED_POWER 255 // limits duty cycle to bed; 255=full current
+//#define MAX_BED_POWER 168 // // 15v->12v=80% (sqrt(256)*12/14.8)^2=168 //Evg33
 
 #if ENABLED(PIDTEMPBED)
 
   //#define PID_BED_DEBUG // Sends debug data to the serial port.
 
+  // ZAV 3D Printer //Evg33 TODO get real PID values for Ultrabase Bed
+  //  M303 E-1 C3 S70 U1    ///  M303 E-1 C8 S70 U1 // Kp: 55.79 Ki: 10.57 Kd: 196.39
+  // было M304 P358.09 I70.05 D457.64
+  #define DEFAULT_bedKp 55.79
+  #define DEFAULT_bedKi 10.57
+  #define DEFAULT_bedKd 196.39
+
+  //#define DEFAULT_bedKp 137.41
+  //#define DEFAULT_bedKi 26.02
+  //#define DEFAULT_bedKd 181.38
+//114.01 19.79 164.17
+
   //120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   //from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
-  #define DEFAULT_bedKp 10.00
-  #define DEFAULT_bedKi .023
-  #define DEFAULT_bedKd 305.4
+  //#define DEFAULT_bedKp 10.00
+  //#define DEFAULT_bedKi .023
+  //#define DEFAULT_bedKd 305.4
 
   //120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   //from pidautotune
@@ -579,7 +627,7 @@
 
 // Uncomment one of these options to enable CoreXY, CoreXZ, or CoreYZ kinematics
 // either in the usual order or reversed
-//#define COREXY
+#define COREXY
 //#define COREXZ
 //#define COREYZ
 //#define COREYX
@@ -597,10 +645,10 @@
 // extra connectors. Leave undefined any used for non-endstop and non-probe purposes.
 #define USE_XMIN_PLUG
 #define USE_YMIN_PLUG
-#define USE_ZMIN_PLUG
+//#define USE_ZMIN_PLUG
 //#define USE_XMAX_PLUG
 //#define USE_YMAX_PLUG
-//#define USE_ZMAX_PLUG
+#define USE_ZMAX_PLUG //Evg33
 
 // Enable pullup for all endstops to prevent a floating state
 #define ENDSTOPPULLUPS
@@ -629,13 +677,13 @@
 #endif
 
 // Mechanical endstop with COM to ground and NC to Signal uses "false" here (most common setup).
-#define X_MIN_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
-#define Y_MIN_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
+#define X_MIN_ENDSTOP_INVERTING true // Set to true to invert the logic of the endstop.
+#define Y_MIN_ENDSTOP_INVERTING true // Set to true to invert the logic of the endstop.
 #define Z_MIN_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
 #define X_MAX_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
 #define Y_MAX_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
-#define Z_MAX_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
-#define Z_MIN_PROBE_ENDSTOP_INVERTING false // Set to true to invert the logic of the probe.
+#define Z_MAX_ENDSTOP_INVERTING true // Set to true to invert the logic of the endstop.
+#define Z_MIN_PROBE_ENDSTOP_INVERTING true // Set to true to invert the logic of the probe.
 
 /**
  * Stepper Drivers
@@ -652,6 +700,11 @@
  *          TMC5130, TMC5130_STANDALONE, TMC5160, TMC5160_STANDALONE
  * :['A4988', 'A5984', 'DRV8825', 'LV8729', 'L6470', 'TB6560', 'TB6600', 'TMC2100', 'TMC2130', 'TMC2130_STANDALONE', 'TMC2160', 'TMC2160_STANDALONE', 'TMC2208', 'TMC2208_STANDALONE', 'TMC2209', 'TMC2209_STANDALONE', 'TMC26X', 'TMC26X_STANDALONE', 'TMC2660', 'TMC2660_STANDALONE', 'TMC5130', 'TMC5130_STANDALONE', 'TMC5160', 'TMC5160_STANDALONE']
  */
+//Evg33 TMC2130 TMC2100 LV8729 A4988
+#define X_DRIVER_TYPE  LV8729 //TMC2100 //TMC2130 //Evg33
+#define Y_DRIVER_TYPE  LV8729 //TMC2100 //TMC2130 //Evg33
+#define Z_DRIVER_TYPE  LV8729 //A4988 //TMC2130 //Evg33
+#define E0_DRIVER_TYPE LV8729 //A4988 //TMC2130 //Evg33
 //#define X_DRIVER_TYPE  A4988
 //#define Y_DRIVER_TYPE  A4988
 //#define Z_DRIVER_TYPE  A4988
@@ -669,6 +722,7 @@
 // Enable this feature if all enabled endstop pins are interrupt-capable.
 // This will remove the need to poll the interrupt pins, saving many CPU cycles.
 //#define ENDSTOP_INTERRUPTS_FEATURE
+#define ENDSTOP_INTERRUPTS_FEATURE //Evg33
 
 /**
  * Endstop Noise Threshold
@@ -709,14 +763,31 @@
  * Override with M92
  *                                      X, Y, Z, E0 [, E1[, E2[, E3[, E4[, E5]]]]]
  */
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 4000, 500 }
+//#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 4000, 500 }
+//#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 286 } //Evg33
+//#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 438 } //Evg33 //295/286...
+//#define DEFAULT_AXIS_STEPS_PER_UNIT   { 160, 160, 800, 876 } //Evg33 //295/286...  //в моём zav 438st 40mm/s M92 E438 /32st
+//#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 438 } //Evg33 //295/286...  //в моём zav 438st 40mm/s M92 E438 /16st //16
+//#define DEFAULT_AXIS_STEPS_PER_UNIT   { 640, 640, 400, 438 } //Evg33 //295/286...  //в моём zav 438st 40mm/s M92 E438 /xy-128st  oth-16st
+//#define DEFAULT_AXIS_STEPS_PER_UNIT   { 640, 640, 400, 438 } //Evg33 //295/286...  //в моём zav 438st 40mm/s M92 E438 /xy-128st  oth-16st
+//#define DEFAULT_AXIS_STEPS_PER_UNIT   { 640, 640, 800, 876 } //Evg33 //295/286...  //в моём zav 438st 40mm/s M92 E438 /xy-128st  othr-32st
+//#define DEFAULT_AXIS_STEPS_PER_UNIT   { 320, 320, 400, 438 } //Evg33 //295/286...  //в моём zav 438st 40mm/s M92 E438 /xy-64st  othr-16st
+//#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 438 } //Evg33 tmc/a4988
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 640, 640, 400, 438 } //Evg33 lv@128/a4988@16
 
 /**
  * Default Max Feed Rate (mm/s)
  * Override with M203
  *                                      X, Y, Z, E0 [, E1[, E2[, E3[, E4[, E5]]]]]
  */
-#define DEFAULT_MAX_FEEDRATE          { 300, 300, 5, 25 }
+//#define DEFAULT_MAX_FEEDRATE          { 300, 300, 5, 25 }
+//#define DEFAULT_MAX_FEEDRATE          { 250, 250, 50, 100 } //Evg33 //300,300,50,100
+//#define DEFAULT_MAX_FEEDRATE          { 300, 300, 50, 45 } //Evg33 M203 X300.00 Y300.00 Z50.00 E40.00 // в моём ZAV E40
+//#define DEFAULT_MAX_FEEDRATE          { 300, 300, 2500, 40 } //Evg33 M203 X300.00 Y300.00 Z50.00 E40.00 // в моём ZAV E40
+//#define DEFAULT_MAX_FEEDRATE          { 300, 300, 50, 40 } //Evg33 M203 X300.00 Y300.00 Z50.00 E40.00 // в моём ZAV E40
+//#define DEFAULT_MAX_FEEDRATE          { 150, 150, 10, 40 } //Evg33 M203 X300.00 Y300.00 Z50.00 E40.00 // �_ �_�_�'�_ ZAV E40
+#define DEFAULT_MAX_FEEDRATE          { 150, 150, 10, 50 } //Evg33 M203 X300.00 Y300.00 Z50.00 E40.00 // �_ �_�_�'�_ ZAV E40
+//DS f50
 
 /**
  * Default Max Acceleration (change/s) change = mm/s
@@ -724,7 +795,14 @@
  * Override with M201
  *                                      X, Y, Z, E0 [, E1[, E2[, E3[, E4[, E5]]]]]
  */
-#define DEFAULT_MAX_ACCELERATION      { 3000, 3000, 100, 10000 }
+//#define DEFAULT_MAX_ACCELERATION      { 3000, 3000, 100, 10000 }
+//#define DEFAULT_MAX_ACCELERATION      { 2100, 2100, 100, 8000 } //Evg33
+//#define DEFAULT_MAX_ACCELERATION      { 2100, 2100, 50  100, 10000 } //Evg33 M201 X2100.00 Y2100.00 Z200.00 E8000.00
+//#define DEFAULT_MAX_ACCELERATION      { 2000, 2000, 100, 8000 } //Evg33 M201 X2100.00 Y2100.00 Z200.00 E8000.00
+//#define DEFAULT_MAX_ACCELERATION      { 2000, 2000, 100, 2500 } //Evg33 M201 X2000.00 Y2000.00 Z200.00 E8000.00
+//#define DEFAULT_MAX_ACCELERATION      { 2000, 2000, 100, 350 } //Evg33 M201 X2000 Y2000 Z100 E350 //190122
+#define DEFAULT_MAX_ACCELERATION      { 3000, 3000, 100, 350 } //Evg33 M201 X2000 Y2000 Z100 E350 //190122
+//DS acc 10k / LA ACC umensh
 
 /**
  * Default Acceleration (change/s) change = mm/s
@@ -734,9 +812,33 @@
  *   M204 R    Retract Acceleration
  *   M204 T    Travel Acceleration
  */
-#define DEFAULT_ACCELERATION          3000    // X, Y, Z and E acceleration for printing moves
-#define DEFAULT_RETRACT_ACCELERATION  3000    // E acceleration for retracts
+//#define DEFAULT_ACCELERATION          2000    // X, Y, Z and E acceleration for printing moves //3000 ?
+#define DEFAULT_ACCELERATION          3000    // X, Y, Z and E acceleration for printing moves //3000 ?
+//DS DA 10k / LA ACC umensh
+//#define DEFAULT_RETRACT_ACCELERATION  8000    // E acceleration for retracts
+//#define DEFAULT_RETRACT_ACCELERATION  2500    // E acceleration for retracts
+#define DEFAULT_RETRACT_ACCELERATION  350    // E acceleration for retracts
+//DS RA 10k / LA ACC umensh
 #define DEFAULT_TRAVEL_ACCELERATION   3000    // X, Y, Z acceleration for travel (non printing) moves
+
+
+/*
+ Printing Acceleration: the integrated acceleration when the printer is printing items. This value directly affects the reaction sensitivity
+ of changing the printing direction or speed  during the printing process. It is recommended to set as 120% of the larger one between the X 
+ axis maximum acceleration and the Y axis maximum acceleration.
+ 3000 -> 3600 (def)
+ 
+ Non-printing Acceleration: The acceleration of the hotend when moving but without extruding the filament. This value directly affects the
+ reaction sensitivity of changing the printing direction or speed during the no-printing moving process. It is recommended to set as 120% 
+ of the printing acceleration.
+ 3600 -> 4320 (travel)
+ 
+ Extrusion Acceleration: The sensitivity of the extruder when it is extruding or withdrawing. The higher the value, the better performance 
+ it will have. Please note that excessive values can cause the extruder to fail, the recommended value:t 800mm/s.
+ retr
+
+
+*/
 
 /**
  * Junction Deviation
@@ -763,10 +865,12 @@
 #if DISABLED(JUNCTION_DEVIATION)
   #define DEFAULT_XJERK 10.0
   #define DEFAULT_YJERK 10.0
-  #define DEFAULT_ZJERK  0.3
+  //#define DEFAULT_ZJERK  0.3
+  #define DEFAULT_ZJERK  0.4 //Evg33
 #endif
 
 #define DEFAULT_EJERK    5.0  // May be used by Linear Advance
+//DS EJ 5 / LA uvel do 20
 
 /**
  * S-Curve Acceleration
@@ -999,14 +1103,15 @@
 // @section machine
 
 // Invert the stepper direction. Change (or reverse the motor connector) if an axis goes the wrong way.
-#define INVERT_X_DIR false
+//#define INVERT_X_DIR false
+#define INVERT_X_DIR true //Evg33
 #define INVERT_Y_DIR true
-#define INVERT_Z_DIR false
+#define INVERT_Z_DIR false //f-8729 t-a //false //Evg33
 
 // @section extruder
 
 // For direct drive extruder v9 set to true, for geared extruder set to false.
-#define INVERT_E0_DIR false
+#define INVERT_E0_DIR true //t-8729 f-a false //true //Evg33
 #define INVERT_E1_DIR false
 #define INVERT_E2_DIR false
 #define INVERT_E3_DIR false
@@ -1026,7 +1131,8 @@
 // :[-1,1]
 #define X_HOME_DIR -1
 #define Y_HOME_DIR -1
-#define Z_HOME_DIR -1
+//#define Z_HOME_DIR -1
+#define Z_HOME_DIR 1 //Evg33
 
 // @section machine
 
@@ -1040,7 +1146,8 @@
 #define Z_MIN_POS 0
 #define X_MAX_POS X_BED_SIZE
 #define Y_MAX_POS Y_BED_SIZE
-#define Z_MAX_POS 200
+//#define Z_MAX_POS 200
+#define Z_MAX_POS 234
 
 /**
  * Software Endstops
@@ -1314,6 +1421,7 @@
 // - Prevent Z homing when the Z probe is outside bed area.
 //
 //#define Z_SAFE_HOMING
+#define Z_SAFE_HOMING //Evg33
 
 #if ENABLED(Z_SAFE_HOMING)
   #define Z_SAFE_HOMING_X_POINT ((X_BED_SIZE) / 2)    // X point for Z homing when homing all axes (G28).
@@ -1321,8 +1429,10 @@
 #endif
 
 // Homing speeds (mm/m)
-#define HOMING_FEEDRATE_XY (50*60)
-#define HOMING_FEEDRATE_Z  (4*60)
+//#define HOMING_FEEDRATE_XY (50*60)
+#define HOMING_FEEDRATE_XY (100*60) //Evg33
+//#define HOMING_FEEDRATE_Z  (4*60) //=240
+#define HOMING_FEEDRATE_Z  (50*60) //Evg33
 
 // Validate that endstops are triggered on homing moves
 #define VALIDATE_HOMING_ENDSTOPS
@@ -1400,10 +1510,11 @@
  *   M502 - Revert settings to "factory" defaults. (Follow with M500 to init the EEPROM.)
  */
 //#define EEPROM_SETTINGS     // Persistent storage with M500 and M501
+#define EEPROM_SETTINGS //Evg33
 //#define DISABLE_M503        // Saves ~2700 bytes of PROGMEM. Disable for release!
 #define EEPROM_CHITCHAT       // Give feedback on EEPROM commands. Disable to save PROGMEM.
 #if ENABLED(EEPROM_SETTINGS)
-  //#define EEPROM_AUTO_INIT  // Init EEPROM automatically on any errors.
+#define EEPROM_AUTO_INIT  // Init EEPROM automatically on any errors.
 #endif
 
 //
@@ -1576,7 +1687,8 @@
  *
  * :{ 'en':'English', 'an':'Aragonese', 'bg':'Bulgarian', 'ca':'Catalan', 'cz':'Czech', 'da':'Danish', 'de':'German', 'el':'Greek', 'el-gr':'Greek (Greece)', 'es':'Spanish', 'eu':'Basque-Euskera', 'fi':'Finnish', 'fr':'French', 'gl':'Galician', 'hr':'Croatian', 'it':'Italian', 'jp-kana':'Japanese', 'ko_KR':'Korean (South Korea)', 'nl':'Dutch', 'pl':'Polish', 'pt':'Portuguese', 'pt-br':'Portuguese (Brazilian)', 'ru':'Russian', 'sk':'Slovak', 'tr':'Turkish', 'uk':'Ukrainian', 'zh_CN':'Chinese (Simplified)', 'zh_TW':'Chinese (Traditional)', 'test':'TEST' }
  */
-#define LCD_LANGUAGE en
+//#define LCD_LANGUAGE en
+#define LCD_LANGUAGE ru //Evg33
 
 /**
  * LCD Character Set
@@ -1600,7 +1712,8 @@
  *
  * :['JAPANESE', 'WESTERN', 'CYRILLIC']
  */
-#define DISPLAY_CHARSET_HD44780 JAPANESE
+//#define DISPLAY_CHARSET_HD44780 JAPANESE
+#define DISPLAY_CHARSET_HD44780 CYRILLIC
 
 /**
  * Info Screen Style (0:Classic, 1:Prusa)
@@ -1617,6 +1730,7 @@
  *
  */
 //#define SDSUPPORT
+#define SDSUPPORT //Evg33
 
 /**
  * SD CARD: SPI SPEED
@@ -1674,6 +1788,7 @@
 //  Set this option if CLOCKWISE causes values to DECREASE
 //
 //#define REVERSE_ENCODER_DIRECTION
+#define REVERSE_ENCODER_DIRECTION //Evg33
 
 //
 // This option reverses the encoder direction for navigating LCD menus.
@@ -1689,6 +1804,7 @@
 // Add individual axis homing items (Home X, Home Y, and Home Z) to the LCD menu.
 //
 //#define INDIVIDUAL_AXIS_HOMING_MENU
+#define INDIVIDUAL_AXIS_HOMING_MENU
 
 //
 // SPEAKER/BUZZER
@@ -1859,7 +1975,7 @@
 // RepRapDiscount FULL GRAPHIC Smart Controller
 // http://reprap.org/wiki/RepRapDiscount_Full_Graphic_Smart_Controller
 //
-//#define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER
+//#define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER //Evg33
 
 //
 // ReprapWorld Graphical LCD
@@ -2065,7 +2181,8 @@
 // Use software PWM to drive the fan, as for the heaters. This uses a very low frequency
 // which is not as annoying as with the hardware PWM. On the other hand, if this frequency
 // is too low, you should also increment SOFT_PWM_SCALE.
-//#define FAN_SOFT_PWM
+//#define FAN_SOFT_PWM 
+//Evg33 надо проверить #define FAN_SOFT_PWM
 
 // Incrementing this by 1 will double the software PWM frequency,
 // affecting heaters, and the fan if FAN_SOFT_PWM is enabled.
@@ -2073,7 +2190,15 @@
 // at zero value, there are 128 effective control positions.
 // :[0,1,2,3,4,5,6,7]
 #define SOFT_PWM_SCALE 0
-
+    // SOFT_PWM_SCALE to frequency:
+    // https://github.com/MarlinFirmware/Marlin/issues/5960
+    // 0: 16000000/64/256/128 =   7.6294 Hz
+    // 1:                / 64 =  15.2588 Hz ---test it
+    // 2:                / 32 =  30.5176 Hz
+    // 3:                / 16 =  61.0352 Hz
+    // 4:                /  8 = 122.0703 Hz
+    // 5:                /  4 = 244.1406 Hz
+//Evg33 надо проверить #define SOFT_PWM_SCALE 1
 // If SOFT_PWM_SCALE is set to a value higher than 0, dithering can
 // be used to mitigate the associated resolution loss. If enabled,
 // some of the PWM cycles are stretched so on average the desired
