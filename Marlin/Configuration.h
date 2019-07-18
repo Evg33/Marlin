@@ -2159,7 +2159,7 @@
 //#define NEOPIXEL_LED
 #if ENABLED(NEOPIXEL_LED)
   #define NEOPIXEL_TYPE   NEO_GRBW // NEO_GRBW / NEO_GRB - four/three channel driver type (defined in Adafruit_NeoPixel.h)
-  #define NEOPIXEL_PIN    4        // LED driving pin
+  //#define NEOPIXEL_PIN    4        // LED driving pin
   #define NEOPIXEL_PIXELS 30       // Number of LEDs in the strip
   #define NEOPIXEL_IS_SEQUENTIAL   // Sequential display for temperature change - LED by LED. Disable to change all LEDs at once.
   #define NEOPIXEL_BRIGHTNESS 127  // Initial brightness (0-255)
@@ -2169,7 +2169,7 @@
   //#define NEOPIXEL_BKGD_LED_INDEX  0               // Index of the LED to use
   //#define NEOPIXEL_BKGD_COLOR { 255, 255, 255, 0 } // R, G, B, W
 #endif
-
+/*
 #if ENABLED(FYSETC_MINI_12864_2_1)
   //#define HAS_SPI_LCD
   //#define BEEPER_PIN       PG4
@@ -2191,7 +2191,7 @@
   #define NEOPIXEL_PIN    PG3
   #define NEOPIXEL_STARTUP_TEST 
 #endif // !FYSETC_MINI_12864_2_1
-
+*/
 /**
  * Printer Event LEDs
  *
