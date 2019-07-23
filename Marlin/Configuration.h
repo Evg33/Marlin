@@ -73,7 +73,7 @@
 // User-specified version info of this build to display in [Pronterface, etc] terminal window during
 // startup. Implementation of an idea by Prof Braino to inform user that any changes made to this
 // build by the user have been successfully uploaded into firmware.
-#define STRING_CONFIG_H_AUTHOR "(Evg33, RAMPS4D13_190109)" // Who made the changes.
+#define STRING_CONFIG_H_AUTHOR "(Evg33, RAMPS4D13_190723)" // Who made the changes.
 #define SHOW_BOOTSCREEN
 #define STRING_SPLASH_LINE1 SHORT_BUILD_VERSION // will be shown during bootup in line 1
 #define STRING_SPLASH_LINE2 WEBSITE_URL         // will be shown during bootup in line 2
@@ -475,8 +475,7 @@
 
 // Comment the following line to disable PID and enable bang-bang.
 #define PIDTEMP
-//#define BANG_MAX 255     // Limits current to nozzle while in bang-bang mode; 255=full current
-#define BANG_MAX 200     // 15v->12v=80% (sqrt(256)*12/14.8)^2=168 //Evg33
+#define BANG_MAX 255     // Limits current to nozzle while in bang-bang mode; 255=full current
 #define PID_MAX BANG_MAX // Limits current to nozzle while PID is active (see PID_FUNCTIONAL_RANGE below); 255=full current
 #define PID_K1 0.95      // Smoothing factor within any PID loop
 #if ENABLED(PIDTEMP)
@@ -498,14 +497,6 @@
   #define DEFAULT_Kp 12.74
   #define DEFAULT_Ki 0.83
   #define DEFAULT_Kd 48.91
-
-  //#define DEFAULT_Kp 9.83
-  //#define DEFAULT_Ki 0.65
-  //#define DEFAULT_Kd 37.14
-
-  //#define DEFAULT_Kp 9.27
-  //#define DEFAULT_Ki 0.59
-  //#define DEFAULT_Kd 36.16
 
   // Ultimaker
   //#define DEFAULT_Kp 22.2
@@ -553,7 +544,6 @@
  * so don't use it unless you are OK with PWM on your bed. (See the comment on enabling PIDTEMPBED)
  */
 #define MAX_BED_POWER 255 // limits duty cycle to bed; 255=full current
-//#define MAX_BED_POWER 168 // // 15v->12v=80% (sqrt(256)*12/14.8)^2=168 //Evg33
 
 #if ENABLED(PIDTEMPBED)
 
@@ -565,11 +555,6 @@
   #define DEFAULT_bedKp 55.79
   #define DEFAULT_bedKi 10.57
   #define DEFAULT_bedKd 196.39
-
-  //#define DEFAULT_bedKp 137.41
-  //#define DEFAULT_bedKi 26.02
-  //#define DEFAULT_bedKd 181.38
-//114.01 19.79 164.17
 
   //120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   //from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
@@ -819,15 +804,13 @@
  *   M204 R    Retract Acceleration
  *   M204 T    Travel Acceleration
  */
-//#define DEFAULT_ACCELERATION          2000    // X, Y, Z and E acceleration for printing moves //3000 ?
-#define DEFAULT_ACCELERATION          3000    // X, Y, Z and E acceleration for printing moves //3000 ?
+#define DEFAULT_ACCELERATION          3000    // X, Y, Z and E acceleration for printing moves
 //DS DA 10k / LA ACC umensh
 //#define DEFAULT_RETRACT_ACCELERATION  8000    // E acceleration for retracts
 //#define DEFAULT_RETRACT_ACCELERATION  2500    // E acceleration for retracts
 #define DEFAULT_RETRACT_ACCELERATION  350    // E acceleration for retracts
 //DS RA 10k / LA ACC umensh
 #define DEFAULT_TRAVEL_ACCELERATION   3000    // X, Y, Z acceleration for travel (non printing) moves
-
 
 /*
  Printing Acceleration: the integrated acceleration when the printer is printing items. This value directly affects the reaction sensitivity
@@ -843,8 +826,6 @@
  Extrusion Acceleration: The sensitivity of the extruder when it is extruding or withdrawing. The higher the value, the better performance 
  it will have. Please note that excessive values can cause the extruder to fail, the recommended value:t 800mm/s.
  retr
-
-
 */
 
 /**
@@ -876,8 +857,7 @@
   #define DEFAULT_ZJERK  0.4 //Evg33
 #endif
 
-#define DEFAULT_EJERK    5.0  // May be used by Linear Advance
-//DS EJ 5 / LA uvel do 20
+#define DEFAULT_EJERK    5.0  // May be used by Linear Advance //DS EJ 5 / LA uvel do 20
 
 /**
  * S-Curve Acceleration
