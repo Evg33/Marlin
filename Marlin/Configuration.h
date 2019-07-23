@@ -726,7 +726,7 @@
  */
 //#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 4000, 500 }
 //#define DEFAULT_AXIS_STEPS_PER_UNIT   { 320, 320, 3200, 300 }
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { (200*16)/(2.0*20), (200*16)/(2.0*20), (200*32/2), 1752 }
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { (400*32)/(2.0*20), (400*32)/(2.0*20), (200*32/2), 1752 }
 //http://3dtoday.ru/blogs/akdzg/custom-firmware-marlin-and-pour-it-into-a-3d-printer/
 
 /**
@@ -1017,9 +1017,9 @@
 // @section machine
 
 // Invert the stepper direction. Change (or reverse the motor connector) if an axis goes the wrong way.
-#define INVERT_X_DIR false
-#define INVERT_Y_DIR true
-#define INVERT_Z_DIR true
+#define INVERT_X_DIR true //false         false          true            true
+#define INVERT_Y_DIR true //true          false          true            false
+#define INVERT_Z_DIR true //x+>y-/y+>x-   x+>x-/y+>y-      ok!
 
 // @section extruder
 
@@ -1054,13 +1054,14 @@
 #define Y_BED_SIZE 200
 
 // Travel limits (mm) after homing, corresponding to endstop positions.
-#define X_MIN_POS 0
+#define X_MIN_POS -40
 #define Y_MIN_POS 0
 #define Z_MIN_POS 0
-#define X_MAX_POS X_BED_SIZE
+//#define X_MAX_POS X_BED_SIZE
+#define X_MAX_POS 240
 #define Y_MAX_POS Y_BED_SIZE
 //#define Z_MAX_POS 200
-#define Z_MAX_POS 270
+#define Z_MAX_POS 250
 
 /**
  * Software Endstops
