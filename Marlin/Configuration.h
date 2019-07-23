@@ -808,7 +808,8 @@
 //DS DA 10k / LA ACC umensh
 //#define DEFAULT_RETRACT_ACCELERATION  8000    // E acceleration for retracts
 //#define DEFAULT_RETRACT_ACCELERATION  2500    // E acceleration for retracts
-#define DEFAULT_RETRACT_ACCELERATION  350    // E acceleration for retracts
+//#define DEFAULT_RETRACT_ACCELERATION  350    // E acceleration for retracts
+#define DEFAULT_RETRACT_ACCELERATION  900    // E acceleration for retracts
 //DS RA 10k / LA ACC umensh
 #define DEFAULT_TRAVEL_ACCELERATION   3000    // X, Y, Z acceleration for travel (non printing) moves
 
