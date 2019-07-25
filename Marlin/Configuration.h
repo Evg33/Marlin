@@ -734,7 +734,7 @@
  */
 //#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 4000, 500 }
 //#define DEFAULT_AXIS_STEPS_PER_UNIT   { 320, 320, 3200, 300 }
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { (400*32)/(2.0*20), (400*32)/(2.0*20), (200*32/2), 438 }
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { (400*32)/(2.0*20), (400*32)/(2.0*20), (200*32/2), 25.5*16 }
 //http://3dtoday.ru/blogs/akdzg/custom-firmware-marlin-and-pour-it-into-a-3d-printer/
 
 /**
