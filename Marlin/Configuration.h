@@ -1899,7 +1899,7 @@
 // RepRapDiscount FULL GRAPHIC Smart Controller
 // http://reprap.org/wiki/RepRapDiscount_Full_Graphic_Smart_Controller
 //
-#define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER
+//#define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER
 
 //
 // ReprapWorld Graphical LCD
@@ -1966,7 +1966,7 @@
 // FYSETC variant of the MINI12864 graphic controller with SD support
 // https://wiki.fysetc.com/Mini12864_Panel/
 //
-//#define FYSETC_MINI_12864_X_X  // Type C/D/E/F. No tunable RGB Backlight by default
+#define FYSETC_MINI_12864_X_X  // Type C/D/E/F. No tunable RGB Backlight by default
 //#define FYSETC_MINI_12864_1_2  // Type C/D/E/F. Simple RGB Backlight (always on)
 //#define FYSETC_MINI_12864_2_0  // Type A/B. Discreet RGB Backlight
 //#define FYSETC_MINI_12864_2_1  // Type A/B. Neopixel RGB Backlight
@@ -2193,29 +2193,6 @@
   //#define NEOPIXEL_BKGD_LED_INDEX  0               // Index of the LED to use
   //#define NEOPIXEL_BKGD_COLOR { 255, 255, 255, 0 } // R, G, B, W
 #endif
-/*
-#if ENABLED(FYSETC_MINI_12864_2_1)
-  //#define HAS_SPI_LCD
-  //#define BEEPER_PIN       PG4
-  //#define BTN_ENC          PA8
-  //#define LCD_PINS_RS    PD10
-  //#define BTN_EN1        PG10
-  //#define BTN_EN2        PF11
-  //#define LCD_PINS_ENABLE PD11
-  //#define LCD_PINS_D4    PG2
-  //#define LCD_SDSS       PB12
-  ///#define SD_DETECT_PIN  PF12
-  //#define LCD_RESET_PIN P1_20   // Must be high or open for LCD to operate normally.
-  #define DOGLCD_CS    PD11
-  #define DOGLCD_A0    PD10
-  #define DOGLCD_SCK   PB13
-  #define DOGLCD_MOSI  PB15
-  #define FORCE_SOFT_SPI
-  #define LCD_BACKLIGHT_PIN -1
-  #define NEOPIXEL_PIN    PG3
-  #define NEOPIXEL_STARTUP_TEST 
-#endif // !FYSETC_MINI_12864_2_1
-*/
 
 /**
  * Printer Event LEDs
