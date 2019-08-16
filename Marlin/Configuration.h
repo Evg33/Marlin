@@ -735,7 +735,6 @@
  *                                      X, Y, Z, E0 [, E1[, E2[, E3[, E4[, E5]]]]]
  */
 //#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 4000, 500 }
-//#define DEFAULT_AXIS_STEPS_PER_UNIT   { 320, 320, 3200, 300 }
 #define DEFAULT_AXIS_STEPS_PER_UNIT   { (400*32)/(2.0*20), (400*32)/(2.0*20), (200*32/2), 25.5*16 }
 //http://3dtoday.ru/blogs/akdzg/custom-firmware-marlin-and-pour-it-into-a-3d-printer/
 
@@ -1032,9 +1031,9 @@
 // @section machine
 
 // Invert the stepper direction. Change (or reverse the motor connector) if an axis goes the wrong way.
-#define INVERT_X_DIR true //false         false          true            true
-#define INVERT_Y_DIR true //true          false          true            false
-#define INVERT_Z_DIR true //x+>y-/y+>x-   x+>x-/y+>y-      ok!
+#define INVERT_X_DIR true
+#define INVERT_Y_DIR true
+#define INVERT_Z_DIR true
 
 // @section extruder
 
@@ -1060,7 +1059,7 @@
 #define X_HOME_DIR -1
 #define Y_HOME_DIR -1
 //#define Z_HOME_DIR -1
-#define Z_HOME_DIR 1 //Evg33
+#define Z_HOME_DIR 1
 
 // @section machine
 
@@ -1360,9 +1359,7 @@
 //#define HOMING_FEEDRATE_XY (50*60)
 //#define HOMING_FEEDRATE_Z  (4*60)
 #define HOMING_FEEDRATE_XY (100*60) //Evg33
-//#define HOMING_FEEDRATE_Z  (4*60) //=240
 #define HOMING_FEEDRATE_Z  (50*60) //Evg33
-
 
 // Validate that endstops are triggered on homing moves
 #define VALIDATE_HOMING_ENDSTOPS
@@ -1501,8 +1498,7 @@
 #if ENABLED(NOZZLE_PARK_FEATURE)
   // Specify a park position as { X, Y, Z_raise }
   //#define NOZZLE_PARK_POINT { (X_MIN_POS + 10), (Y_MAX_POS - 10), 20 }
-  //#define NOZZLE_PARK_POINT { (X_MIN_POS + 10), (Y_MAX_POS - 10), 0 } /// Evg33 Z ??? 
-  #define NOZZLE_PARK_POINT { (X_MIN_POS + 10), (Y_MIN_POS + 10), 10 } /// Evg33 Z ??? 
+  #define NOZZLE_PARK_POINT { (X_MIN_POS + 10), (Y_MIN_POS + 10), 10 }
   #define NOZZLE_PARK_XY_FEEDRATE 100   // (mm/s) X and Y axes feedrate (also used for delta Z axis)
   #define NOZZLE_PARK_Z_FEEDRATE 5      // (mm/s) Z axis feedrate (not used for delta printers)
 #endif
@@ -1911,7 +1907,6 @@
 // RepRapDiscount FULL GRAPHIC Smart Controller
 // http://reprap.org/wiki/RepRapDiscount_Full_Graphic_Smart_Controller
 //
-//#define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER
 //#define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER
 
 //
