@@ -73,7 +73,7 @@
 // User-specified version info of this build to display in [Pronterface, etc] terminal window during
 // startup. Implementation of an idea by Prof Braino to inform user that any changes made to this
 // build by the user have been successfully uploaded into firmware.
-#define STRING_CONFIG_H_AUTHOR "(Evg33, RAMPS4D13_190723)" // Who made the changes.
+#define STRING_CONFIG_H_AUTHOR "(none, default config)" // Who made the changes.
 #define SHOW_BOOTSCREEN
 #define STRING_SPLASH_LINE1 SHORT_BUILD_VERSION // will be shown during bootup in line 1
 #define STRING_SPLASH_LINE2 WEBSITE_URL         // will be shown during bootup in line 2
@@ -758,15 +758,6 @@
  *                                      X, Y, Z, E0 [, E1[, E2[, E3[, E4[, E5]]]]]
  */
 //#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 4000, 500 }
-//#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 286 } //Evg33
-//#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 438 } //Evg33 //295/286...
-//#define DEFAULT_AXIS_STEPS_PER_UNIT   { 160, 160, 800, 876 } //Evg33 //295/286...  //в моём zav 438st 40mm/s M92 E438 /32st
-//#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 438 } //Evg33 //295/286...  //в моём zav 438st 40mm/s M92 E438 /16st //16
-//#define DEFAULT_AXIS_STEPS_PER_UNIT   { 640, 640, 400, 438 } //Evg33 //295/286...  //в моём zav 438st 40mm/s M92 E438 /xy-128st  oth-16st
-//#define DEFAULT_AXIS_STEPS_PER_UNIT   { 640, 640, 400, 438 } //Evg33 //295/286...  //в моём zav 438st 40mm/s M92 E438 /xy-128st  oth-16st
-//#define DEFAULT_AXIS_STEPS_PER_UNIT   { 640, 640, 800, 876 } //Evg33 //295/286...  //в моём zav 438st 40mm/s M92 E438 /xy-128st  othr-32st
-//#define DEFAULT_AXIS_STEPS_PER_UNIT   { 320, 320, 400, 438 } //Evg33 //295/286...  //в моём zav 438st 40mm/s M92 E438 /xy-64st  othr-16st
-//#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 438 } //Evg33 tmc/a4988
 #define DEFAULT_AXIS_STEPS_PER_UNIT   { 640, 640, 400, 438 } //Evg33 lv@128/a4988@16
 
 /**
@@ -775,13 +766,7 @@
  *                                      X, Y, Z, E0 [, E1[, E2[, E3[, E4[, E5]]]]]
  */
 //#define DEFAULT_MAX_FEEDRATE          { 300, 300, 5, 25 }
-//#define DEFAULT_MAX_FEEDRATE          { 250, 250, 50, 100 } //Evg33 //300,300,50,100
-//#define DEFAULT_MAX_FEEDRATE          { 300, 300, 50, 45 } //Evg33 M203 X300.00 Y300.00 Z50.00 E40.00 // в моём ZAV E40
-//#define DEFAULT_MAX_FEEDRATE          { 300, 300, 2500, 40 } //Evg33 M203 X300.00 Y300.00 Z50.00 E40.00 // в моём ZAV E40
-//#define DEFAULT_MAX_FEEDRATE          { 300, 300, 50, 40 } //Evg33 M203 X300.00 Y300.00 Z50.00 E40.00 // в моём ZAV E40
-//#define DEFAULT_MAX_FEEDRATE          { 150, 150, 10, 40 } //Evg33 M203 X300.00 Y300.00 Z50.00 E40.00 // �_ �_�_�'�_ ZAV E40
-#define DEFAULT_MAX_FEEDRATE          { 150, 150, 10, 50 } //Evg33 M203 X300.00 Y300.00 Z50.00 E40.00 // �_ �_�_�'�_ ZAV E40
-//DS f50
+#define DEFAULT_MAX_FEEDRATE          { 150, 150, 10, 50 }
 
 /**
  * Default Max Acceleration (change/s) change = mm/s
@@ -790,13 +775,8 @@
  *                                      X, Y, Z, E0 [, E1[, E2[, E3[, E4[, E5]]]]]
  */
 //#define DEFAULT_MAX_ACCELERATION      { 3000, 3000, 100, 10000 }
-//#define DEFAULT_MAX_ACCELERATION      { 2100, 2100, 100, 8000 } //Evg33
-//#define DEFAULT_MAX_ACCELERATION      { 2100, 2100, 50  100, 10000 } //Evg33 M201 X2100.00 Y2100.00 Z200.00 E8000.00
-//#define DEFAULT_MAX_ACCELERATION      { 2000, 2000, 100, 8000 } //Evg33 M201 X2100.00 Y2100.00 Z200.00 E8000.00
-//#define DEFAULT_MAX_ACCELERATION      { 2000, 2000, 100, 2500 } //Evg33 M201 X2000.00 Y2000.00 Z200.00 E8000.00
-//#define DEFAULT_MAX_ACCELERATION      { 2000, 2000, 100, 350 } //Evg33 M201 X2000 Y2000 Z100 E350 //190122
-#define DEFAULT_MAX_ACCELERATION      { 3000, 3000, 100, 350 } //Evg33 M201 X2000 Y2000 Z100 E350 //190122
-//DS acc 10k / LA ACC umensh
+#define DEFAULT_MAX_ACCELERATION      { 3000, 3000, 100, 350 }
+
 
 /**
  * Default Acceleration (change/s) change = mm/s
@@ -807,29 +787,9 @@
  *   M204 T    Travel Acceleration
  */
 #define DEFAULT_ACCELERATION          3000    // X, Y, Z and E acceleration for printing moves
-//DS DA 10k / LA ACC umensh
-//#define DEFAULT_RETRACT_ACCELERATION  8000    // E acceleration for retracts
-//#define DEFAULT_RETRACT_ACCELERATION  2500    // E acceleration for retracts
-//#define DEFAULT_RETRACT_ACCELERATION  350    // E acceleration for retracts
+//#define DEFAULT_RETRACT_ACCELERATION  3000    // E acceleration for retracts
 #define DEFAULT_RETRACT_ACCELERATION  900    // E acceleration for retracts
-//DS RA 10k / LA ACC umensh
 #define DEFAULT_TRAVEL_ACCELERATION   3000    // X, Y, Z acceleration for travel (non printing) moves
-
-/*
- Printing Acceleration: the integrated acceleration when the printer is printing items. This value directly affects the reaction sensitivity
- of changing the printing direction or speed  during the printing process. It is recommended to set as 120% of the larger one between the X 
- axis maximum acceleration and the Y axis maximum acceleration.
- 3000 -> 3600 (def)
- 
- Non-printing Acceleration: The acceleration of the hotend when moving but without extruding the filament. This value directly affects the
- reaction sensitivity of changing the printing direction or speed during the no-printing moving process. It is recommended to set as 120% 
- of the printing acceleration.
- 3600 -> 4320 (travel)
- 
- Extrusion Acceleration: The sensitivity of the extruder when it is extruding or withdrawing. The higher the value, the better performance 
- it will have. Please note that excessive values can cause the extruder to fail, the recommended value:t 800mm/s.
- retr
-*/
 
 /**
  * Junction Deviation
@@ -860,7 +820,7 @@
   #define DEFAULT_ZJERK  0.4 //Evg33
 #endif
 
-#define DEFAULT_EJERK    5.0  // May be used by Linear Advance //DS EJ 5 / LA uvel do 20
+#define DEFAULT_EJERK    5.0  // May be used by Linear Advance
 
 /**
  * S-Curve Acceleration
@@ -1094,9 +1054,9 @@
 
 // Invert the stepper direction. Change (or reverse the motor connector) if an axis goes the wrong way.
 //#define INVERT_X_DIR false
-#define INVERT_X_DIR true //Evg33
+#define INVERT_X_DIR true
 #define INVERT_Y_DIR true
-#define INVERT_Z_DIR false //f-8729 t-a //false //Evg33
+#define INVERT_Z_DIR false
 
 // @section extruder
 
@@ -1677,8 +1637,7 @@
  *
  * :{ 'en':'English', 'an':'Aragonese', 'bg':'Bulgarian', 'ca':'Catalan', 'cz':'Czech', 'da':'Danish', 'de':'German', 'el':'Greek', 'el-gr':'Greek (Greece)', 'es':'Spanish', 'eu':'Basque-Euskera', 'fi':'Finnish', 'fr':'French', 'gl':'Galician', 'hr':'Croatian', 'it':'Italian', 'jp-kana':'Japanese', 'ko_KR':'Korean (South Korea)', 'nl':'Dutch', 'pl':'Polish', 'pt':'Portuguese', 'pt-br':'Portuguese (Brazilian)', 'ru':'Russian', 'sk':'Slovak', 'tr':'Turkish', 'uk':'Ukrainian', 'zh_CN':'Chinese (Simplified)', 'zh_TW':'Chinese (Traditional)', 'test':'TEST' }
  */
-//#define LCD_LANGUAGE en
-#define LCD_LANGUAGE ru //Evg33
+#define LCD_LANGUAGE en
 
 /**
  * LCD Character Set
@@ -1778,7 +1737,6 @@
 //  Set this option if CLOCKWISE causes values to DECREASE
 //
 //#define REVERSE_ENCODER_DIRECTION
-#define REVERSE_ENCODER_DIRECTION //Evg33
 
 //
 // This option reverses the encoder direction for navigating LCD menus.
@@ -1802,7 +1760,6 @@
 // Add individual axis homing items (Home X, Home Y, and Home Z) to the LCD menu.
 //
 //#define INDIVIDUAL_AXIS_HOMING_MENU
-#define INDIVIDUAL_AXIS_HOMING_MENU
 
 //
 // SPEAKER/BUZZER
@@ -1973,7 +1930,7 @@
 // RepRapDiscount FULL GRAPHIC Smart Controller
 // http://reprap.org/wiki/RepRapDiscount_Full_Graphic_Smart_Controller
 //
-//#define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER //Evg33
+//#define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER
 
 //
 // ReprapWorld Graphical LCD
@@ -2183,8 +2140,8 @@
 // Use software PWM to drive the fan, as for the heaters. This uses a very low frequency
 // which is not as annoying as with the hardware PWM. On the other hand, if this frequency
 // is too low, you should also increment SOFT_PWM_SCALE.
-//#define FAN_SOFT_PWM 
-//Evg33 надо проверить #define FAN_SOFT_PWM
+//#define FAN_SOFT_PWM
+
 
 // Incrementing this by 1 will double the software PWM frequency,
 // affecting heaters, and the fan if FAN_SOFT_PWM is enabled.
@@ -2192,15 +2149,7 @@
 // at zero value, there are 128 effective control positions.
 // :[0,1,2,3,4,5,6,7]
 #define SOFT_PWM_SCALE 0
-    // SOFT_PWM_SCALE to frequency:
-    // https://github.com/MarlinFirmware/Marlin/issues/5960
-    // 0: 16000000/64/256/128 =   7.6294 Hz
-    // 1:                / 64 =  15.2588 Hz ---test it
-    // 2:                / 32 =  30.5176 Hz
-    // 3:                / 16 =  61.0352 Hz
-    // 4:                /  8 = 122.0703 Hz
-    // 5:                /  4 = 244.1406 Hz
-//Evg33 надо проверить #define SOFT_PWM_SCALE 1
+
 // If SOFT_PWM_SCALE is set to a value higher than 0, dithering can
 // be used to mitigate the associated resolution loss. If enabled,
 // some of the PWM cycles are stretched so on average the desired
