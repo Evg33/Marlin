@@ -91,7 +91,7 @@
 #define STRING_CONFIG_H_AUTHOR "@brandstaetter, @grbd" // Who made the changes.
 #define SHOW_BOOTSCREEN
 #define STRING_SPLASH_LINE1 SHORT_BUILD_VERSION // will be shown during bootup in line 1
-#define STRING_SPLASH_LINE2 "Welcome to ANYCUBIC"         // will be shown during bootup in line 2
+#define STRING_SPLASH_LINE2 "Welcome to ANYCUBIC" // will be shown during bootup in line 2
 
 /**
  * *** VENDORS PLEASE READ ***
@@ -2225,7 +2225,7 @@
 // LulzBot Color Touch UI for FTDI EVE (FT800/FT810) displays
 // See Configuration_adv.h for all configuration options.
 //
-//#defined LULZBOT_TOUCH_UI
+//#define LULZBOT_TOUCH_UI
 
 //
 // Third-party or vendor-customized controller interfaces.
