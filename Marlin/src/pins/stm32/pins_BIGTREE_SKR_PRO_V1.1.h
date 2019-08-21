@@ -180,6 +180,17 @@
 //
 #define SDSS               PB12
 
+/*  #define SDCARD_CONNECTION ONBOARD
+  #define ENABLE_SPI1
+  #define SD_DETECT_PIN    PB11
+  #define SCK_PIN          PA5
+  #define MISO_PIN         PA6
+  #define MOSI_PIN         PB5 //PA7
+  
+  #define SS_PIN         PA4
+  #define SDSS           PA4 //Evg
+  #define LCD_SDSS       PA4 //Evg
+*/
 /**
  *               _____                                             _____
  *           NC | · · | GND                                    5V | · · | GND
@@ -191,53 +202,9 @@
  *               EXP2                                              EXP1
  */
 
-//#define LCD_PINS_RS    PG2
-//#define LCD_PINS_ENABLE PD11 / PG7
-//#define LCD_PINS_D4    PG2
-#define BEEPER_PIN PG4
-#define BTN_ENC PA8
-
-#define BTN_EN1 PG10
-#define BTN_EN2 PF11
-
-#define LCD_RESET_PIN  PG2
-#define DOGLCD_A0    PD10
-#define DOGLCD_CS    PD11
-//#define FORCE_SOFT_SPI    // Use this if default of hardware SPI causes display problems
-//#define KILL_PIN   -1
-//#define DOGLCD_SCK   PB13
-//#define DOGLCD_MOSI  PB15
-
-//#define RGB_LED_R_PIN PG3 //for  not x_X
-//#define RGB_LED_G_PIN PG6 //for  not x_X
-//#define RGB_LED_B_PIN PG7 //for  not x_X
-#define LED_PIN PG7
-#define RGB_LED_W_PIN -1
-
-//#define LCD_BACKLIGHT_PIN -1
-
-
-//#define LCD_CONTRAST 200
-//#define LCD_SDSS       PB12
-//#define SDSS   PB12 было выше
-//#define SD_DETECT_PIN  PF12
-
-/*
-#elif ENABLED(FYSETC_MINI_12864)
-  // The FYSETC_MINI_12864 display
-  #define U8G_CLASS U8GLIB_MINI12864_2X_HAL
-  #if ENABLED(FORCE_SOFT_SPI)
-    #define U8G_PARAM DOGLCD_SCK, DOGLCD_MOSI, DOGLCD_CS, DOGLCD_A0   // 4 stripes SW-SPI
-  #else
-    #define U8G_PARAM DOGLCD_CS, DOGLCD_A0                            // 4 stripes HW-SPI
-  #endif
-
-*/
-
 //
 // LCDs and Controllers
 //
-/*
 #if HAS_SPI_LCD
   #define BEEPER_PIN       PG4
   #define BTN_ENC          PA8
@@ -253,8 +220,7 @@
 
   #else
 
-    //#define LCD_PINS_RS    PD10
-    #define LCD_PINS_RS    PG2
+    #define LCD_PINS_RS    PD10
 
     #define BTN_EN1        PG10
     #define BTN_EN2        PF11
@@ -262,9 +228,7 @@
 
     #define LCD_SDSS       PB12
 
-    //notneed
     #define LCD_PINS_ENABLE PD11
-    //notneed
     #define LCD_PINS_D4    PG2
 
     #if ENABLED(ULTIPANEL)
@@ -274,7 +238,7 @@
     #endif
 
   #endif
-*/
+
   // Alter timing for graphical display
   #if HAS_GRAPHICAL_LCD
     #ifndef ST7920_DELAY_1
@@ -288,5 +252,4 @@
     #endif
   #endif
 
-
-//#endif // HAS_SPI_LCD
+#endif // HAS_SPI_LCD
