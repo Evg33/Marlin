@@ -496,9 +496,9 @@
   // M303 E0 C8 S230 U1
   // M303 E0 C8 S150 U1
   // M303 E0 C8 S230 U1 //Kp: 12.74 Ki: 0.83 Kd: 48.91
-  #define DEFAULT_Kp 12.74
-  #define DEFAULT_Ki 0.83
-  #define DEFAULT_Kd 48.91
+  #define DEFAULT_Kp 14.36
+  #define DEFAULT_Ki 0.98
+  #define DEFAULT_Kd 52.86
 
   // Ultimaker
   //#define DEFAULT_Kp 22.2
