@@ -344,7 +344,7 @@
 #if ENABLED(PSU_CONTROL)
   #define PSU_ACTIVE_HIGH false // Set 'false' for ATX (1), 'true' for X-Box (2)
 
-  #define PS_DEFAULT_OFF      // Keep power off until enabled directly with M80
+  //#define PS_DEFAULT_OFF      // Keep power off until enabled directly with M80
 
   #define AUTO_POWER_CONTROL  // Enable automatic control of the PS_ON pin
   #if ENABLED(AUTO_POWER_CONTROL)
@@ -776,7 +776,7 @@
  *                                      X, Y, Z, E0 [, E1[, E2[, E3[, E4[, E5]]]]]
  */
 //#define DEFAULT_MAX_ACCELERATION      { 3000, 3000, 100, 10000 }
-#define DEFAULT_MAX_ACCELERATION      { 3000, 3000, 100, 350 }
+#define DEFAULT_MAX_ACCELERATION      { 3000, 3000, 100, 900 }
 
 
 /**
