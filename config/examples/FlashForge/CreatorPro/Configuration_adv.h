@@ -1017,17 +1017,31 @@
    * equivalent MAX3421E breakout board. The USB thumb drive will appear
    * to Marlin as an SD card.
    *
-   * The MAX3421E must be assigned the same pins as the SD card reader, with
+   * The MAX3421E can be assigned the same pins as the SD card reader, with
    * the following pin mapping:
    *
    *    SCLK, MOSI, MISO --> SCLK, MOSI, MISO
-   *    INT              --> SD_DETECT_PIN
+   *    INT              --> SD_DETECT_PIN [1]
    *    SS               --> SDSS
+   *
+   * [1] On AVR an interrupt-capable pin is best for UHS3 compatibility.
    */
   //#define USB_FLASH_DRIVE_SUPPORT
   #if ENABLED(USB_FLASH_DRIVE_SUPPORT)
-    #define USB_CS_PIN         SDSS
-    #define USB_INTR_PIN       SD_DETECT_PIN
+    #define USB_CS_PIN    SDSS
+    #define USB_INTR_PIN  SD_DETECT_PIN
+
+    /**
+     * USB Host Shield Library
+     *
+     * - UHS2 uses no interrupts and has been production-tested
+     *   on a LulzBot TAZ Pro with a 32-bit Archim board.
+     *
+     * - UHS3 is newer code with better USB compatibility. But it
+     *   is less tested and is known to interfere with Servos.
+     *   [1] This requires USB_INTR_PIN to be interrupt-capable.
+     */
+    //#define USE_UHS3_USB
   #endif
 
   /**
@@ -1197,6 +1211,18 @@
   // Use a numeric passcode for "Screen lock" keypad.
   // (recommended for smaller displays)
   //#define TOUCH_UI_PASSCODE
+#endif
+
+//
+// FSMC Graphical TFT
+//
+#if ENABLED(FSMC_GRAPHICAL_TFT)
+  //#define TFT_MARLINUI_COLOR 0xFFFF // White
+  //#define TFT_MARLINBG_COLOR 0x0000 // Black
+  //#define TFT_DISABLED_COLOR 0x0003 // Almost black
+  //#define TFT_BTCANCEL_COLOR 0xF800 // Red
+  //#define TFT_BTARROWS_COLOR 0xDEE6 // 11011 110111 00110 Yellow
+  //#define TFT_BTOKMENU_COLOR 0x145F // 00010 100010 11111 Cyan
 #endif
 
 // @section safety
@@ -1913,10 +1939,12 @@
    * Connect the stepper driver's DIAG1 pin to the X/Y endstop pin.
    * X, Y, and Z homing will always be done in spreadCycle mode.
    *
-   * X/Y/Z_STALL_SENSITIVITY is used to tune the trigger sensitivity.
-   * Use M914 X Y Z to live-adjust the sensitivity.
-   *  Higher: LESS sensitive. (Too high => failure to trigger)
-   *   Lower: MORE sensitive. (Too low  => false positives)
+   * X/Y/Z_STALL_SENSITIVITY is the default stall threshold.
+   * Use M914 X Y Z to set the stall threshold at runtime:
+   *
+   *  Sensitivity   TMC2209   Others
+   *    HIGHEST       255      -64    (Too sensitive => False positive)
+   *    LOWEST         0        63    (Too insensitive => No trigger)
    *
    * It is recommended to set [XYZ]_HOME_BUMP_MM to 0.
    *
@@ -1940,6 +1968,7 @@
   #if EITHER(SENSORLESS_HOMING, SENSORLESS_PROBING)
     // TMC2209: 0...255. TMC2130: -64...63
     #define X_STALL_SENSITIVITY  8
+    #define X2_STALL_SENSITIVITY X_STALL_SENSITIVITY
     #define Y_STALL_SENSITIVITY  8
     //#define Z_STALL_SENSITIVITY  8
     //#define SPI_ENDSTOPS              // TMC2130 only
