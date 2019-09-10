@@ -751,7 +751,7 @@
  *                                      X, Y, Z, E0 [, E1[, E2[, E3[, E4[, E5]]]]]
  */
 //#define DEFAULT_MAX_ACCELERATION      { 3000, 3000, 100, 10000 }
-#define DEFAULT_MAX_ACCELERATION      { 3000, 3000, 100, 900 } // Evg33 ZAV  M201 X2000 Y2000 Z100 E350 //190122
+#define DEFAULT_MAX_ACCELERATION      { 3000, 3000, 100, 900 }
 
 /**
  * Default Acceleration (change/s) change = mm/s
@@ -1356,8 +1356,8 @@
 // Homing speeds (mm/m)
 //#define HOMING_FEEDRATE_XY (50*60)
 //#define HOMING_FEEDRATE_Z  (4*60)
-#define HOMING_FEEDRATE_XY (100*60) //Evg33
-#define HOMING_FEEDRATE_Z  (50*60) //Evg33
+#define HOMING_FEEDRATE_XY (100*60)
+#define HOMING_FEEDRATE_Z  (50*60)
 
 // Validate that endstops are triggered on homing moves
 #define VALIDATE_HOMING_ENDSTOPS
