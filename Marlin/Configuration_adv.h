@@ -756,7 +756,7 @@
  * lowest stepping frequencies.
  */
 //#define ADAPTIVE_STEP_SMOOTHING
-#define ADAPTIVE_STEP_SMOOTHING //Evg33
+#define ADAPTIVE_STEP_SMOOTHING
 
 /**
  * Custom Microstepping
@@ -1255,7 +1255,7 @@
  * Warning: Does not respect endstops!
  */
 //#define BABYSTEPPING
-#define BABYSTEPPING //Evg33
+#define BABYSTEPPING
 #if ENABLED(BABYSTEPPING)
   //#define BABYSTEP_WITHOUT_HOMING
   //#define BABYSTEP_XY                     // Also enable X/Y Babystepping. Not supported on DELTA!
@@ -1425,10 +1425,10 @@
 // THE BLOCK_BUFFER_SIZE NEEDS TO BE A POWER OF 2 (e.g. 8, 16, 32) because shifts and ors are used to do the ring-buffering.
 #if ENABLED(SDSUPPORT)
   //#define BLOCK_BUFFER_SIZE 16 // SD,LCD,Buttons take more memory, block buffer needs to be smaller
-  #define BLOCK_BUFFER_SIZE 64 //Evg33 https://github.com/foosel/OctoPrint/issues/2834
+  #define BLOCK_BUFFER_SIZE 32 //Evg33 https://github.com/foosel/OctoPrint/issues/2834
 #else
   //#define BLOCK_BUFFER_SIZE 16 // maximize block buffer
-  #define BLOCK_BUFFER_SIZE 64 //Evg33 https://github.com/foosel/OctoPrint/issues/2834
+  #define BLOCK_BUFFER_SIZE 32 //Evg33 https://github.com/foosel/OctoPrint/issues/2834
 #endif
 
 // @section serial
@@ -1436,7 +1436,7 @@
 // The ASCII buffer for serial input
 #define MAX_CMD_SIZE 96
 //#define BUFSIZE 4
-#define BUFSIZE 32 //Evg33
+#define BUFSIZE 8
 
 // Transmission to Host Buffer Size
 // To save 386 bytes of PROGMEM (and TX_BUFFER_SIZE+3 bytes of RAM) set to 0.
@@ -1446,16 +1446,17 @@
 // Other output doesn't need to be that speedy.
 // :[0, 2, 4, 8, 16, 32, 64, 128, 256]
 //#define TX_BUFFER_SIZE 0
-//Evg33 32 in Due
-#define TX_BUFFER_SIZE 32 //Evg33
+//dflt 32 in Due
+#define TX_BUFFER_SIZE 64
 
 // Host Receive Buffer Size
 // Without XON/XOFF flow control (see SERIAL_XON_XOFF below) 32 bytes should be enough.
 // To use flow control, set this buffer size to at least 1024 bytes.
 // :[0, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048]
 //#define RX_BUFFER_SIZE 1024
-//Evg33 128 in due 
-#define RX_BUFFER_SIZE 2048
+//dflt 128 in due 
+//#define RX_BUFFER_SIZE 2048
+#define RX_BUFFER_SIZE 512
 
 #if RX_BUFFER_SIZE >= 1024
   // Enable to have the controller send XON/XOFF control characters to
@@ -1931,7 +1932,7 @@
    * M122 - Report driver parameters (Requires TMC_DEBUG)
    */
   //#define MONITOR_DRIVER_STATUS
-  #define MONITOR_DRIVER_STATUS //Evg33
+  #define MONITOR_DRIVER_STATUS
 
   #if ENABLED(MONITOR_DRIVER_STATUS)
     #define CURRENT_STEP_DOWN     50  // [mA]
@@ -1948,14 +1949,14 @@
    */
   //#define HYBRID_THRESHOLD
 
-  #define X_HYBRID_THRESHOLD     500 //100  // [mm/s]
+  #define X_HYBRID_THRESHOLD     100  // [mm/s]
   #define X2_HYBRID_THRESHOLD    100
-  #define Y_HYBRID_THRESHOLD     500 //100
+  #define Y_HYBRID_THRESHOLD     100
   #define Y2_HYBRID_THRESHOLD    100
-  #define Z_HYBRID_THRESHOLD     500 //  3
+  #define Z_HYBRID_THRESHOLD       3
   #define Z2_HYBRID_THRESHOLD      3
   #define Z3_HYBRID_THRESHOLD      3
-  #define E0_HYBRID_THRESHOLD    500 // 30
+  #define E0_HYBRID_THRESHOLD     30
   #define E1_HYBRID_THRESHOLD     30
   #define E2_HYBRID_THRESHOLD     30
   #define E3_HYBRID_THRESHOLD     30

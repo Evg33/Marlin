@@ -139,33 +139,33 @@
 
 // Choose the name from boards.h that matches your setup
 #ifndef MOTHERBOARD
-  //#define MOTHERBOARD BOARD_RAMPS_14_EFB //Evg33
-  #define MOTHERBOARD BOARD_RURAMPS4D_13 //Evg33
+  //#define MOTHERBOARD BOARD_RAMPS_14_EFB
+  #define MOTHERBOARD BOARD_RURAMPS4D_13
 #endif
 
 // Name displayed in the LCD "Ready" message and Info menu
 //#define CUSTOM_MACHINE_NAME "3D Printer"
-#define CUSTOM_MACHINE_NAME "Evg33 3D" //Evg33
+#define CUSTOM_MACHINE_NAME "Evg33 3D"
 
 // Printer's unique ID, used by some programs to differentiate between machines.
 // Choose your own or use a service like http://www.uuidgenerator.net/version4
 //#define MACHINE_UUID "00000000-0000-0000-0000-000000000000"
-#define MACHINE_UUID "5cb5d076-b0ba-47e0-b117-584814c65522" //Evg33
+#define MACHINE_UUID "5cb5d076-b0ba-47e0-b117-584814c65522"
 
 // @section extruder
 
 // This defines the number of extruders
 // :[1, 2, 3, 4, 5, 6]
 //#define EXTRUDERS 1
-#define EXTRUDERS 3 //Evg33
+#define EXTRUDERS 3
 
 // Generally expected filament diameter (1.75, 2.85, 3.0, ...). Used for Volumetric, Filament Width Sensor, etc.
 //#define DEFAULT_NOMINAL_FILAMENT_DIA 3.0
-#define DEFAULT_NOMINAL_FILAMENT_DIA 1.75 //Evg33
+#define DEFAULT_NOMINAL_FILAMENT_DIA 1.75
 
 // For Cyclops or any "multi-extruder" that shares a single nozzle.
 //#define SINGLENOZZLE
-#define SINGLENOZZLE //Evg33
+#define SINGLENOZZLE
 
 /**
  * Průša MK2 Single Nozzle Multi-Material Multiplexer, and variants.
@@ -346,14 +346,14 @@
 
   #define AUTO_POWER_CONTROL  // Enable automatic control of the PS_ON pin
   #if ENABLED(AUTO_POWER_CONTROL)
-    //#define AUTO_POWER_FANS           // Turn on PSU if fans need power
+    #define AUTO_POWER_FANS           // Turn on PSU if fans need power
     #define AUTO_POWER_E_FANS
     //#define AUTO_POWER_CONTROLLERFAN
     //#define AUTO_POWER_CHAMBER_FAN
     #define AUTO_POWER_E_TEMP        50 // (°C) Turn on PSU over this temperature
     //#define AUTO_POWER_CHAMBER_TEMP  30 // (°C) Turn on PSU over this temperature
-    #define POWER_TIMEOUT 30
-    //#define POWER_TIMEOUT 120
+    //#define POWER_TIMEOUT 30
+    #define POWER_TIMEOUT 120
   #endif
 #endif
 
@@ -426,8 +426,8 @@
 #define TEMP_SENSOR_3 0
 #define TEMP_SENSOR_4 0
 #define TEMP_SENSOR_5 0
-//#define TEMP_SENSOR_BED 0 //Evg33
-#define TEMP_SENSOR_BED 1 //Evg33
+//#define TEMP_SENSOR_BED 0
+#define TEMP_SENSOR_BED 1
 #define TEMP_SENSOR_CHAMBER 0
 
 // Dummy thermistor constant temperature readings, for use with 998 and 999
@@ -533,7 +533,7 @@
  * the issues involved, don't use bed PID until someone else verifies that your hardware works.
  */
 //#define PIDTEMPBED
-#define PIDTEMPBED //Evg33 нужен только для маленького стола
+#define PIDTEMPBED //Evg33 нужен для маленького стола
 
 //#define BED_LIMIT_SWITCHING
 
@@ -641,7 +641,7 @@
 //#define USE_ZMIN_PLUG
 //#define USE_XMAX_PLUG
 //#define USE_YMAX_PLUG
-#define USE_ZMAX_PLUG //Evg33
+#define USE_ZMAX_PLUG
 
 // Enable pullup for all endstops to prevent a floating state
 #define ENDSTOPPULLUPS
@@ -693,11 +693,10 @@
  *          TMC5130, TMC5130_STANDALONE, TMC5160, TMC5160_STANDALONE
  * :['A4988', 'A5984', 'DRV8825', 'LV8729', 'L6470', 'TB6560', 'TB6600', 'TMC2100', 'TMC2130', 'TMC2130_STANDALONE', 'TMC2160', 'TMC2160_STANDALONE', 'TMC2208', 'TMC2208_STANDALONE', 'TMC2209', 'TMC2209_STANDALONE', 'TMC26X', 'TMC26X_STANDALONE', 'TMC2660', 'TMC2660_STANDALONE', 'TMC5130', 'TMC5130_STANDALONE', 'TMC5160', 'TMC5160_STANDALONE']
  */
-//Evg33 TMC2130 TMC2100 LV8729 A4988
-#define X_DRIVER_TYPE  LV8729 //TMC2100 //TMC2130 //Evg33
-#define Y_DRIVER_TYPE  LV8729 //TMC2100 //TMC2130 //Evg33
-#define Z_DRIVER_TYPE  LV8729 //A4988 //TMC2130 //Evg33
-#define E0_DRIVER_TYPE LV8729 //A4988 //TMC2130 //Evg33
+#define X_DRIVER_TYPE  LV8729
+#define Y_DRIVER_TYPE  LV8729
+#define Z_DRIVER_TYPE  LV8729
+#define E0_DRIVER_TYPE LV8729
 //#define X_DRIVER_TYPE  A4988
 //#define Y_DRIVER_TYPE  A4988
 //#define Z_DRIVER_TYPE  A4988
@@ -715,7 +714,7 @@
 // Enable this feature if all enabled endstop pins are interrupt-capable.
 // This will remove the need to poll the interrupt pins, saving many CPU cycles.
 //#define ENDSTOP_INTERRUPTS_FEATURE
-#define ENDSTOP_INTERRUPTS_FEATURE //Evg33
+#define ENDSTOP_INTERRUPTS_FEATURE
 
 /**
  * Endstop Noise Threshold
@@ -757,7 +756,7 @@
  *                                      X, Y, Z, E0 [, E1[, E2[, E3[, E4[, E5]]]]]
  */
 //#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 4000, 500 }
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 640, 640, 400, 438 } //Evg33 lv@128/a4988@16
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 640, 640, 400, 438 } //Evg33 lv@128
 
 /**
  * Default Max Feed Rate (mm/s)
@@ -816,7 +815,7 @@
   #define DEFAULT_XJERK 10.0
   #define DEFAULT_YJERK 10.0
   //#define DEFAULT_ZJERK  0.3
-  #define DEFAULT_ZJERK  0.4 //Evg33
+  #define DEFAULT_ZJERK  0.4
 #endif
 
 #define DEFAULT_EJERK    5.0  // May be used by Linear Advance
@@ -1060,7 +1059,8 @@
 // @section extruder
 
 // For direct drive extruder v9 set to true, for geared extruder set to false.
-#define INVERT_E0_DIR true //t-8729 f-a false //true //Evg33
+//#define INVERT_E0_DIR false
+#define INVERT_E0_DIR true
 #define INVERT_E1_DIR false
 #define INVERT_E2_DIR false
 #define INVERT_E3_DIR false
@@ -1081,7 +1081,7 @@
 #define X_HOME_DIR -1
 #define Y_HOME_DIR -1
 //#define Z_HOME_DIR -1
-#define Z_HOME_DIR 1 //Evg33
+#define Z_HOME_DIR 1
 
 // @section machine
 
@@ -1370,7 +1370,7 @@
 // - Prevent Z homing when the Z probe is outside bed area.
 //
 //#define Z_SAFE_HOMING
-#define Z_SAFE_HOMING //Evg33
+#define Z_SAFE_HOMING
 
 #if ENABLED(Z_SAFE_HOMING)
   #define Z_SAFE_HOMING_X_POINT ((X_BED_SIZE) / 2)    // X point for Z homing when homing all axes (G28).
@@ -1379,9 +1379,9 @@
 
 // Homing speeds (mm/m)
 //#define HOMING_FEEDRATE_XY (50*60)
-#define HOMING_FEEDRATE_XY (100*60) //Evg33
-//#define HOMING_FEEDRATE_Z  (4*60) //=240
-#define HOMING_FEEDRATE_Z  (50*60) //Evg33
+//#define HOMING_FEEDRATE_Z  (4*60)
+#define HOMING_FEEDRATE_XY (100*60)
+#define HOMING_FEEDRATE_Z  (50*60)
 
 // Validate that endstops are triggered on homing moves
 #define VALIDATE_HOMING_ENDSTOPS
@@ -1459,11 +1459,12 @@
  *   M502 - Revert settings to "factory" defaults. (Follow with M500 to init the EEPROM.)
  */
 //#define EEPROM_SETTINGS     // Persistent storage with M500 and M501
-#define EEPROM_SETTINGS //Evg33
+#define EEPROM_SETTINGS
 //#define DISABLE_M503        // Saves ~2700 bytes of PROGMEM. Disable for release!
 #define EEPROM_CHITCHAT       // Give feedback on EEPROM commands. Disable to save PROGMEM.
 #if ENABLED(EEPROM_SETTINGS)
-#define EEPROM_AUTO_INIT  // Init EEPROM automatically on any errors.
+  //#define EEPROM_AUTO_INIT  // Init EEPROM automatically on any errors.
+  #define EEPROM_AUTO_INIT  // Init EEPROM automatically on any errors.
 #endif
 
 //
@@ -1515,6 +1516,7 @@
  *    P1  Raise the nozzle always to Z-park height.
  *    P2  Raise the nozzle by Z-park amount, limited to Z_MAX_POS.
  */
+//#define NOZZLE_PARK_FEATURE
 #define NOZZLE_PARK_FEATURE
 
 #if ENABLED(NOZZLE_PARK_FEATURE)
@@ -1678,7 +1680,7 @@
  *
  */
 //#define SDSUPPORT
-#define SDSUPPORT //Evg33
+#define SDSUPPORT
 
 /**
  * SD CARD: SPI SPEED
@@ -2143,7 +2145,6 @@
 // which is not as annoying as with the hardware PWM. On the other hand, if this frequency
 // is too low, you should also increment SOFT_PWM_SCALE.
 //#define FAN_SOFT_PWM
-
 
 // Incrementing this by 1 will double the software PWM frequency,
 // affecting heaters, and the fan if FAN_SOFT_PWM is enabled.
