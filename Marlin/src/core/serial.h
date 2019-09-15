@@ -146,8 +146,8 @@ extern uint8_t marlin_debug_flags;
 #define SERIAL_ECHOPGM(S)           (serialprintPGM(PSTR(S)))
 #define SERIAL_ECHOLNPGM(S)         (serialprintPGM(PSTR(S "\n")))
 
-#define SERIAL_ECHOPAIR_F(pre, V...) do{ SERIAL_ECHO(pre); SERIAL_ECHO_F(V); }while(0)
-#define SERIAL_ECHOLNPAIR_F(V...)    do{ SERIAL_ECHOPAIR_F(V); SERIAL_EOL(); }while(0)
+#define SERIAL_ECHOPAIR_F(S, V...)  do{ SERIAL_ECHOPGM(S); SERIAL_ECHO_F(V); }while(0)
+#define SERIAL_ECHOLNPAIR_F(V...)   do{ SERIAL_ECHOPAIR_F(V); SERIAL_EOL(); }while(0)
 
 #define SERIAL_ECHO_START()         serial_echo_start()
 #define SERIAL_ERROR_START()        serial_error_start()
@@ -186,7 +186,7 @@ void serial_spaces(uint8_t count);
 
 void print_bin(const uint16_t val);
 
-void print_xyz(PGM_P const prefix, PGM_P const suffix, const float x, const float y, const float z);
 void print_xyz(PGM_P const prefix, PGM_P const suffix, const float xyz[]);
+void print_xyz(PGM_P const prefix, PGM_P const suffix, const float &x, const float &y, const float &z);
 #define SERIAL_POS(SUFFIX,VAR) do { print_xyz(PSTR("  " STRINGIFY(VAR) "="), PSTR(" : " SUFFIX "\n"), VAR); }while(0)
 #define SERIAL_XYZ(PREFIX,V...) do { print_xyz(PSTR(PREFIX), nullptr, V); }while(0)
