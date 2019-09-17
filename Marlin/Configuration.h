@@ -139,7 +139,8 @@
 
 // Name displayed in the LCD "Ready" message and Info menu
 //#define CUSTOM_MACHINE_NAME "3D Printer"
-#define CUSTOM_MACHINE_NAME "UNI @ SKR Pro"
+//#define CUSTOM_MACHINE_NAME "UNI @ SKR Pro"
+#define CUSTOM_MACHINE_NAME STRING_DISTRIBUTION_DATE
 
 // Printer's unique ID, used by some programs to differentiate between machines.
 // Choose your own or use a service like http://www.uuidgenerator.net/version4
