@@ -138,7 +138,7 @@
 
 // Name displayed in the LCD "Ready" message and Info menu
 //#define CUSTOM_MACHINE_NAME "3D Printer"
-#define CUSTOM_MACHINE_NAME "UNI @ SKR 1.3"
+#define CUSTOM_MACHINE_NAME "ZAVMini/SKR13"
 
 // Printer's unique ID, used by some programs to differentiate between machines.
 // Choose your own or use a service like http://www.uuidgenerator.net/version4
@@ -480,10 +480,15 @@
 
   // If you are using a pre-configured hotend then you can use one of the value sets by uncommenting it
 
+  // ZAV Mini M303 E0 C8 S220 U1
+  #define DEFAULT_Kp 13.21
+  #define DEFAULT_Ki 0.75
+  #define DEFAULT_Kd 58.17
+
   // UNI M303 E0 C8 S230 U1
-  #define DEFAULT_Kp 15.28
-  #define DEFAULT_Ki 1.39
-  #define DEFAULT_Kd 41.91
+  //#define DEFAULT_Kp 15.28
+  //#define DEFAULT_Ki 1.39
+  //#define DEFAULT_Kd 41.91
   
   // Ultimaker
   //#define DEFAULT_Kp 22.2
@@ -534,10 +539,17 @@
 #if ENABLED(PIDTEMPBED)
   //#define MIN_BED_POWER 0
   //#define PID_BED_DEBUG // Sends debug data to the serial port.
+
+  // ZAV Mini M303 E-1 C3 S70 U1    ///  M303 E-1 C3 S100 U1
+  #define DEFAULT_bedKp 45.37
+  #define DEFAULT_bedKi 8.85
+  #define DEFAULT_bedKd 155.01
+
   // UNI M303 E-1 C3 S70 U1    ///  M303 E-1 C8 S100 U1 /// M303 E-1 C8 S100 U1
-  #define DEFAULT_bedKp 38.36
-  #define DEFAULT_bedKi 4.56
-  #define DEFAULT_bedKd 215.04
+  //#define DEFAULT_bedKp 38.36
+  //#define DEFAULT_bedKi 4.56
+  //#define DEFAULT_bedKd 215.04
+
   //120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   //from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
   //#define DEFAULT_bedKp 10.00
@@ -675,14 +687,14 @@
  *          TMC5130, TMC5130_STANDALONE, TMC5160, TMC5160_STANDALONE
  * :['A4988', 'A5984', 'DRV8825', 'LV8729', 'L6470', 'TB6560', 'TB6600', 'TMC2100', 'TMC2130', 'TMC2130_STANDALONE', 'TMC2160', 'TMC2160_STANDALONE', 'TMC2208', 'TMC2208_STANDALONE', 'TMC2209', 'TMC2209_STANDALONE', 'TMC26X', 'TMC26X_STANDALONE', 'TMC2660', 'TMC2660_STANDALONE', 'TMC5130', 'TMC5130_STANDALONE', 'TMC5160', 'TMC5160_STANDALONE']
  */
-#define X_DRIVER_TYPE  TMC2208
-#define Y_DRIVER_TYPE  TMC2208
-#define Z_DRIVER_TYPE  TMC2208
+#define X_DRIVER_TYPE  TMC2209
+#define Y_DRIVER_TYPE  TMC2209
+#define Z_DRIVER_TYPE  TMC2209
 //#define X2_DRIVER_TYPE A4988
 //#define Y2_DRIVER_TYPE A4988
 //#define Z2_DRIVER_TYPE A4988
 //#define Z3_DRIVER_TYPE A4988
-#define E0_DRIVER_TYPE TMC2208
+#define E0_DRIVER_TYPE TMC2209
 //#define E1_DRIVER_TYPE A4988
 //#define E2_DRIVER_TYPE A4988
 //#define E3_DRIVER_TYPE A4988
@@ -733,7 +745,7 @@
  *                                      X, Y, Z, E0 [, E1[, E2[, E3[, E4[, E5]]]]]
  */
 //#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 4000, 500 }
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { (400*32)/(2.0*20), (400*32)/(2.0*20), (200*32/2), 25.5*16 }
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { (400*16)/(2.0*20), (400*16)/(2.0*20), (200*8/4), 25.5*8 }
 //http://3dtoday.ru/blogs/akdzg/custom-firmware-marlin-and-pour-it-into-a-3d-printer/
 
 /**
@@ -742,7 +754,7 @@
  *                                      X, Y, Z, E0 [, E1[, E2[, E3[, E4[, E5]]]]]
  */
 //#define DEFAULT_MAX_FEEDRATE          { 300, 300, 10, 25 }
-#define DEFAULT_MAX_FEEDRATE          { 300, 300, 15, 40 }
+#define DEFAULT_MAX_FEEDRATE          { 300, 300, 10, 40 }
 
 /**
  * Default Max Acceleration (change/s) change = mm/s
@@ -1029,9 +1041,9 @@
 // @section machine
 
 // Invert the stepper direction. Change (or reverse the motor connector) if an axis goes the wrong way.
-#define INVERT_X_DIR true
-#define INVERT_Y_DIR true
-#define INVERT_Z_DIR true
+#define INVERT_X_DIR false
+#define INVERT_Y_DIR false
+#define INVERT_Z_DIR false
 
 // @section extruder
 
@@ -1062,18 +1074,18 @@
 // @section machine
 
 // The size of the print bed
-#define X_BED_SIZE 200
-#define Y_BED_SIZE 200
+#define X_BED_SIZE 100
+#define Y_BED_SIZE 100
 
 // Travel limits (mm) after homing, corresponding to endstop positions.
-#define X_MIN_POS -40
+#define X_MIN_POS 0
 #define Y_MIN_POS 0
 #define Z_MIN_POS 0
-//#define X_MAX_POS X_BED_SIZE
-#define X_MAX_POS 240
+#define X_MAX_POS X_BED_SIZE
+//#define X_MAX_POS 240
 #define Y_MAX_POS Y_BED_SIZE
 //#define Z_MAX_POS 200
-#define Z_MAX_POS 265
+#define Z_MAX_POS 107.8
 
 /**
  * Software Endstops
@@ -2190,21 +2202,21 @@
 #endif
 
 // Support for Adafruit Neopixel LED driver
-//#define NEOPIXEL_LED
+#define NEOPIXEL_LED
 #if ENABLED(NEOPIXEL_LED)
   //#define NEOPIXEL_TYPE   NEO_GRBW // NEO_GRBW / NEO_GRB - four/three channel driver type (defined in Adafruit_NeoPixel.h)
   #define NEOPIXEL_TYPE   NEO_GRB // NEO_GRBW / NEO_GRB - four/three channel driver type (defined in Adafruit_NeoPixel.h)
   //#define NEOPIXEL2_TYPE NEOPIXEL_TYPE
   //#define NEOPIXEL2_PIN    5
-  #define NEOPIXEL_PIXELS 30       // Number of LEDs in the strip, larger of 2 strips if 2 neopixel strips are used
+  #define NEOPIXEL_PIXELS 3       // Number of LEDs in the strip, larger of 2 strips if 2 neopixel strips are used
   #define NEOPIXEL_IS_SEQUENTIAL   // Sequential display for temperature change - LED by LED. Disable to change all LEDs at once.
   #define NEOPIXEL_BRIGHTNESS 127  // Initial brightness (0-255)
   #define NEOPIXEL_STARTUP_TEST  // Cycle through colors at startup
 
   // Use a single Neopixel LED for static (background) lighting
-  #define NEOPIXEL_BKGD_LED_INDEX  0               // Index of the LED to use
+  //#define NEOPIXEL_BKGD_LED_INDEX  0               // Index of the LED to use
   //#define NEOPIXEL_BKGD_COLOR { 255, 255, 255, 0 } // R, G, B, W
-  #define NEOPIXEL_BKGD_COLOR { 0, 0, 255, 0 } // R, G, B, W
+  //#define NEOPIXEL_BKGD_COLOR { 0, 0, 255, 0 } // R, G, B, W
 #endif
 
 /**
