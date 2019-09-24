@@ -126,7 +126,7 @@
  *
  * :[2400, 9600, 19200, 38400, 57600, 115200, 250000, 500000, 1000000]
  */
-#define BAUDRATE 115200 //Evg
+#define BAUDRATE 250000
 
 // Enable the Bluetooth serial interface on AT90USB devices
 //#define BLUETOOTH
@@ -418,7 +418,7 @@
 #define TEMP_SENSOR_3 0
 #define TEMP_SENSOR_4 0
 #define TEMP_SENSOR_5 0
-#define TEMP_SENSOR_BED 1 //Evg
+#define TEMP_SENSOR_BED 1
 #define TEMP_SENSOR_CHAMBER 0
 
 // Dummy thermistor constant temperature readings, for use with 998 and 999
@@ -482,10 +482,15 @@
 
   // If you are using a pre-configured hotend then you can use one of the value sets by uncommenting it
 
+  // UNI M303 E0 C8 S230 U1
+  #define DEFAULT_Kp 15.28
+  #define DEFAULT_Ki 1.39
+  #define DEFAULT_Kd 41.91
+  
   // Ultimaker
-  #define DEFAULT_Kp 22.2
-  #define DEFAULT_Ki 1.08
-  #define DEFAULT_Kd 114
+  //#define DEFAULT_Kp 22.2
+  //#define DEFAULT_Ki 1.08
+  //#define DEFAULT_Kd 114
 
   // MakerGear
   //#define DEFAULT_Kp 7.0
@@ -516,7 +521,7 @@
  * heater. If your configuration is significantly different than this and you don't understand
  * the issues involved, don't use bed PID until someone else verifies that your hardware works.
  */
-//#define PIDTEMPBED
+#define PIDTEMPBED
 
 //#define BED_LIMIT_SWITCHING
 
@@ -532,11 +537,16 @@
   //#define MIN_BED_POWER 0
   //#define PID_BED_DEBUG // Sends debug data to the serial port.
 
+  // UNI M303 E-1 C3 S70 U1    ///  M303 E-1 C8 S100 U1 /// M303 E-1 C8 S100 U1
+  #define DEFAULT_bedKp 38.36
+  #define DEFAULT_bedKi 4.56
+  #define DEFAULT_bedKd 215.04
+  
   //120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   //from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
-  #define DEFAULT_bedKp 10.00
-  #define DEFAULT_bedKi .023
-  #define DEFAULT_bedKd 305.4
+  //#define DEFAULT_bedKp 10.00
+  //#define DEFAULT_bedKi .023
+  //#define DEFAULT_bedKd 305.4
 
   //120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   //from pidautotune
@@ -564,7 +574,8 @@
  * Note: For Bowden Extruders make this large enough to allow load/unload.
  */
 #define PREVENT_LENGTHY_EXTRUDE
-#define EXTRUDE_MAXLENGTH 200
+//#define EXTRUDE_MAXLENGTH 200
+#define EXTRUDE_MAXLENGTH 900
 
 //===========================================================================
 //======================== Thermal Runaway Protection =======================
@@ -728,7 +739,8 @@
 //#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 4000, 500 }
 //#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 4000, 500 }
 //#define DEFAULT_AXIS_STEPS_PER_UNIT   { (200*16)/(2.0*20), (200*16)/(2.0*20), (200*E0_MICROSTEPS/2), 1752 } //Evg
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { (400*64)/(2.0*20), (400*64)/(2.0*20), (400*64/2), 1752 } //Evg
+//#define DEFAULT_AXIS_STEPS_PER_UNIT   { (400*64)/(2.0*20), (400*64)/(2.0*20), (400*64/2), 1752 } //Evg
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { (400*32)/(2.0*20), (400*32)/(2.0*20), (200*32/2), 25.5*16 }
 //http://3dtoday.ru/blogs/akdzg/custom-firmware-marlin-and-pour-it-into-a-3d-printer/
 
 /**
@@ -737,7 +749,7 @@
  *                                      X, Y, Z, E0 [, E1[, E2[, E3[, E4[, E5]]]]]
  */
 //#define DEFAULT_MAX_FEEDRATE          { 300, 300, 5, 25 }
-#define DEFAULT_MAX_FEEDRATE          { 300, 300, 10, 25 } //Evg
+#define DEFAULT_MAX_FEEDRATE          { 300, 300, 15, 40 } //Evg
 
 /**
  * Default Max Acceleration (change/s) change = mm/s
@@ -1057,13 +1069,16 @@
 #define Y_BED_SIZE 200
 
 // Travel limits (mm) after homing, corresponding to endstop positions.
-#define X_MIN_POS 0
+//#define X_MIN_POS 0
+#define X_MIN_POS -40
 #define Y_MIN_POS 0
 #define Z_MIN_POS 0
-#define X_MAX_POS X_BED_SIZE
+//#define X_MAX_POS X_BED_SIZE
+#define X_MAX_POS 240
 #define Y_MAX_POS Y_BED_SIZE
 //#define Z_MAX_POS 200
-#define Z_MAX_POS 270
+//#define Z_MAX_POS 270
+#define Z_MAX_POS 265
 
 /**
  * Software Endstops
@@ -1483,11 +1498,12 @@
  *    P1  Raise the nozzle always to Z-park height.
  *    P2  Raise the nozzle by Z-park amount, limited to Z_MAX_POS.
  */
-//#define NOZZLE_PARK_FEATURE
+#define NOZZLE_PARK_FEATURE
 
 #if ENABLED(NOZZLE_PARK_FEATURE)
   // Specify a park position as { X, Y, Z_raise }
-  #define NOZZLE_PARK_POINT { (X_MIN_POS + 10), (Y_MAX_POS - 10), 20 }
+  //#define NOZZLE_PARK_POINT { (X_MIN_POS + 10), (Y_MAX_POS - 10), 20 }
+  #define NOZZLE_PARK_POINT { (X_MIN_POS + 10), (Y_MIN_POS + 10), 0 }
   #define NOZZLE_PARK_XY_FEEDRATE 100   // (mm/s) X and Y axes feedrate (also used for delta Z axis)
   #define NOZZLE_PARK_Z_FEEDRATE 5      // (mm/s) Z axis feedrate (not used for delta printers)
 #endif
@@ -2182,7 +2198,7 @@
 #endif
 
 // Support for Adafruit Neopixel LED driver
-#define NEOPIXEL_LED
+//#define NEOPIXEL_LED
 #if ENABLED(NEOPIXEL_LED)
   //#define NEOPIXEL_TYPE   NEO_GRBW // NEO_GRBW / NEO_GRB - four/three channel driver type (defined in Adafruit_NeoPixel.h)
   #define NEOPIXEL_TYPE   NEO_GRB // NEO_GRBW / NEO_GRB - four/three channel driver type (defined in Adafruit_NeoPixel.h)
