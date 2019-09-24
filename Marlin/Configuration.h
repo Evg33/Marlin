@@ -1789,7 +1789,12 @@
 //
 // ULTIPANEL as seen on Thingiverse.
 //
-//#define ULTIPANEL
+#define ULTIPANEL //Evg
+#define U8GLIB_SH1106  //Evg
+#define LCD_SCREEN_ROT_180 //Evg
+//#define LCD_CONTRAST_INIT 1    //Evg
+//#define LCD_CONTRAST_MIN 0     //Evg
+//#define LCD_CONTRAST_MAX 255   //Evg
 
 //
 // PanelOne from T3P3 (via RAMPS 1.4 AUX2/AUX3)
@@ -1913,7 +1918,7 @@
 // RepRapDiscount FULL GRAPHIC Smart Controller
 // http://reprap.org/wiki/RepRapDiscount_Full_Graphic_Smart_Controller
 //
-#define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER
+//#define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER
 
 //
 // ReprapWorld Graphical LCD
