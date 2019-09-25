@@ -86,6 +86,8 @@
 
 // Show the Marlin bootscreen on startup. ** ENABLE FOR PRODUCTION **
 #define SHOW_BOOTSCREEN
+#define BOOTSCREEN_TIMEOUT   100
+#define CUSTOM_BOOTSCREEN_TIMEOUT   700
 
 // Show the bitmap in Marlin/_Bootscreen.h on startup.
 #define SHOW_CUSTOM_BOOTSCREEN
@@ -737,11 +739,17 @@
  *                                      X, Y, Z, E0 [, E1[, E2[, E3[, E4[, E5]]]]]
  */
 //#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 4000, 500 }
+//http://3dtoday.ru/blogs/akdzg/custom-firmware-marlin-and-pour-it-into-a-3d-printer/
 //#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 4000, 500 }
 //#define DEFAULT_AXIS_STEPS_PER_UNIT   { (200*16)/(2.0*20), (200*16)/(2.0*20), (200*E0_MICROSTEPS/2), 1752 } //Evg
 //#define DEFAULT_AXIS_STEPS_PER_UNIT   { (400*64)/(2.0*20), (400*64)/(2.0*20), (400*64/2), 1752 } //Evg
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { (400*32)/(2.0*20), (400*32)/(2.0*20), (200*32/2), 25.5*16 }
-//http://3dtoday.ru/blogs/akdzg/custom-firmware-marlin-and-pour-it-into-a-3d-printer/
+//#define DEFAULT_AXIS_STEPS_PER_UNIT   { (400*32)/(2.0*20), (400*32)/(2.0*20), (200*16/2), 25.5*16 }
+#define USER_STEPS_X 32
+#define USER_STEPS_Y 32
+#define USER_STEPS_Z 16
+#define USER_STEPS_E0 16
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { (400*USER_STEPS_X)/(2.0*20), (400*USER_STEPS_Y)/(2.0*20), (200*USER_STEPS_Z/2), 25.5*USER_STEPS_E0 }
+
 
 /**
  * Default Max Feed Rate (mm/s)

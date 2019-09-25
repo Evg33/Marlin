@@ -1155,7 +1155,7 @@
   #define STATUS_FAN_FRAMES 3       // :[0,1,2,3,4] Number of fan animation frames
   //#define STATUS_HEAT_PERCENT       // Show heating in a progress bar
   //#define BOOT_MARLIN_LOGO_SMALL    // Show a smaller Marlin logo on the Boot Screen (saving 399 bytes of flash)
-  #define BOOT_MARLIN_LOGO_ANIMATED // Animated Marlin logo. Costs ~‭3260 (or ~940) bytes of PROGMEM.
+  //#define BOOT_MARLIN_LOGO_ANIMATED // Animated Marlin logo. Costs ~‭3260 (or ~940) bytes of PROGMEM.
 
   // Frivolous Game Options
   #define MARLIN_BRICKOUT
@@ -1764,7 +1764,8 @@
 
   #if AXIS_IS_TMC(X)
     #define X_CURRENT     850  // (mA) RMS current. Multiply by 1.414 for peak current.
-    #define X_MICROSTEPS   32  // 0..256
+    //#define X_MICROSTEPS   32  // 0..256
+    #define X_MICROSTEPS USER_STEPS_X
     //#define X_RSENSE   0.11 //TMC2208
     #define X_RSENSE    0.075  //TMC5160
     #define X_CHAIN_POS     0  // 0 - Not chained, 1 - MCU MOSI connected, 2 - next in chain, ...
@@ -1779,7 +1780,8 @@
 
   #if AXIS_IS_TMC(Y)
     #define Y_CURRENT     850
-    #define Y_MICROSTEPS   32
+    //#define Y_MICROSTEPS   32
+    #define Y_MICROSTEPS USER_STEPS_Y
     //#define Y_RSENSE   0.11 //2208
     #define Y_RSENSE    0.075 //5160
     #define Y_CHAIN_POS     0
@@ -1794,7 +1796,8 @@
 
   #if AXIS_IS_TMC(Z)
     #define Z_CURRENT     850
-    #define Z_MICROSTEPS   32
+    //#define Z_MICROSTEPS   16
+    #define Z_MICROSTEPS USER_STEPS_Z
     //#define Z_RSENSE   0.11 //2208
     #define Z_RSENSE    0.075 //5160
     #define Z_CHAIN_POS     0
@@ -1816,7 +1819,8 @@
 
   #if AXIS_IS_TMC(E0)
     #define E0_CURRENT    850
-    #define E0_MICROSTEPS  16
+    //#define E0_MICROSTEPS  16
+    #define E0_MICROSTEPS USER_STEPS_E0
     //#define E0_RSENSE  0.11 //2208
     #define E0_RSENSE   0.075 //5160
     #define E0_CHAIN_POS    0
