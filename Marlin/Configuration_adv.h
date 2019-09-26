@@ -1767,7 +1767,12 @@
     //#define X_MICROSTEPS   32  // 0..256
     #define X_MICROSTEPS USER_STEPS_X
     //#define X_RSENSE   0.11 //TMC2208
-    #define X_RSENSE    0.075  //TMC5160
+    //#define X_RSENSE    0.075  //TMC5160
+    #if AXIS_DRIVER_TYPE_X(TMC5160)
+     #define X_RSENSE 0.075
+    #else
+     #define X_RSENSE  0.11
+    #endif
     #define X_CHAIN_POS     0  // 0 - Not chained, 1 - MCU MOSI connected, 2 - next in chain, ...
   #endif
 
@@ -1782,8 +1787,11 @@
     #define Y_CURRENT     850
     //#define Y_MICROSTEPS   32
     #define Y_MICROSTEPS USER_STEPS_Y
-    //#define Y_RSENSE   0.11 //2208
-    #define Y_RSENSE    0.075 //5160
+    #if AXIS_DRIVER_TYPE_Y(TMC5160)
+     #define Y_RSENSE 0.075
+    #else
+     #define Y_RSENSE  0.11
+    #endif
     #define Y_CHAIN_POS     0
   #endif
 
