@@ -86,11 +86,11 @@
 
 // Show the Marlin bootscreen on startup. ** ENABLE FOR PRODUCTION **
 #define SHOW_BOOTSCREEN
-#define BOOTSCREEN_TIMEOUT   100
+#define BOOTSCREEN_TIMEOUT   200
 
 // Show the bitmap in Marlin/_Bootscreen.h on startup.
 #define SHOW_CUSTOM_BOOTSCREEN
-#define CUSTOM_BOOTSCREEN_TIMEOUT   300
+#define CUSTOM_BOOTSCREEN_TIMEOUT   2500
 
 // Show the bitmap in Marlin/_Statusscreen.h on the status screen.
 //#define CUSTOM_STATUS_SCREEN_IMAGE
