@@ -291,7 +291,6 @@
 //#define FAN_KICKSTART_TIME 100
 #define FAN_KICKSTART_TIME 200
 
-
 /**
  * PWM Fan Scaling
  *
@@ -348,7 +347,7 @@
  * Multiple extruders can be assigned to the same pin in which case
  * the fan will turn on when any selected extruder is above the threshold.
  */
-#define E0_AUTO_FAN_PIN -1
+#define E0_AUTO_FAN_PIN FAN1_PIN
 #define E1_AUTO_FAN_PIN -1
 #define E2_AUTO_FAN_PIN -1
 #define E3_AUTO_FAN_PIN -1
@@ -865,7 +864,7 @@
    * LED Control Menu
    * Add LED Control to the LCD menu
    */
-  //#define LED_CONTROL_MENU
+  #define LED_CONTROL_MENU
   #if ENABLED(LED_CONTROL_MENU)
     #define LED_COLOR_PRESETS                 // Enable the Preset Color menu option
     #if ENABLED(LED_COLOR_PRESETS)
@@ -888,7 +887,7 @@
 
 // The timeout (in ms) to return to the status screen from sub-menus
 //#define LCD_TIMEOUT_TO_STATUS 15000
-#define LCD_TIMEOUT_TO_STATUS 60000
+#define LCD_TIMEOUT_TO_STATUS 60000 //60 sec
 
 // Add an 'M73' G-code to set the current percentage
 #define LCD_SET_PROGRESS_MANUALLY
@@ -1006,7 +1005,7 @@
    * On print completion the LCD Menu will open with the file selected.
    * You can just click to start the print, or navigate elsewhere.
    */
-  #define SD_REPRINT_LAST_SELECTED_FILE
+  //#define SD_REPRINT_LAST_SELECTED_FILE
 
   /**
    * Auto-report SdCard status with M27 S<seconds>
@@ -1288,7 +1287,7 @@
  *
  * Warning: Does not respect endstops!
  */
-#define BABYSTEPPING
+//#define BABYSTEPPING
 #if ENABLED(BABYSTEPPING)
   //#define BABYSTEP_WITHOUT_HOMING
   //#define BABYSTEP_XY                     // Also enable X/Y Babystepping. Not supported on DELTA!
@@ -1468,8 +1467,8 @@
 
 // The ASCII buffer for serial input
 #define MAX_CMD_SIZE 96
-//#define BUFSIZE 4
-#define BUFSIZE 32
+#define BUFSIZE 4
+//#define BUFSIZE 32 --- troubles !!!
 
 // Transmission to Host Buffer Size
 // To save 386 bytes of PROGMEM (and TX_BUFFER_SIZE+3 bytes of RAM) set to 0.
@@ -1478,8 +1477,8 @@
 // For debug-echo: 128 bytes for the optimal speed.
 // Other output doesn't need to be that speedy.
 // :[0, 2, 4, 8, 16, 32, 64, 128, 256]
-//#define TX_BUFFER_SIZE 0
-#define TX_BUFFER_SIZE 32
+#define TX_BUFFER_SIZE 0
+//ee#define TX_BUFFER_SIZE 32 --- need test
 
 // Host Receive Buffer Size
 // Without XON/XOFF flow control (see SERIAL_XON_XOFF below) 32 bytes should be enough.
@@ -1932,7 +1931,7 @@
    */
   #define STEALTHCHOP_XY
   #define STEALTHCHOP_Z
-  //#define STEALTHCHOP_E
+  #define STEALTHCHOP_E
 
   /**
    * Optimize spreadCycle chopper parameters by using predefined parameter sets
@@ -1949,7 +1948,7 @@
    * { <off_time[1..15]>, <hysteresis_end[-3..12]>, hysteresis_start[1..8] }
    */
   #define CHOPPER_TIMING CHOPPER_DEFAULT_12V
-  
+
   /**
    * Monitor Trinamic drivers for error conditions,
    * like overtemperature and short to ground.
@@ -2047,7 +2046,6 @@
    */
   //#define TMC_DEBUG
   #define TMC_DEBUG
-
 
   /**
    * You can set your own advanced settings by filling in predefined functions.
