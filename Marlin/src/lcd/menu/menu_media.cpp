@@ -39,7 +39,7 @@
 #endif
 
 void lcd_sd_updir() {
-  ui.encoderPosition = card.updir() ? ENCODER_STEPS_PER_MENU_ITEM : 0;
+  ui.encoderPosition = card.cdup() ? ENCODER_STEPS_PER_MENU_ITEM : 0;
   encoderTopLine = 0;
   screen_changed = true;
   ui.refresh();
@@ -82,10 +82,14 @@ inline void sdcard_start_selected_file() {
 #if ENABLED(SD_MENU_CONFIRM_START)
 
   void menu_sd_confirm() {
+    char * const longest = card.longest_filename();
+    char buffer[strlen(longest) + 2];
+    buffer[0] = ' ';
+    strcpy(buffer + 1, longest);
     do_select_screen(
       PSTR(MSG_BUTTON_PRINT), PSTR(MSG_BUTTON_CANCEL),
       sdcard_start_selected_file, ui.goto_previous_screen,
-      PSTR(MSG_START_PRINT " "), card.longest_filename(), PSTR("?")
+      PSTR(MSG_START_PRINT), buffer, PSTR("?")
     );
   }
 
@@ -111,7 +115,7 @@ class MenuItem_sdfile {
 class MenuItem_sdfolder {
   public:
     static void action(CardReader &theCard) {
-      card.chdir(theCard.filename);
+      card.cd(theCard.filename);
       encoderTopLine = 0;
       ui.encoderPosition = 2 * (ENCODER_STEPS_PER_MENU_ITEM);
       screen_changed = true;
