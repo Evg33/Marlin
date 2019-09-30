@@ -321,7 +321,7 @@ public:
   #define MAX_COORDINATE_SYSTEMS 9
   #if ENABLED(CNC_COORDINATE_SYSTEMS)
     static int8_t active_coordinate_system;
-    static float coordinate_system[MAX_COORDINATE_SYSTEMS][XYZ];
+    static xyz_pos_t coordinate_system[MAX_COORDINATE_SYSTEMS];
     static bool select_coordinate_system(const int8_t _new);
   #endif
 
@@ -370,7 +370,7 @@ private:
 
   static void G0_G1(
     #if IS_SCARA || defined(G0_FEEDRATE)
-      bool fast_move=false
+      const bool fast_move=false
     #endif
   );
 
