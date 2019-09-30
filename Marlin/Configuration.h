@@ -481,10 +481,10 @@
 
   // If you are using a pre-configured hotend then you can use one of the value sets by uncommenting it
 
-  // ZAV Mini M303 E0 C8 S220 U1
-  #define DEFAULT_Kp 13.21
-  #define DEFAULT_Ki 0.75
-  #define DEFAULT_Kd 58.17
+  // ZAV Mini M303 E0 C8 S230 U1
+  #define DEFAULT_Kp 12.38
+  #define DEFAULT_Ki 0.69
+  #define DEFAULT_Kd 55.75
 
   // UNI M303 E0 C8 S230 U1
   //#define DEFAULT_Kp 15.28
