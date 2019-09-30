@@ -541,10 +541,10 @@
   //#define MIN_BED_POWER 0
   //#define PID_BED_DEBUG // Sends debug data to the serial port.
 
-  // ZAV Mini M303 E-1 C3 S70 U1    ///  M303 E-1 C3 S100 U1
-  #define DEFAULT_bedKp 45.37
-  #define DEFAULT_bedKi 8.85
-  #define DEFAULT_bedKd 155.01
+  // ZAV Mini M303 E-1 C3 S70 U1    ///  M303 E-1 C3 S100 U1 // M303 E-1 C5 S100 U1
+  #define DEFAULT_bedKp 47.45
+  #define DEFAULT_bedKi 9.12
+  #define DEFAULT_bedKd 164.66
 
   // UNI M303 E-1 C3 S70 U1    ///  M303 E-1 C8 S100 U1 /// M303 E-1 C8 S100 U1
   //#define DEFAULT_bedKp 38.36
