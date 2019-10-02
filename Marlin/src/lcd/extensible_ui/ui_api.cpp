@@ -516,13 +516,13 @@ namespace ExtUI {
 
     int getTMCBumpSensitivity(const axis_t axis) {
       switch (axis) {
-        #if X_SENSORLESS && AXIS_HAS_STALLGUARD(X)
+        #if X_SENSORLESS
           case X: return stepperX.homing_threshold();
         #endif
-        #if Y_SENSORLESS && AXIS_HAS_STALLGUARD(Y)
+        #if Y_SENSORLESS
           case Y: return stepperY.homing_threshold();
         #endif
-        #if Z_SENSORLESS && AXIS_HAS_STALLGUARD(Z)
+        #if Z_SENSORLESS
           case Z: return stepperZ.homing_threshold();
         #endif
         default: return 0;
@@ -531,18 +531,16 @@ namespace ExtUI {
 
     void setTMCBumpSensitivity(const float value, const axis_t axis) {
       switch (axis) {
-        #if X_SENSORLESS && AXIS_HAS_STALLGUARD(X)
-          case X: stepperX.homing_threshold(value); break;
-        #else
-          UNUSED(value);
-        #endif
-        #if Y_SENSORLESS && AXIS_HAS_STALLGUARD(Y)
-          case Y: stepperY.homing_threshold(value); break;
-        #else
-          UNUSED(value);
-        #endif
-        #if Z_SENSORLESS && AXIS_HAS_STALLGUARD(Z)
-          case Z: stepperZ.homing_threshold(value); break;
+        #if X_SENSORLESS || Y_SENSORLESS || Z_SENSORLESS
+          #if X_SENSORLESS
+            case X: stepperX.homing_threshold(value); break;
+          #endif
+          #if Y_SENSORLESS
+            case Y: stepperY.homing_threshold(value); break;
+          #endif
+          #if Z_SENSORLESS
+            case Z: stepperZ.homing_threshold(value); break;
+          #endif
         #else
           UNUSED(value);
         #endif
@@ -579,12 +577,11 @@ namespace ExtUI {
   }
 
   void setAxisMaxFeedrate_mm_s(const feedRate_t value, const axis_t axis) {
-    planner.settings.max_feedrate_mm_s[axis] = value;
+    planner.set_max_feedrate(axis, value);
   }
 
   void setAxisMaxFeedrate_mm_s(const feedRate_t value, const extruder_t extruder) {
-    UNUSED_E(extruder);
-    planner.settings.max_feedrate_mm_s[E_AXIS_N(axis - E0)] = value;
+    planner.set_max_feedrate(E_AXIS_N(extruder - E0), value);
   }
 
   float getAxisMaxAcceleration_mm_s2(const axis_t axis) {
@@ -597,12 +594,11 @@ namespace ExtUI {
   }
 
   void setAxisMaxAcceleration_mm_s2(const float value, const axis_t axis) {
-    planner.settings.max_acceleration_mm_per_s2[axis] = value;
+    planner.set_max_acceleration(axis, value);
   }
 
   void setAxisMaxAcceleration_mm_s2(const float value, const extruder_t extruder) {
-    UNUSED_E(extruder);
-    planner.settings.max_acceleration_mm_per_s2[E_AXIS_N(extruder - E0)] = value;
+    planner.set_max_acceleration(E_AXIS_N(extruder - E0), value);
   }
 
   #if HAS_FILAMENT_SENSOR
@@ -650,11 +646,11 @@ namespace ExtUI {
     }
 
     void setAxisMaxJerk_mm_s(const float value, const axis_t axis) {
-      planner.max_jerk[axis] = value;
+      planner.set_max_jerk((AxisEnum)axis, value);
     }
 
     void setAxisMaxJerk_mm_s(const float value, const extruder_t) {
-      planner.max_jerk.e = value;
+      planner.set_max_jerk(E_AXIS, value);
     }
   #endif
 

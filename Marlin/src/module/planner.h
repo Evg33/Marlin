@@ -358,6 +358,10 @@ class Planner {
 
     static void reset_acceleration_rates();
     static void refresh_positioning();
+    static void set_max_acceleration(const uint8_t axis, float targetValue);
+    static void set_max_feedrate(const uint8_t axis, float targetValue);
+    static void set_max_jerk(const AxisEnum axis, float targetValue);
+
 
     #if EXTRUDERS
       FORCE_INLINE static void refresh_e_factor(const uint8_t e) {
@@ -431,12 +435,9 @@ class Planner {
 
     #else
 
-      FORCE_INLINE static float fade_scaling_factor_for_z(const float &rz) {
-        UNUSED(rz);
-        return 1;
-      }
+      FORCE_INLINE static float fade_scaling_factor_for_z(const float&) { return 1; }
 
-      FORCE_INLINE static bool leveling_active_at_z(const float &rz) { UNUSED(rz); return true; }
+      FORCE_INLINE static bool leveling_active_at_z(const float&) { return true; }
 
     #endif
 
