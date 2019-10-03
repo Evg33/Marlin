@@ -1698,6 +1698,7 @@
 // produce one step. Should be increased for high-resolution encoders.
 //
 //#define ENCODER_PULSES_PER_STEP 4
+#define ENCODER_PULSES_PER_STEP 3 //Fysetc mini 12864
 
 //
 // Use this option to override the number of step signals required to
