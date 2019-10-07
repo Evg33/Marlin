@@ -746,7 +746,7 @@
  *                                      X, Y, Z, E0 [, E1[, E2[, E3[, E4[, E5]]]]]
  */
 //#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 4000, 500 }
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { (400*16)/(2.0*20), (400*16)/(2.0*20), (200*8/4), 25.5*8 }
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { (400*32)/(2.0*20), (400*32)/(2.0*20), (200*8/4), 25.5*8 }
 //http://3dtoday.ru/blogs/akdzg/custom-firmware-marlin-and-pour-it-into-a-3d-printer/
 
 /**
