@@ -648,8 +648,7 @@
 //#define HOME_AFTER_DEACTIVATE  // Require rehoming after steppers are deactivated
 
 // Minimum time that a segment needs to take if the buffer is emptied
-//#define DEFAULT_MINSEGMENTTIME        20000   // (ms)
-#define DEFAULT_MINSEGMENTTIME        50000   // (ms)
+#define DEFAULT_MINSEGMENTTIME        20000   // (ms)
 
 // If defined the movements slow down when the look ahead buffer is only half full
 #define SLOWDOWN
