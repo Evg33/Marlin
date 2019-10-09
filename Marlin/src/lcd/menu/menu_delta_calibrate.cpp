@@ -41,7 +41,7 @@
 #endif
 
 void _man_probe_pt(const xy_pos_t &xy) {
-  do_blocking_move_to(xy, Z_CLEARANCE_BETWEEN_PROBES);
+  do_blocking_move_to_xy_z(xy, Z_CLEARANCE_BETWEEN_PROBES);
   ui.synchronize();
   move_menu_scale = _MAX(PROBE_MANUALLY_STEP, MIN_STEPS_PER_SEGMENT / float(DEFAULT_XYZ_STEPS_PER_UNIT));
   ui.goto_screen(lcd_move_z);
@@ -94,14 +94,13 @@ void _man_probe_pt(const xy_pos_t &xy) {
 
 #endif
 
-void _recalc_delta_settings() {
-  #if HAS_LEVELING
-    reset_bed_level(); // After changing kinematics bed-level data is no longer valid
-  #endif
-  recalc_delta_settings();
-}
-
 void lcd_delta_settings() {
+  auto _recalc_delta_settings = []() {
+    #if HAS_LEVELING
+      reset_bed_level(); // After changing kinematics bed-level data is no longer valid
+    #endif
+    recalc_delta_settings();
+  };
   START_MENU();
   BACK_ITEM(MSG_DELTA_CALIBRATE);
   EDIT_ITEM(float52sign, MSG_DELTA_HEIGHT, &delta_height, delta_height - 10, delta_height + 10, _recalc_delta_settings);
