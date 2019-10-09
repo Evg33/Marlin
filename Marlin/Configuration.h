@@ -829,6 +829,9 @@
  *   http://blog.kyneticcnc.com/2018/10/computing-junction-deviation-for-marlin.html
  */
 #if DISABLED(CLASSIC_JERK)
+// https://github.com/MarlinFirmware/Marlin/pull/15481
+// JD=0.4*JERK_XY^2/DEFAULT_RETRACT_ACCELERATION=0,4*10^2/3000=0.013
+//  #define JUNCTION_DEVIATION_MM 0.015  // (mm) Distance from real junction edge
   #define JUNCTION_DEVIATION_MM 0.02  // (mm) Distance from real junction edge
 #endif
 
