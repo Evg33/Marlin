@@ -87,8 +87,7 @@
 
 // Show the Marlin bootscreen on startup. ** ENABLE FOR PRODUCTION **
 #define SHOW_BOOTSCREEN
-#define BOOTSCREEN_TIMEOUT   100
-#define CUSTOM_BOOTSCREEN_TIMEOUT   700
+#define BOOTSCREEN_TIMEOUT   1
 
 // Show the bitmap in Marlin/_Bootscreen.h on startup.
 #define SHOW_CUSTOM_BOOTSCREEN
@@ -142,8 +141,8 @@
 
 // Name displayed in the LCD "Ready" message and Info menu
 //#define CUSTOM_MACHINE_NAME "3D Printer"
-//#define CUSTOM_MACHINE_NAME "UNI @ SKR Pro"
-#define CUSTOM_MACHINE_NAME STRING_DISTRIBUTION_DATE
+//#define CUSTOM_MACHINE_NAME STRING_DISTRIBUTION_DATE
+#define CUSTOM_MACHINE_NAME "UNI / SKR Pro"
 
 // Printer's unique ID, used by some programs to differentiate between machines.
 // Choose your own or use a service like http://www.uuidgenerator.net/version4
@@ -332,11 +331,13 @@
  * Enable and connect the power supply to the PS_ON_PIN.
  * Specify whether the power supply is active HIGH or active LOW.
  */
-//#define PSU_CONTROL
+#define PS_ON_PIN  PC9
+#define PSU_CONTROL
 //#define PSU_NAME "Power Supply"
 
 #if ENABLED(PSU_CONTROL)
-  #define PSU_ACTIVE_HIGH false // Set 'false' for ATX (1), 'true' for X-Box (2)
+  //#define PSU_ACTIVE_HIGH false // Set 'false' for ATX (1), 'true' for X-Box (2)
+  #define PSU_ACTIVE_HIGH true
 
   //#define PS_DEFAULT_OFF      // Keep power off until enabled directly with M80
 
@@ -472,8 +473,8 @@
 #define PID_MAX BANG_MAX // Limits current to nozzle while PID is active (see PID_FUNCTIONAL_RANGE below); 255=full current
 #define PID_K1 0.95      // Smoothing factor within any PID loop
 #if ENABLED(PIDTEMP)
-  //#define PID_EDIT_MENU         // Add PID editing to the "Advanced Settings" menu. (~700 bytes of PROGMEM)
-  //#define PID_AUTOTUNE_MENU     // Add PID auto-tuning to the "Advanced Settings" menu. (~250 bytes of PROGMEM)
+  #define PID_EDIT_MENU         // Add PID editing to the "Advanced Settings" menu. (~700 bytes of PROGMEM)
+  #define PID_AUTOTUNE_MENU     // Add PID auto-tuning to the "Advanced Settings" menu. (~250 bytes of PROGMEM)
   //#define PID_DEBUG             // Sends debug data to the serial port.
   //#define PID_OPENLOOP 1        // Puts PID in open loop. M104/M140 sets the output power from 0 to PID_MAX
   //#define SLOW_PWM_HEATERS      // PWM with very low frequency (roughly 0.125Hz=8s) and minimum state time of approximately 1s useful for heaters driven by a relay
@@ -607,8 +608,8 @@
 // @section machine
 
 // Uncomment one of these options to enable CoreXY, CoreXZ, or CoreYZ kinematics
-// either in the usual order or ed
-#define COREXY //Evg
+// either in the usual order or reversed
+#define COREXY
 //#define COREXZ
 //#define COREYZ
 //#define COREYX
@@ -757,7 +758,7 @@
  *                                      X, Y, Z, E0 [, E1[, E2[, E3[, E4[, E5]]]]]
  */
 //#define DEFAULT_MAX_FEEDRATE          { 300, 300, 5, 25 }
-#define DEFAULT_MAX_FEEDRATE          { 300, 300, 15, 40 } //Evg
+#define DEFAULT_MAX_FEEDRATE          { 300, 300, 10, 40 } //Evg
 
 //#define LIMITED_MAX_FR_EDITING        // Limit edit via M203 or LCD to DEFAULT_MAX_FEEDRATE * 2
 #if ENABLED(LIMITED_MAX_FR_EDITING)
@@ -819,7 +820,8 @@
  *   http://blog.kyneticcnc.com/2018/10/computing-junction-deviation-for-marlin.html
  */
 #if DISABLED(CLASSIC_JERK)
-  #define JUNCTION_DEVIATION_MM 0.013 // (mm) Distance from real junction edge
+//  #define JUNCTION_DEVIATION_MM 0.013 // (mm) Distance from real junction edge
+  #define JUNCTION_DEVIATION_MM 0.04
 #endif
 
 /**
@@ -1080,7 +1082,7 @@
 #define X_HOME_DIR -1
 #define Y_HOME_DIR -1
 //#define Z_HOME_DIR -1
-#define Z_HOME_DIR 1 //Evg33
+#define Z_HOME_DIR 1
 
 // @section machine
 
@@ -1316,13 +1318,13 @@
 #endif
 
 // Add a menu item to move between bed corners for manual bed adjustment
-//#define LEVEL_BED_CORNERS
+#define LEVEL_BED_CORNERS
 
 #if ENABLED(LEVEL_BED_CORNERS)
   #define LEVEL_CORNERS_INSET 30    // (mm) An inset for corner leveling
   #define LEVEL_CORNERS_Z_HOP  4.0  // (mm) Move nozzle up before moving between corners
-  #define LEVEL_CORNERS_HEIGHT 0.0  // (mm) Z height of nozzle at leveling points
-  //#define LEVEL_CENTER_TOO        // Move to the center after the last corner
+  #define LEVEL_CORNERS_HEIGHT 0.1  // (mm) Z height of nozzle at leveling points
+  #define LEVEL_CENTER_TOO        // Move to the center after the last corner
 #endif
 
 /**
@@ -1362,10 +1364,8 @@
 // Homing speeds (mm/m)
 //#define HOMING_FEEDRATE_XY (50*60)
 //#define HOMING_FEEDRATE_Z  (4*60)
-#define HOMING_FEEDRATE_XY (100*60) //Evg33
-//#define HOMING_FEEDRATE_Z  (4*60) //=240
-#define HOMING_FEEDRATE_Z  (50*60) //Evg33
-
+#define HOMING_FEEDRATE_XY (70*60)
+#define HOMING_FEEDRATE_Z  (10*60) //Evg33
 
 // Validate that endstops are triggered on homing moves
 #define VALIDATE_HOMING_ENDSTOPS
@@ -1447,7 +1447,7 @@
 //#define DISABLE_M503        // Saves ~2700 bytes of PROGMEM. Disable for release!
 #define EEPROM_CHITCHAT       // Give feedback on EEPROM commands. Disable to save PROGMEM.
 #if ENABLED(EEPROM_SETTINGS)
-  //#define EEPROM_AUTO_INIT  // Init EEPROM automatically on any errors.
+  #define EEPROM_AUTO_INIT  // Init EEPROM automatically on any errors.
 #endif
 
 //For SKRPRO
@@ -1748,7 +1748,7 @@
 //
 // Add individual axis homing items (Home X, Home Y, and Home Z) to the LCD menu.
 //
-//#define INDIVIDUAL_AXIS_HOMING_MENU
+#define INDIVIDUAL_AXIS_HOMING_MENU
 
 //
 // SPEAKER/BUZZER
@@ -1756,7 +1756,7 @@
 // If you have a speaker that can produce tones, enable it here.
 // By default Marlin assumes you have a buzzer with a fixed frequency.
 //
-#define SPEAKER //Evg
+//#define SPEAKER
 
 //
 // The duration and frequency for the UI feedback sound.
