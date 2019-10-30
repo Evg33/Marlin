@@ -1823,7 +1823,7 @@
   #define INTERPOLATE       true  // Interpolate X/Y/Z_MICROSTEPS to 256
 
   #if AXIS_IS_TMC(X)
-    #define X_CURRENT     850  // (mA) RMS current. Multiply by 1.414 for peak current.
+    #define X_CURRENT     1200  // 2A // (mA) RMS current. Multiply by 1.414 for peak current.
     //#define X_MICROSTEPS   32  // 0..256
     #define X_MICROSTEPS USER_STEPS_X
     //#define X_RSENSE   0.11 //TMC2208
@@ -1844,7 +1844,7 @@
   #endif
 
   #if AXIS_IS_TMC(Y)
-    #define Y_CURRENT     850
+    #define Y_CURRENT     1200 // 2A
     //#define Y_MICROSTEPS   32
     #define Y_MICROSTEPS USER_STEPS_Y
     #if AXIS_DRIVER_TYPE_Y(TMC5160)
@@ -1863,7 +1863,7 @@
   #endif
 
   #if AXIS_IS_TMC(Z)
-    #define Z_CURRENT     850
+    #define Z_CURRENT    1000 //1.6A
     //#define Z_MICROSTEPS   16
     #define Z_MICROSTEPS USER_STEPS_Z
     //#define Z_RSENSE   0.11 //2208
@@ -2043,16 +2043,16 @@
    * STEALTHCHOP_(XY|Z|E) must be enabled to use HYBRID_THRESHOLD.
    * M913 X/Y/Z/E to live tune the setting
    */
-  //#define HYBRID_THRESHOLD
+  #define HYBRID_THRESHOLD
 
-  #define X_HYBRID_THRESHOLD     200  // [mm/s]
+  #define X_HYBRID_THRESHOLD      96  // [mm/s] //dflt 100
   #define X2_HYBRID_THRESHOLD    100
-  #define Y_HYBRID_THRESHOLD     200
+  #define Y_HYBRID_THRESHOLD      96
   #define Y2_HYBRID_THRESHOLD    100
-  #define Z_HYBRID_THRESHOLD      11
+  #define Z_HYBRID_THRESHOLD       8 // dflt 3
   #define Z2_HYBRID_THRESHOLD      3
   #define Z3_HYBRID_THRESHOLD      3
-  #define E0_HYBRID_THRESHOLD     15
+  #define E0_HYBRID_THRESHOLD     30
   #define E1_HYBRID_THRESHOLD     30
   #define E2_HYBRID_THRESHOLD     30
   #define E3_HYBRID_THRESHOLD     30
