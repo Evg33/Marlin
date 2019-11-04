@@ -482,9 +482,9 @@
   // If you are using a pre-configured hotend then you can use one of the value sets by uncommenting it
 
   // ZAV Mini M303 E0 C8 S230 U1
-  #define DEFAULT_Kp 12.38
-  #define DEFAULT_Ki 0.69
-  #define DEFAULT_Kd 55.75
+  #define DEFAULT_Kp 12.07
+  #define DEFAULT_Ki 0.67
+  #define DEFAULT_Kd 54.61
 
   // UNI M303 E0 C8 S230 U1
   //#define DEFAULT_Kp 15.28
@@ -541,10 +541,10 @@
   //#define MIN_BED_POWER 0
   //#define PID_BED_DEBUG // Sends debug data to the serial port.
 
-  // ZAV Mini M303 E-1 C3 S70 U1    ///  M303 E-1 C3 S100 U1 // M303 E-1 C5 S100 U1
-  #define DEFAULT_bedKp 47.45
-  #define DEFAULT_bedKi 9.12
-  #define DEFAULT_bedKd 164.66
+  // ZAV Mini M303 E-1 C8 S100 U1
+  #define DEFAULT_bedKp 51.54
+  #define DEFAULT_bedKi 10.06
+  #define DEFAULT_bedKd 176.09
 
   // UNI M303 E-1 C3 S70 U1    ///  M303 E-1 C8 S100 U1 /// M303 E-1 C8 S100 U1
   //#define DEFAULT_bedKp 38.36
@@ -1367,7 +1367,7 @@
 // Homing speeds (mm/m)
 //#define HOMING_FEEDRATE_XY (50*60)
 //#define HOMING_FEEDRATE_Z  (4*60)
-#define HOMING_FEEDRATE_XY (50*60)
+#define HOMING_FEEDRATE_XY 3000
 #define HOMING_FEEDRATE_Z  (15*60)
 
 // Validate that endstops are triggered on homing moves
