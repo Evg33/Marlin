@@ -1991,6 +1991,9 @@
 //#define FYSETC_MINI_12864_1_2  // Type C/D/E/F. Simple RGB Backlight (always on)
 //#define FYSETC_MINI_12864_2_0  // Type A/B. Discreet RGB Backlight
 #define FYSETC_MINI_12864_2_1  // Type A/B. Neopixel RGB Backlight
+#if ENABLED(FYSETC_MINI_12864_2_1)
+ #define LCD_CONTRAST_INIT 234
+#endif
 
 //
 // Factory display for Creality CR-10
@@ -2214,7 +2217,7 @@
   //#define NEOPIXEL2_PIN P2_00
   #define NEOPIXEL_PIXELS 3       // Number of LEDs in the strip, larger of 2 strips if 2 neopixel strips are used
   #define NEOPIXEL_IS_SEQUENTIAL   // Sequential display for temperature change - LED by LED. Disable to change all LEDs at once.
-  #define NEOPIXEL_BRIGHTNESS 64  // Initial brightness (0-255)
+  #define NEOPIXEL_BRIGHTNESS 96  // Initial brightness (0-255)
   //#define NEOPIXEL_STARTUP_TEST // Cycle through colors at startup
 
   // Use a single Neopixel LED for static (background) lighting
