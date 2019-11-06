@@ -28,7 +28,7 @@ env:
   # Broken Extended STM32 Environments
   #- TEST_PLATFORM="ARMED"
   #- TEST_PLATFORM="BIGTREE_BTT002"
-  - TEST_PLATFORM="BIGTREE_SKR_PRO"
+  #- TEST_PLATFORM="BIGTREE_SKR_PRO"
 
   # Extended STM32 Environments
   #- TEST_PLATFORM="STM32F103RC_bigtree"
@@ -38,7 +38,7 @@ env:
   #- TEST_PLATFORM="mks_robin"
 
   # Put lengthy tests last
-  - TEST_PLATFORM="LPC1768"
+  #- TEST_PLATFORM="LPC1768"
   #- TEST_PLATFORM="LPC1769"
 
   # Non-working environment tests
