@@ -13,7 +13,7 @@ env:
   - TEST_PLATFORM="DUE"
   #- TEST_PLATFORM="esp32"
   #- TEST_PLATFORM="linux_native"
-  - TEST_PLATFORM="megaatmega2560"
+  #- TEST_PLATFORM="megaatmega2560"
   #- TEST_PLATFORM="STM32F103RE"
   #- TEST_PLATFORM="teensy31"
   #- TEST_PLATFORM="teensy35"
