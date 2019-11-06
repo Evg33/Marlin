@@ -10,7 +10,7 @@ notifications:
 
 env:
   # Base Environments
-  #- TEST_PLATFORM="DUE"
+  - TEST_PLATFORM="DUE"
   #- TEST_PLATFORM="esp32"
   #- TEST_PLATFORM="linux_native"
   - TEST_PLATFORM="megaatmega2560"
