@@ -13,7 +13,7 @@ env:
   #- TEST_PLATFORM="DUE"
   #- TEST_PLATFORM="esp32"
   #- TEST_PLATFORM="linux_native"
-  - TEST_PLATFORM="megaatmega2560"
+  #- TEST_PLATFORM="megaatmega2560"
   #- TEST_PLATFORM="STM32F103RE"
   #- TEST_PLATFORM="teensy31"
   #- TEST_PLATFORM="teensy35"
@@ -28,7 +28,7 @@ env:
   # Broken Extended STM32 Environments
   #- TEST_PLATFORM="ARMED"
   #- TEST_PLATFORM="BIGTREE_BTT002"
-  - TEST_PLATFORM="BIGTREE_SKR_PRO"
+  #- TEST_PLATFORM="BIGTREE_SKR_PRO"
 
   # Extended STM32 Environments
   #- TEST_PLATFORM="STM32F103RC_bigtree"
