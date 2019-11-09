@@ -1357,7 +1357,7 @@
 #if ENABLED(LIN_ADVANCE)
   //#define EXTRA_LIN_ADVANCE_K // Enable for second linear advance constants
   //#define LIN_ADVANCE_K 0.22    // Unit: mm compression per 1mm/s extruder speed
-  #define LIN_ADVANCE_K 0.095    // Unit: mm compression per 1mm/s extruder speed
+  #define LIN_ADVANCE_K 0 //0.6
   //#define LA_DEBUG            // If enabled, this will generate debug information output over USB.
 #endif
 
@@ -1876,7 +1876,7 @@
   #endif
 
   #if AXIS_IS_TMC(E0)
-    #define E0_CURRENT   1700*0.5
+    #define E0_CURRENT   1700*0.47
     #define E0_MICROSTEPS   8
     //#define E0_RSENSE     0.075
     #define E0_RSENSE    0.11
