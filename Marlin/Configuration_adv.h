@@ -841,7 +841,7 @@
 // @section lcd
 
 #if EITHER(ULTIPANEL, EXTENSIBLE_UI)
-  #define MANUAL_FEEDRATE { 50*60, 50*60, 10*60, 60 } // Feedrates for manual moves along X, Y, Z, E from panel
+  #define MANUAL_FEEDRATE { (50*60), (50*60), (10*60), 60 } // Feedrates for manual moves along X, Y, Z, E from panel
   #define SHORT_MANUAL_Z_MOVE 0.025 // (mm) Smallest manual Z move (< 0.1mm)
   #if ENABLED(ULTIPANEL)
     #define MANUAL_E_MOVES_RELATIVE // Display extruder move distance rather than "position"
@@ -1830,7 +1830,7 @@
   #define INTERPOLATE       true  // Interpolate X/Y/Z_MICROSTEPS to 256
 
   #if AXIS_IS_TMC(X)
-    #define X_CURRENT    2000*0.6  // (mA) RMS current. Multiply by 1.414 for peak current.
+    #define X_CURRENT    (2000*60/100)  // (mA) RMS current. Multiply by 1.414 for peak current.
     #define X_CURRENT_HOME  X_CURRENT  // (mA) RMS current for sensorless homing
     #define X_MICROSTEPS   32  // 0..256
     #define X_RSENSE     0.075  //5160
@@ -1846,7 +1846,7 @@
   #endif
 
   #if AXIS_IS_TMC(Y)
-    #define Y_CURRENT    2000*0.6
+    #define Y_CURRENT    (2000*60/100)
     #define Y_CURRENT_HOME  Y_CURRENT
     #define Y_MICROSTEPS   32
     #define Y_RSENSE     0.075  //5160
@@ -1862,7 +1862,7 @@
   #endif
 
   #if AXIS_IS_TMC(Z)
-    #define Z_CURRENT     400*0.6
+    #define Z_CURRENT     (400*60/100)
     #define Z_CURRENT_HOME  Z_CURRENT
     #define Z_MICROSTEPS    8
     #define Z_RSENSE          0.11
@@ -1886,7 +1886,7 @@
   #endif
 
   #if AXIS_IS_TMC(E0)
-    #define E0_CURRENT   1700*0.47
+    #define E0_CURRENT   (1700*47/100)
     #define E0_MICROSTEPS   8
     #define E0_RSENSE    0.11
     #define E0_CHAIN_POS   -1
