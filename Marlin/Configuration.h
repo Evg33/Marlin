@@ -479,9 +479,10 @@
   // If you are using a pre-configured hotend then you can use one of the value sets by uncommenting it
 
   // ZAV Mini M303 E0 C8 S230 U1
-  #define DEFAULT_Kp 12.07
-  #define DEFAULT_Ki 0.67
-  #define DEFAULT_Kd 54.61
+  // M301 P12.63 I0.70 D56.76
+  #define DEFAULT_Kp 12.63 //12.07 
+  #define DEFAULT_Ki  0.80 // 0.67
+  #define DEFAULT_Kd 56.76 //54.61
 
   // UNI M303 E0 C8 S230 U1
   //#define DEFAULT_Kp 15.28
@@ -538,10 +539,11 @@
   //#define MIN_BED_POWER 0
   //#define PID_BED_DEBUG // Sends debug data to the serial port.
 
-  // ZAV Mini M303 E-1 C8 S100 U1
-  #define DEFAULT_bedKp 51.54
-  #define DEFAULT_bedKi 10.06
-  #define DEFAULT_bedKd 176.09
+  // ZAV Mini M303 E-1 C8 S70 U1
+  // M304 P35.93 I6.98 D123.37
+  #define DEFAULT_bedKp  35.93 // 51.54
+  #define DEFAULT_bedKi   6.98 // 10.06
+  #define DEFAULT_bedKd 123.37 //176.09
 
   // UNI M303 E-1 C3 S70 U1    ///  M303 E-1 C8 S100 U1 /// M303 E-1 C8 S100 U1
   //#define DEFAULT_bedKp 38.36
