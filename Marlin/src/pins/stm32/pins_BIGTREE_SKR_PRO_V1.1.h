@@ -172,11 +172,11 @@
 //
 #define HEATER_0_PIN       PB1  // Heater0
 #define HEATER_1_PIN       PD14 // Heater1
-#define HEATER_2_PIN       PB0  // Heater1
+#define HEATER_2_PIN       PB0  // Heater2
 #define HEATER_BED_PIN     PD12 // Hotbed
-#define FAN_PIN            PE6  // PC8  // Fan0
+#define FAN_PIN            PE6  // PC8  // Fan0 //Mosfet at FAN_PIN broken by Evg33.
 #define FAN1_PIN           PE5  // Fan1
-#define FAN2_PIN           -1   // PE6  // Fan2
+#define FAN2_PIN           -1   // PE6  // Fan2 //Mosfet at FAN_PIN broken by Evg33.
 
 //
 // Misc. Functions
