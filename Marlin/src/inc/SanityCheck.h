@@ -422,6 +422,8 @@
   #error "FILAMENT_UNLOAD_RETRACT_LENGTH is now FILAMENT_UNLOAD_PURGE_RETRACT. Please update Configuration_adv.h."
 #elif defined(FILAMENT_UNLOAD_DELAY)
   #error "FILAMENT_UNLOAD_DELAY is now FILAMENT_UNLOAD_PURGE_DELAY. Please update Configuration_adv.h."
+#elif defined(HOME_USING_SPREADCYCLE)
+  #error "HOME_USING_SPREADCYCLE is now obsolete. Please remove it from Configuration_adv.h."
 #endif
 
 #define BOARD_MKS_13        -1000
@@ -1957,7 +1959,7 @@ static_assert(Y_MAX_LENGTH >= Y_BED_SIZE, "Movement bounds (Y_MIN_POS, Y_MAX_POS
 /**
  * Check existing CS pins against enabled TMC SPI drivers.
  */
-#define INVALID_TMC_SPI(ST) (AXIS_HAS_SPI && !PIN_EXISTS(ST##_CS))
+#define INVALID_TMC_SPI(ST) (AXIS_HAS_SPI(ST) && !PIN_EXISTS(ST##_CS))
 #if INVALID_TMC_SPI(X)
   #error "An SPI driven TMC driver on X requires X_CS_PIN."
 #elif INVALID_TMC_SPI(X2)
@@ -2079,6 +2081,10 @@ static_assert(Y_MAX_LENGTH >= Y_BED_SIZE, "Movement bounds (Y_MIN_POS, Y_MAX_POS
     || defined(E3_HARDWARE_SERIAL) || defined(E4_HARDWARE_SERIAL) \
     || defined(E5_HARDWARE_SERIAL) )
   #error "TMC2208 Software Serial is supported only on AVR, LPC1768, STM32F1 and STM32F4 platforms."
+#endif
+
+#if ENABLED(DELTA) && (ENABLED(STEALTHCHOP_XY) != ENABLED(STEALTHCHOP_Z))
+  #error "STEALTHCHOP_XY and STEALTHCHOP_Z must be the same on DELTA."
 #endif
 
 #if ENABLED(SENSORLESS_HOMING)
@@ -2236,10 +2242,6 @@ static_assert(Y_MAX_LENGTH >= Y_BED_SIZE, "Movement bounds (Y_MIN_POS, Y_MAX_POS
 #endif
 #undef IN_CHAIN
 
-#if ENABLED(DELTA) && (ENABLED(STEALTHCHOP_XY) != ENABLED(STEALTHCHOP_Z))
-  #error "STEALTHCHOP_XY and STEALTHCHOP_Z must be the same on DELTA."
-#endif
-
 /**
  * Digipot requirement
  */
@@ -2353,24 +2355,13 @@ static_assert(   _ARR_TEST(3,0) && _ARR_TEST(3,1) && _ARR_TEST(3,2)
 #endif
 
 #if ENABLED(Z_STEPPER_AUTO_ALIGN)
-
   #if !Z_MULTI_STEPPER_DRIVERS
     #error "Z_STEPPER_AUTO_ALIGN requires Z_DUAL_STEPPER_DRIVERS or Z_TRIPLE_STEPPER_DRIVERS."
   #elif !HAS_BED_PROBE
     #error "Z_STEPPER_AUTO_ALIGN requires a Z-bed probe."
+  #elif ENABLED(Z_STEPPER_ALIGN_KNOWN_STEPPER_POSITIONS) && DISABLED(Z_TRIPLE_STEPPER_DRIVERS)
+    #error "Z_STEPPER_ALIGN_KNOWN_STEPPER_POSITIONS requires Z_TRIPLE_STEPPER_DRIVERS."
   #endif
-
-  #if ENABLED(Z_STEPPER_ALIGN_KNOWN_STEPPER_POSITIONS)
-    #if DISABLED(Z_TRIPLE_STEPPER_DRIVERS)
-      #error "Z_STEPPER_ALIGN_KNOWN_STEPPER_POSITIONS requires Z_TRIPLE_STEPPER_DRIVERS."
-    #endif
-    constexpr float sanity_arr_screw_xy[][2] = Z_STEPPER_ALIGN_STEPPER_XY;
-    static_assert(
-      COUNT(sanity_arr_screw_xy) == Z_STEPPER_COUNT,
-      "Z_STEPPER_ALIGN_STEPPER_XY requires three {X,Y} entries (one per Z stepper)."
-    );
-  #endif
-
 #endif
 
 #if ENABLED(PRINTCOUNTER) && DISABLED(EEPROM_SETTINGS)
@@ -2560,13 +2551,5 @@ static_assert(   _ARR_TEST(3,0) && _ARR_TEST(3,1) && _ARR_TEST(3,2)
     #error "PRINT_PROGRESS_SHOW_DECIMALS currently requires a Graphical LCD."
   #elif ENABLED(SHOW_REMAINING_TIME)
     #error "SHOW_REMAINING_TIME currently requires a Graphical LCD."
-  #endif
-#endif
-
-#if ENABLED(LIN_ADVANCE) && MINIMUM_STEPPER_PULSE < 1
-  #if HAS_TMC_STANDALONE_E_DRIVER
-    #error "LIN_ADVANCE with TMC standalone driver on extruder requires MIMIMUM_STEPPER_PULSE >= 1"
-  #elif HAS_TMC_E_DRIVER && DISABLED(SQUARE_WAVE_STEPPING)
-    #error "LIN_ADVANCE with TMC driver on extruder requires SQUARE_WAVE_STEPPING or MINIMUM_STEPPER_PULSE >= 1"
   #endif
 #endif
