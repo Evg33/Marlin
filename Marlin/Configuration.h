@@ -758,7 +758,8 @@
  */
 //#define DEFAULT_MAX_FEEDRATE          { 300, 300, 10, 25 }
 //#define DEFAULT_MAX_FEEDRATE          { 300, 300, 10, 40 }
-#define DEFAULT_MAX_FEEDRATE          { 95, 95, 16, 120 }
+//#define DEFAULT_MAX_FEEDRATE          { 95, 95, 16, 120 }
+#define DEFAULT_MAX_FEEDRATE          { 150, 150, 16, 120 }
 
 //#define LIMITED_MAX_FR_EDITING        // Limit edit via M203 or LCD to DEFAULT_MAX_FEEDRATE * 2
 #if ENABLED(LIMITED_MAX_FR_EDITING)
@@ -826,7 +827,7 @@
 // JD=0.4*JERK_XY^2/DEFAULT_ACCELERATION=0,4*10^2/2000=0.013
 // theoretical start point, junction deviation=0.4*(jerk^2/accel)
 //  #define JUNCTION_DEVIATION_MM 0.013 // (mm) Distance from real junction edge
-  #define JUNCTION_DEVIATION_MM 0.04  // (mm) Distance from real junction edge
+  #define JUNCTION_DEVIATION_MM 0.06  // (mm) Distance from real junction edge
 #endif
 
 /**
