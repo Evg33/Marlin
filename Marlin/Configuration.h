@@ -134,16 +134,16 @@
 
 // Choose the name from boards.h that matches your setup
 #ifndef MOTHERBOARD
-  #define MOTHERBOARD BOARD_BIGTREE_SKR_V1_3
+  #define MOTHERBOARD BOARD_BIGTREE_SKR_V1_4_TURBO
 #endif
 
 // Name displayed in the LCD "Ready" message and Info menu
-#define CUSTOM_MACHINE_NAME "ZAVMini/SKR13"
+#define CUSTOM_MACHINE_NAME "ZAVMini/SKR14T"
 
 // Printer's unique ID, used by some programs to differentiate between machines.
 // Choose your own or use a service like http://www.uuidgenerator.net/version4
 //#define MACHINE_UUID "00000000-0000-0000-0000-000000000000"
-#define MACHINE_UUID "cb6554f5-d5b7-4b26-8e18-807e839a7676"
+#define MACHINE_UUID "a3626cb9-63fd-4ea1-99e1-2e034bcf1555"
 
 // @section extruder
 
