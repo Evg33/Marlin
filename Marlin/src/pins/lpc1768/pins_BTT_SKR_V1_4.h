@@ -215,7 +215,7 @@
     #define LCD_PINS_D4    P1_20
 
     #define LCD_SDSS       P0_16   // (16) J3-7 & AUX-4
-    #define SD_DETECT_PIN  P1_31   // (49) (NOT 5V tolerant)
+    //#define SD_DETECT_PIN  P1_31   // (49) (NOT 5V tolerant)
 
     #if ENABLED(FYSETC_MINI_12864)
       #define DOGLCD_CS    P1_18

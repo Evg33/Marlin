@@ -2241,7 +2241,7 @@
   #define NEOPIXEL_TYPE   NEO_RGB // NEO_GRBW / NEO_GRB - four/three channel driver type (defined in Adafruit_NeoPixel.h)
   //#define NEOPIXEL_PIN     P1_21  // LED driving pin
   //#define NEOPIXEL2_TYPE NEO_GRB
-  //#define NEOPIXEL2_PIN P2_00
+  //#define NEOPIXEL2_PIN P1_24
   #define NEOPIXEL_PIXELS 3       // Number of LEDs in the strip, larger of 2 strips if 2 neopixel strips are used
   #define NEOPIXEL_IS_SEQUENTIAL   // Sequential display for temperature change - LED by LED. Disable to change all LEDs at once.
   #define NEOPIXEL_BRIGHTNESS 96  // Initial brightness (0-255)

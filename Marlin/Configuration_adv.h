@@ -2002,7 +2002,7 @@
 #if HAS_TRINAMIC
 
   #define HOLD_MULTIPLIER    0.5  // Scales down the holding current from run current
-  #define INTERPOLATE       true  // Interpolate X/Y/Z_MICROSTEPS to 256
+  #define INTERPOLATE       false //true  // Interpolate X/Y/Z_MICROSTEPS to 256
 
   #if AXIS_IS_TMC(X)
     #define X_CURRENT    (2000*60/100)  //1200(1150)// (mA) RMS current. Multiply by 1.414 for peak current. 
@@ -2330,8 +2330,8 @@
    */
   //#define TMC_ADV() {  }
   #define TMC_ADV() { \
-    stepperE0.intpol(0); \
-    stepperZ.intpol(0); \
+    stepperX.intpol(1); \
+    stepperY.intpol(1); \
    }
 #endif // HAS_TRINAMIC
 
