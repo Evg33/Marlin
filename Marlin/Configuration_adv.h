@@ -2093,7 +2093,8 @@
 
   #if AXIS_IS_TMC(E0)
     //#define E0_CURRENT   (1700*47/100) //799
-    #define E0_CURRENT   (1000*50/100) //500
+    //#define E0_CURRENT   (1000*50/100) //500
+    #define E0_CURRENT   (1000*60/100) //600
     #define E0_MICROSTEPS   8
     #define E0_RSENSE    0.11 //0.11 @2209 or 0.075 @5160
     #define E0_CHAIN_POS   -1
