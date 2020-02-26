@@ -2065,7 +2065,7 @@
   #endif
 
   #if AXIS_IS_TMC(Z)
-    #define Z_CURRENT    (1680*60/100)
+    #define Z_CURRENT    (1500*60/100)
     #define Z_CURRENT_HOME  Z_CURRENT
     #define Z_MICROSTEPS USER_STEPS_Z
     #if AXIS_DRIVER_TYPE_Z(TMC5160)
@@ -2101,7 +2101,7 @@
   #endif
 
   #if AXIS_IS_TMC(E0)
-    #define E0_CURRENT   (1680*60/100)
+    #define E0_CURRENT   (1500*60/100)
     #define E0_MICROSTEPS USER_STEPS_E0
     #if AXIS_DRIVER_TYPE_E0(TMC5160)
      #define E0_RSENSE 0.075
