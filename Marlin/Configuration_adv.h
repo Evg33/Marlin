@@ -2065,7 +2065,7 @@
   #endif
 
   #if AXIS_IS_TMC(Z)
-    #define Z_CURRENT    (1500*60/100)
+    #define Z_CURRENT    (1500*60/100) // Oukeda OK42STH38-1684A 400ST82 2018-09-18-01 1.8° 1.68A 3.2mH
     #define Z_CURRENT_HOME  Z_CURRENT
     #define Z_MICROSTEPS USER_STEPS_Z
     #if AXIS_DRIVER_TYPE_Z(TMC5160)
