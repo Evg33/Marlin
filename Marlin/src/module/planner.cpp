@@ -1748,7 +1748,7 @@ bool Planner::_populate_block(block_t * const block, bool split_move,
             position_float.e = target_float.e;
           #endif
           de = 0; // no difference
-          SERIAL_ECHO_MSG(MSG_ERR_COLD_EXTRUDE_STOP);
+          SERIAL_ECHO_MSG(STR_ERR_COLD_EXTRUDE_STOP);
         }
       #endif // PREVENT_COLD_EXTRUSION
       #if ENABLED(PREVENT_LENGTHY_EXTRUDE)
@@ -1770,7 +1770,7 @@ bool Planner::_populate_block(block_t * const block, bool split_move,
               position_float.e = target_float.e;
             #endif
             de = 0; // no difference
-            SERIAL_ECHO_MSG(MSG_ERR_LONG_EXTRUDE_STOP);
+            SERIAL_ECHO_MSG(STR_ERR_LONG_EXTRUDE_STOP);
           }
         }
       #endif // PREVENT_LENGTHY_EXTRUDE
@@ -2397,8 +2397,15 @@ bool Planner::_populate_block(block_t * const block, bool split_move,
       LOOP_XYZE(i)
     #endif
     {
-      const float jerk = ABS(current_speed[i]),   // cs : Starting from zero, change in speed for this axis
-                  maxj = max_jerk[i];             // mj : The max jerk setting for this axis
+      const float jerk = ABS(current_speed[i]);   // cs : Starting from zero, change in speed for this axis
+
+      float maxj = max_jerk[i];                   // mj : The max jerk setting for this axis
+
+      #ifdef TRAVEL_EXTRA_XYJERK
+        if ((TRAVEL_EXTRA_XYJERK) && !de <= 0 && (i == X_AXIS || i == Y_AXIS))
+          maxj += TRAVEL_EXTRA_XYJERK;            // Extra jerk allowance for travel moves
+      #endif
+
       if (jerk > maxj) {                          // cs > mj : New current speed too fast?
         if (limited) {                            // limited already?
           const float mjerk = nominal_speed * maxj; // ns*mj
