@@ -2073,8 +2073,11 @@
     #define Z_CURRENT_HOME  Z_CURRENT
     //#define Z_MICROSTEPS   16
     #define Z_MICROSTEPS USER_STEPS_Z
-    //#define Z_RSENSE   0.11 //2208
-    #define Z_RSENSE    0.075 //5160
+    #if AXIS_DRIVER_TYPE_Z(TMC5160)
+     #define Z_RSENSE 0.075
+    #else
+     #define Z_RSENSE  0.11
+    #endif
     #define Z_CHAIN_POS    -1
   #endif
 
@@ -2106,8 +2109,11 @@
     #define E0_CURRENT   1000
     //#define E0_MICROSTEPS  16
     #define E0_MICROSTEPS USER_STEPS_E0
-    //#define E0_RSENSE  0.11 //2208
-    #define E0_RSENSE   0.075 //5160
+    #if AXIS_DRIVER_TYPE_E0(TMC5160)
+     #define E0_RSENSE 0.075
+    #else
+     #define E0_RSENSE  0.11
+    #endif
     #define E0_CHAIN_POS   -1
   #endif
 
