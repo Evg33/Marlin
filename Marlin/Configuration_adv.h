@@ -2024,7 +2024,7 @@
   #define HOLD_MULTIPLIER    0.5  // Scales down the holding current from run current
   #define INTERPOLATE       true  // Interpolate X/Y/Z_MICROSTEPS to 256
 
-  #if AXIS_IS_TMC(X)
+  #if AXIS_IS_TMC(X) // StepperOnline 17HM19-2004S 0.9deg 2.0A 3.0mH
     #define X_CURRENT     (2000*60/100)  // (mA) RMS current. Multiply by 1.414 for peak current.
     #define X_CURRENT_HOME  X_CURRENT  // (mA) RMS current for sensorless homing
     #define X_MICROSTEPS USER_STEPS_X
@@ -2044,7 +2044,7 @@
     #define X2_CHAIN_POS     -1
   #endif
 
-  #if AXIS_IS_TMC(Y)
+  #if AXIS_IS_TMC(Y) // StepperOnline 17HM19-2004S 0.9deg 2.0A 3.0mH
     #define Y_CURRENT     (2000*60/100)
     #define Y_CURRENT_HOME  Y_CURRENT
     #define Y_MICROSTEPS USER_STEPS_Y
@@ -2064,8 +2064,8 @@
     #define Y2_CHAIN_POS     -1
   #endif
 
-  #if AXIS_IS_TMC(Z)
-    #define Z_CURRENT    (1500*60/100) // Oukeda OK42STH38-1684A 400ST82 2018-09-18-01 1.8° 1.68A 3.2mH
+  #if AXIS_IS_TMC(Z) // Oukeda OK42STH38-1684A 400ST82 2018-09-18-01 1.8deg 1.68A 3.2mH
+    #define Z_CURRENT    (1500*60/100)
     #define Z_CURRENT_HOME  Z_CURRENT
     #define Z_MICROSTEPS USER_STEPS_Z
     #if AXIS_DRIVER_TYPE_Z(TMC5160)
@@ -2100,7 +2100,7 @@
     #define Z4_CHAIN_POS     -1
   #endif
 
-  #if AXIS_IS_TMC(E0)
+  #if AXIS_IS_TMC(E0) // Usongshine 17HS4401 1.8deg 1.5A 3.7mH
     #define E0_CURRENT   (1500*60/100)
     #define E0_MICROSTEPS USER_STEPS_E0
     #if AXIS_DRIVER_TYPE_E0(TMC5160)
@@ -2111,7 +2111,7 @@
     #define E0_CHAIN_POS   -1
   #endif
 
-  #if AXIS_IS_TMC(E1)
+  #if AXIS_IS_TMC(E1) // StepperOnline 17HS19-2004S1 1.8deg 2.0A 3.0mH
     #define E1_CURRENT      800
     #define E1_MICROSTEPS    16
     #define E1_RSENSE         0.11
