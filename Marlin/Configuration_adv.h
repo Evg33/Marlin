@@ -2101,7 +2101,7 @@
   #endif
 
   #if AXIS_IS_TMC(E0) // Usongshine 17HS4401 1.8deg 1.5A 3.7mH
-    #define E0_CURRENT   (1500*60/100)
+    #define E0_CURRENT   (1500*65/100)
     #define E0_MICROSTEPS USER_STEPS_E0
     #if AXIS_DRIVER_TYPE_E0(TMC5160)
      #define E0_RSENSE 0.075
