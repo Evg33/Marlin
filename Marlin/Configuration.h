@@ -496,9 +496,13 @@
   //#define DEFAULT_Ki  0.80
   //#define DEFAULT_Kd 56.54
   //200224  ZAV Mini M303 E0 C8 S190 U1
-  #define DEFAULT_Kp 14.45
-  #define DEFAULT_Ki 0.84
-  #define DEFAULT_Kd 61.81
+  //#define DEFAULT_Kp 14.45
+  //#define DEFAULT_Ki 0.84
+  //#define DEFAULT_Kd 61.81
+  //200228  ZAV Mini M303 E0 C8 S230 U1
+  #define DEFAULT_Kp 12.96
+  #define DEFAULT_Ki 0.76
+  #define DEFAULT_Kd 55.09
 
   // UNI M303 E0 C8 S230 U1
   //#define DEFAULT_Kp 15.28
@@ -562,9 +566,13 @@
   //#define DEFAULT_bedKi   6.03
   //#define DEFAULT_bedKd 115.54
   //200224  ZAV Mini 200224 M303 E-1 C8 S70 U1
-  #define DEFAULT_bedKp 43.09
-  #define DEFAULT_bedKi 8.61
-  #define DEFAULT_bedKd 143.78
+  //#define DEFAULT_bedKp 43.09
+  //#define DEFAULT_bedKi 8.61
+  //#define DEFAULT_bedKd 143.78
+  //200228  ZAV Mini 200224 M303 E-1 C8 S100 U1
+  #define DEFAULT_bedKp 50.20
+  #define DEFAULT_bedKi 8.78
+  #define DEFAULT_bedKd 191.44
 
   // UNI M303 E-1 C3 S70 U1    ///  M303 E-1 C8 S100 U1 /// M303 E-1 C8 S100 U1
   //#define DEFAULT_bedKp 38.36
