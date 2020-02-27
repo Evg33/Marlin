@@ -1172,18 +1172,16 @@
   // Add an optimized binary file transfer mode, initiated with 'M28 B1'
   //#define BINARY_FILE_TRANSFER
 
-  #if HAS_SDCARD_CONNECTION
-    /**
-     * Set this option to one of the following (or the board's defaults apply):
-     *
-     *           LCD - Use the SD drive in the external LCD controller.
-     *       ONBOARD - Use the SD drive on the control board. (No SD_DETECT_PIN. M21 to init.)
-     *  CUSTOM_CABLE - Use a custom cable to access the SD (as defined in a pins file).
-     *
-     * :[ 'LCD', 'ONBOARD', 'CUSTOM_CABLE' ]
-     */
-    //#define SDCARD_CONNECTION LCD
-  #endif
+  /**
+   * Set this option to one of the following (or the board's defaults apply):
+   *
+   *           LCD - Use the SD drive in the external LCD controller.
+   *       ONBOARD - Use the SD drive on the control board. (No SD_DETECT_PIN. M21 to init.)
+   *  CUSTOM_CABLE - Use a custom cable to access the SD (as defined in a pins file).
+   *
+   * :[ 'LCD', 'ONBOARD', 'CUSTOM_CABLE' ]
+   */
+  //#define SDCARD_CONNECTION LCD
 
 #endif // SDSUPPORT
 
@@ -2814,6 +2812,8 @@
 #if ENABLED(FASTER_GCODE_PARSER)
   //#define GCODE_QUOTED_STRINGS  // Support for quoted string parameters
 #endif
+
+//#define GCODE_CASE_INSENSITIVE  // Accept G-code sent to the firmware in lowercase
 
 /**
  * CNC G-code options
