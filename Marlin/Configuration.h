@@ -496,15 +496,6 @@
 
   // If you are using a pre-configured hotend then you can use one of the value sets by uncommenting it
 
-  // UNI M303 E0 C8 S230 U1
-  //#define DEFAULT_Kp 15.28
-  //#define DEFAULT_Ki 1.39
-  //#define DEFAULT_Kd 41.91
-  // UNI 200228 M303 E0 C8 S230 U1
-  #define DEFAULT_Kp 19.65
-  #define DEFAULT_Ki 2.01
-  #define DEFAULT_Kd 47.95
-
   // Ultimaker
   //#define DEFAULT_Kp 22.2
   //#define DEFAULT_Ki 1.08
@@ -520,6 +511,19 @@
   //#define DEFAULT_Ki 2.25
   //#define DEFAULT_Kd 440
 
+  // UNI M303 E0 C8 S230 U1
+  //#define DEFAULT_Kp 15.28
+  //#define DEFAULT_Ki 1.39
+  //#define DEFAULT_Kd 41.91
+  // UNI 200228 M303 E0 C8 S230 U1
+  //#define DEFAULT_Kp 19.65
+  //#define DEFAULT_Ki 2.01
+  //#define DEFAULT_Kd 47.95
+  // UNI 200229 M303 E0 C8 S240 U1 (left door added)
+  #define DEFAULT_Kp 21.92
+  #define DEFAULT_Ki 2.26
+  #define DEFAULT_Kd 53.05
+  
 #endif // PIDTEMP
 
 //===========================================================================
@@ -555,16 +559,6 @@
   //#define MIN_BED_POWER 0
   //#define PID_BED_DEBUG // Sends debug data to the serial port.
 
-  // UNI M303 E-1 C3 S70 U1    ///  M303 E-1 C8 S100 U1 /// M303 E-1 C8 S100 U1
-  //#define DEFAULT_bedKp 38.36
-  //#define DEFAULT_bedKi 4.56
-  //#define DEFAULT_bedKd 215.04
-  // UNI 200228 M303 E-1 C8 S75 U1 (83 max)
-  #define DEFAULT_bedKp 46.97
-  #define DEFAULT_bedKi 7.63
-  #define DEFAULT_bedKd 192.90
-
-  
   //120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   //from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
   //#define DEFAULT_bedKp 10.00
@@ -578,6 +572,19 @@
   //#define DEFAULT_bedKd 1675.16
 
   // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
+  // UNI M303 E-1 C3 S70 U1    ///  M303 E-1 C8 S100 U1 /// M303 E-1 C8 S100 U1
+  //#define DEFAULT_bedKp 38.36
+  //#define DEFAULT_bedKi 4.56
+  //#define DEFAULT_bedKd 215.04
+  // UNI 200228 M303 E-1 C8 S75 U1 (83 max)
+  //#define DEFAULT_bedKp 46.97
+  //#define DEFAULT_bedKi 7.63
+  //#define DEFAULT_bedKd 192.90
+  // UNI 200229 M303 E-1 C8 S75 U1 (left door added)
+  #define DEFAULT_bedKp 54.18
+  #define DEFAULT_bedKi 10.58
+  #define DEFAULT_bedKd 184.94
+
 #endif // PIDTEMPBED
 
 // @section extruder
