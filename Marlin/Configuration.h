@@ -1109,7 +1109,7 @@
 // @section extruder
 
 // For direct drive extruder v9 set to true, for geared extruder set to false.
-#define INVERT_E0_DIR false // bdn 2208t / 2209f
+#define INVERT_E0_DIR true // bdn 2208f / 2209t
 #define INVERT_E1_DIR false
 #define INVERT_E2_DIR false
 #define INVERT_E3_DIR false
