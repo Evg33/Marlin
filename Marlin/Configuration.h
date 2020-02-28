@@ -790,8 +790,7 @@
  *                                      X, Y, Z, E0 [, E1[, E2...]]
  */
 //#define DEFAULT_MAX_FEEDRATE          { 300, 300, 5, 25 }
-//#define DEFAULT_MAX_FEEDRATE          { 350, 350, 40, 100 } //M203
-#define DEFAULT_MAX_FEEDRATE          { 100, 100, 40, 100 } //lower 4 testing
+#define DEFAULT_MAX_FEEDRATE          { 350, 350, 40, 100 } //M203
 
 //#define LIMITED_MAX_FR_EDITING        // Limit edit via M203 or LCD to DEFAULT_MAX_FEEDRATE * 2
 #if ENABLED(LIMITED_MAX_FR_EDITING)
@@ -804,8 +803,7 @@
  * Override with M201
  *                                      X, Y, Z, E0 [, E1[, E2...]]
  */
-//#define DEFAULT_MAX_ACCELERATION      { 3000, 3000, 100, 5000 }
-#define DEFAULT_MAX_ACCELERATION      { 800, 800, 100, 5000 } //lower 4 testing
+#define DEFAULT_MAX_ACCELERATION      { 3000, 3000, 100, 5000 }
 
 //#define LIMITED_MAX_ACCEL_EDITING     // Limit edit via M201 or LCD to DEFAULT_MAX_ACCELERATION * 2
 #if ENABLED(LIMITED_MAX_ACCEL_EDITING)
@@ -820,13 +818,10 @@
  *   M204 R    Retract Acceleration
  *   M204 T    Travel Acceleration
  */
-//#define DEFAULT_ACCELERATION          2000    // X, Y, Z and E acceleration for printing moves
-//#define DEFAULT_RETRACT_ACCELERATION  5000    // E acceleration for retracts
-//#define DEFAULT_TRAVEL_ACCELERATION   3000    // X, Y, Z acceleration for travel (non printing) moves
-//lower 4 testing
-#define DEFAULT_ACCELERATION          800
-#define DEFAULT_RETRACT_ACCELERATION  800
-#define DEFAULT_TRAVEL_ACCELERATION   800
+#define DEFAULT_ACCELERATION          2000    // X, Y, Z and E acceleration for printing moves
+#define DEFAULT_RETRACT_ACCELERATION  5000    // E acceleration for retracts
+#define DEFAULT_TRAVEL_ACCELERATION   3000    // X, Y, Z acceleration for travel (non printing) moves
+
 /**
  * Default Jerk limits (mm/s)
  * Override with M205 X Y Z E
@@ -860,8 +855,7 @@
  */
 #if DISABLED(CLASSIC_JERK)
 //  #define JUNCTION_DEVIATION_MM 0.013 // (mm) Distance from real junction edge
-  //#define JUNCTION_DEVIATION_MM 0.02
-  #define JUNCTION_DEVIATION_MM 0.013 //lower 4 testing
+  #define JUNCTION_DEVIATION_MM 0.02
 #endif
 
 /**
