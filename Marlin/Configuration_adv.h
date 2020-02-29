@@ -2370,11 +2370,8 @@
    *   stepperZ.intpol(0); \
    * }
    */
-  //#define TMC_ADV() {  }
-  #define TMC_ADV() { \
-    stepperE0.intpol(0); \
-    stepperZ.intpol(0); \
-   }
+  #define TMC_ADV() {  }
+  //#define TMC_ADV() { stepperE0.intpol(0); stepperZ.intpol(0); }
 #endif // HAS_TRINAMIC
 
 // @section L64XX
