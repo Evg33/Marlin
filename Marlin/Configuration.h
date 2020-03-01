@@ -520,10 +520,13 @@
   //#define DEFAULT_Ki 2.01
   //#define DEFAULT_Kd 47.95
   // UNI 200229 M303 E0 C8 S240 U1 (left door added)
-  #define DEFAULT_Kp 21.92
-  #define DEFAULT_Ki 2.26
-  #define DEFAULT_Kd 53.05
-  
+  //#define DEFAULT_Kp 21.92
+  //#define DEFAULT_Ki 2.26
+  //#define DEFAULT_Kd 53.05
+  // UNI 200302 M303 E0 C8 S240 U1
+  #define DEFAULT_Kp 19.69
+  #define DEFAULT_Ki 1.91
+  #define DEFAULT_Kd 50.81
 #endif // PIDTEMP
 
 //===========================================================================
@@ -581,9 +584,13 @@
   //#define DEFAULT_bedKi 7.63
   //#define DEFAULT_bedKd 192.90
   // UNI 200229 M303 E-1 C8 S75 U1 (left door added)
-  #define DEFAULT_bedKp 54.18
-  #define DEFAULT_bedKi 10.58
-  #define DEFAULT_bedKd 184.94
+  //#define DEFAULT_bedKp 54.18
+  //#define DEFAULT_bedKi 10.58
+  //#define DEFAULT_bedKd 184.94
+  // UNI 200302 M303 E-1 C8 S80 U1 (new bed 20x30)
+  #define DEFAULT_bedKp 94.82
+  #define DEFAULT_bedKi 17.69
+  #define DEFAULT_bedKd 338.84
 
 #endif // PIDTEMPBED
 
