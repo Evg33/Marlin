@@ -2019,7 +2019,7 @@
  * TMCStepper library is required to use TMC stepper drivers.
  * https://github.com/teemuatlut/TMCStepper
  */
-#if HAS_TRINAMIC
+#if HAS_TRINAMIC_CONFIG
 
   #define HOLD_MULTIPLIER    0.5  // Scales down the holding current from run current
   #define INTERPOLATE       true  // Interpolate X/Y/Z_MICROSTEPS to 256
@@ -2370,9 +2370,9 @@
    *   stepperZ.intpol(0); \
    * }
    */
-  #define TMC_ADV() {  }
   //#define TMC_ADV() { stepperE0.intpol(0); stepperZ.intpol(0); }
-#endif // HAS_TRINAMIC
+  #define TMC_ADV() {  }
+#endif // HAS_TRINAMIC_CONFIG
 
 // @section L64XX
 
