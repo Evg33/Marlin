@@ -908,7 +908,6 @@
  *
  */
 //#define Z_MIN_PROBE_PIN 32 // Pin 32 is the RAMPS default
-#define Z_MIN_PROBE_PIN P1_27
 
 /**
  * Probe Type
