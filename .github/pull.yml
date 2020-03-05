@@ -1,0 +1,12 @@
+version: "20030500"
+rules:
+  - base: 2.0.x
+    upstream: MarlinFirmware:2.0.x
+    mergeMethod: hardreset
+  - base: bugfix-2.0.x
+    upstream: MarlinFirmware:bugfix-2.0.x
+    mergeMethod: hardreset
+  - base: bugfix-1.1.x
+    upstream: MarlinFirmware:bugfix-1.1.x
+    mergeMethod: hardreset
+label: ":arrow_heading_down: pull"
