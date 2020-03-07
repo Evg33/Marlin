@@ -588,9 +588,13 @@
   //#define DEFAULT_bedKi 10.58
   //#define DEFAULT_bedKd 184.94
   // UNI 200302 M303 E-1 C8 S80 U1 (new bed 20x30)
-  #define DEFAULT_bedKp 94.82
-  #define DEFAULT_bedKi 17.69
-  #define DEFAULT_bedKd 338.84
+  //#define DEFAULT_bedKp 94.82
+  //#define DEFAULT_bedKi 17.69
+  //#define DEFAULT_bedKd 338.84
+  // UNI 200307 M303 E-1 C8 S80 U1 (new mirror 20x30)
+  #define DEFAULT_bedKp 97.94
+  #define DEFAULT_bedKi 18.83
+  #define DEFAULT_bedKd 339.53
 
 #endif // PIDTEMPBED
 
