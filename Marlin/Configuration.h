@@ -524,9 +524,13 @@
   //#define DEFAULT_Ki 2.26
   //#define DEFAULT_Kd 53.05
   // UNI 200302 M303 E0 C8 S240 U1
-  #define DEFAULT_Kp 19.69
-  #define DEFAULT_Ki 1.91
-  #define DEFAULT_Kd 50.81
+  //#define DEFAULT_Kp 19.69
+  //#define DEFAULT_Ki 1.91
+  //#define DEFAULT_Kd 50.81
+  // UNI 200312 M303 E0 C8 S240 U1 (camera)
+  #define DEFAULT_Kp 20.53
+  #define DEFAULT_Ki 2.05
+  #define DEFAULT_Kd 51.34
 #endif // PIDTEMP
 
 //===========================================================================
@@ -592,9 +596,13 @@
   //#define DEFAULT_bedKi 17.69
   //#define DEFAULT_bedKd 338.84
   // UNI 200307 M303 E-1 C8 S80 U1 (new mirror 20x30)
-  #define DEFAULT_bedKp 97.94
-  #define DEFAULT_bedKi 18.83
-  #define DEFAULT_bedKd 339.53
+  //#define DEFAULT_bedKp 97.94
+  //#define DEFAULT_bedKi 18.83
+  //#define DEFAULT_bedKd 339.53
+  // UNI 200312 M303 E-1 C8 S80 U1 (camera)
+  #define DEFAULT_bedKp 90.87
+  #define DEFAULT_bedKi 17.21
+  #define DEFAULT_bedKd 319.85
 
 #endif // PIDTEMPBED
 
