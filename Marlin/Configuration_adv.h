@@ -2038,7 +2038,7 @@
   #if AXIS_IS_TMC(X) // StepperOnline 17HM19-2004S 0.9deg 2.0A 3.0mH
     #define X_CURRENT    (2000*60/100)  //1200(1150)// (mA) RMS current. Multiply by 1.414 for peak current. 
     #define X_CURRENT_HOME  X_CURRENT  // (mA) RMS current for sensorless homing
-    #define X_MICROSTEPS   32  // 0..256
+    #define X_MICROSTEPS    USER_STEPS_XY  // 0..256
     #if AXIS_DRIVER_TYPE_X(TMC5160)
      #define X_RSENSE 0.075
     #else
@@ -2058,7 +2058,7 @@
   #if AXIS_IS_TMC(Y) // StepperOnline 17HM19-2004S 0.9deg 2.0A 3.0mH
     #define Y_CURRENT    (2000*60/100) //1200(1100)
     #define Y_CURRENT_HOME  Y_CURRENT
-    #define Y_MICROSTEPS   32
+    #define Y_MICROSTEPS    USER_STEPS_XY
     #if AXIS_DRIVER_TYPE_Y(TMC5160)
      #define Y_RSENSE 0.075
     #else
@@ -2078,7 +2078,7 @@
   #if AXIS_IS_TMC(Z) // StepperOnline 17LS13-0404E-150H 1.8deg 0.4A 37mH 4mm/rev 4leads  0.02mm/lead
     #define Z_CURRENT     (400*60/100) //240
     #define Z_CURRENT_HOME  Z_CURRENT
-    #define Z_MICROSTEPS    8
+    #define Z_MICROSTEPS    USER_STEPS_Z
     #if AXIS_DRIVER_TYPE_Z(TMC5160)
      #define Z_RSENSE 0.075
     #else
@@ -2115,7 +2115,7 @@
     //#define E0_CURRENT   (1700*47/100) //799
     //#define E0_CURRENT   (1000*50/100) //500
     #define E0_CURRENT   (1000*60/100) //600
-    #define E0_MICROSTEPS   8
+    #define E0_MICROSTEPS   USER_STEPS_E0
     #if AXIS_DRIVER_TYPE_E0(TMC5160)
      #define E0_RSENSE 0.075
     #else
