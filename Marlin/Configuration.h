@@ -773,9 +773,9 @@
  */
 //#define DISTINCT_E_FACTORS
 
-#define USER_STEPS_XY 32
-#define USER_STEPS_Z 8
-#define USER_STEPS_E0 128
+#define USER_STEPS_XY 64 //32
+#define USER_STEPS_Z 32 //8
+#define USER_STEPS_E0 128 //8
 
 /**
  * Default Axis Steps Per Unit (steps/mm)
