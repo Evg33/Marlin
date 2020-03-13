@@ -802,10 +802,10 @@
 //#define DEFAULT_AXIS_STEPS_PER_UNIT   { (200*16)/(2.0*20), (200*16)/(2.0*20), (200*E0_MICROSTEPS/2), 1752 } //Evg
 //#define DEFAULT_AXIS_STEPS_PER_UNIT   { (400*64)/(2.0*20), (400*64)/(2.0*20), (400*64/2), 1752 } //Evg
 //#define DEFAULT_AXIS_STEPS_PER_UNIT   { (400*32)/(2.0*20), (400*32)/(2.0*20), (200*16/2), 25.5*16 }
-#define USER_STEPS_X 32
-#define USER_STEPS_Y 32
-#define USER_STEPS_Z 16
-#define USER_STEPS_E0 16
+#define USER_STEPS_X 16
+#define USER_STEPS_Y 16
+#define USER_STEPS_Z 8
+#define USER_STEPS_E0 8
 #define DEFAULT_AXIS_STEPS_PER_UNIT   { (400*USER_STEPS_X)/(2.0*20), (400*USER_STEPS_Y)/(2.0*20), (200*USER_STEPS_Z/2), 25.8*USER_STEPS_E0 }
 
 
@@ -815,7 +815,7 @@
  *                                      X, Y, Z, E0 [, E1[, E2...]]
  */
 //#define DEFAULT_MAX_FEEDRATE          { 300, 300, 5, 25 }
-#define DEFAULT_MAX_FEEDRATE          { 350, 350, 40, 100 } //M203
+#define DEFAULT_MAX_FEEDRATE          { 350, 350, 40, 50 } //M203
 
 //#define LIMITED_MAX_FR_EDITING        // Limit edit via M203 or LCD to DEFAULT_MAX_FEEDRATE * 2
 #if ENABLED(LIMITED_MAX_FR_EDITING)
