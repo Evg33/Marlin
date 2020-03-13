@@ -2110,9 +2110,8 @@
     #define Z4_CHAIN_POS     -1
   #endif
 
-  //Usongshine 17HS4401 1.8deg 1.5A 3.7mH
-  #if AXIS_IS_TMC(E0) // StepperOnline 17HS19-2004S1 1.8deg 2.0A 3.0mH 
-    #define E0_CURRENT   (2000*60/100)
+    #if AXIS_IS_TMC(E0) // StepperOnline 17HS19-2004S1 1.8deg 2.0A 3.0mH 
+    #define E0_CURRENT   (2000*65/100)
     #define E0_MICROSTEPS USER_STEPS_E0
     #if AXIS_DRIVER_TYPE_E0(TMC5160)
      #define E0_RSENSE 0.075
@@ -2129,6 +2128,7 @@
     #define E1_CHAIN_POS     -1
   #endif
 
+  //Usongshine 17HS4401 1.8deg 1.5A 3.7mH
   #if AXIS_IS_TMC(E2)
     #define E2_CURRENT      800
     #define E2_MICROSTEPS    16
