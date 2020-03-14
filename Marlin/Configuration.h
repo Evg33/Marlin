@@ -714,10 +714,14 @@
  *          TMC5130, TMC5130_STANDALONE, TMC5160, TMC5160_STANDALONE
  * :['A4988', 'A5984', 'DRV8825', 'LV8729', 'L6470', 'L6474', 'POWERSTEP01', 'TB6560', 'TB6600', 'TMC2100', 'TMC2130', 'TMC2130_STANDALONE', 'TMC2160', 'TMC2160_STANDALONE', 'TMC2208', 'TMC2208_STANDALONE', 'TMC2209', 'TMC2209_STANDALONE', 'TMC26X', 'TMC26X_STANDALONE', 'TMC2660', 'TMC2660_STANDALONE', 'TMC5130', 'TMC5130_STANDALONE', 'TMC5160', 'TMC5160_STANDALONE']
  */
+#define X_DRIVER_TYPE  TMC2208 //TMC2225 SENSE  0.15
 //#define X_DRIVER_TYPE  TMC2209
-#define X_DRIVER_TYPE  TMC5160
+//#define X_DRIVER_TYPE  TMC5160
+
+#define Y_DRIVER_TYPE  TMC2208 //TMC2225 SENSE  0.15
 //#define Y_DRIVER_TYPE  TMC2209
-#define Y_DRIVER_TYPE  TMC5160
+//#define Y_DRIVER_TYPE  TMC5160
+
 //#define Z_DRIVER_TYPE  TMC2209
 #define Z_DRIVER_TYPE  TMC5160
 //#define X2_DRIVER_TYPE A4988
@@ -773,9 +777,9 @@
  */
 //#define DISTINCT_E_FACTORS
 
-#define USER_STEPS_XY 64 //32
+#define USER_STEPS_XY 32 //32
 #define USER_STEPS_Z 32 //8
-#define USER_STEPS_E0 128 //8
+#define USER_STEPS_E0 32 //8
 
 /**
  * Default Axis Steps Per Unit (steps/mm)
@@ -1120,8 +1124,8 @@
 // @section machine
 
 // Invert the stepper direction. Change (or reverse the motor connector) if an axis goes the wrong way.
-#define INVERT_X_DIR true //5160 true / 2209 false
-#define INVERT_Y_DIR true
+#define INVERT_X_DIR false //5160 true / 2209 2225 false
+#define INVERT_Y_DIR false
 #define INVERT_Z_DIR true
 
 // @section extruder

@@ -2041,7 +2041,7 @@
     #if AXIS_DRIVER_TYPE_X(TMC5160)
      #define X_RSENSE 0.075
     #else
-     #define X_RSENSE  0.11
+     #define X_RSENSE  0.15 //TMC2225 - 0.15, other 0.11
     #endif
     #define X_CHAIN_POS    -1  // <=0 : Not chained. 1 : MCU MOSI connected. 2 : Next in chain, ...
   #endif
@@ -2061,7 +2061,7 @@
     #if AXIS_DRIVER_TYPE_Y(TMC5160)
      #define Y_RSENSE 0.075
     #else
-     #define Y_RSENSE  0.11
+     #define Y_RSENSE  0.15 //TMC2225 - 0.15, other 0.11
     #endif
     #define Y_CHAIN_POS      -1
   #endif
