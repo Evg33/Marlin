@@ -2070,7 +2070,7 @@
     #if AXIS_DRIVER_TYPE_X(TMC5160)
      #define X_RSENSE 0.075
     #else
-     #define X_RSENSE  0.15 //TMC2225 - 0.15, other 0.11
+     #define X_RSENSE  0.11 //TMC2225 - 0.15, other 0.11
     #endif
     #define X_CHAIN_POS    -1  // <=0 : Not chained. 1 : MCU MOSI connected. 2 : Next in chain, ...
   #endif
@@ -2084,13 +2084,13 @@
   #endif
 
   #if AXIS_IS_TMC(Y) // StepperOnline 17HM19-2004S 0.9deg 2.0A 3.0mH
-    #define Y_CURRENT    (2000*60/100) //1200(1100)
+    #define Y_CURRENT    (2000*60/100)
     #define Y_CURRENT_HOME  Y_CURRENT
     #define Y_MICROSTEPS    USER_STEPS_XY
     #if AXIS_DRIVER_TYPE_Y(TMC5160)
      #define Y_RSENSE 0.075
     #else
-     #define Y_RSENSE  0.15 //TMC2225 - 0.15, other 0.11
+     #define Y_RSENSE  0.11 //TMC2225 - 0.15, other 0.11
     #endif
     #define Y_CHAIN_POS      -1
   #endif
@@ -2103,8 +2103,8 @@
     #define Y2_CHAIN_POS     -1
   #endif
 
-  #if AXIS_IS_TMC(Z) // StepperOnline 17LS13-0404E-150H 1.8deg 0.4A 37mH 4mm/rev 4leads  0.02mm/lead
-    #define Z_CURRENT     (400*60/100) //240
+  #if AXIS_IS_TMC(Z) // 0.4mm/rev
+    #define Z_CURRENT     (1500*60/100)
     #define Z_CURRENT_HOME  Z_CURRENT
     #define Z_MICROSTEPS    USER_STEPS_Z
     #if AXIS_DRIVER_TYPE_Z(TMC5160)
@@ -2139,8 +2139,8 @@
     #define Z4_CHAIN_POS     -1
   #endif
 
-  #if AXIS_IS_TMC(E0) // StepperOnline 17HS08-1004S 1.8deg 1.0A 4.5mH
-    #define E0_CURRENT   (1000*60/100) //600
+  #if AXIS_IS_TMC(E0) // StepperOnline 17HS19-2004S1 1.8deg 2.0A 3.0mH
+    #define E0_CURRENT   (2000*65/100)
     #define E0_MICROSTEPS   USER_STEPS_E0
     #if AXIS_DRIVER_TYPE_E0(TMC5160)
      #define E0_RSENSE 0.075
@@ -2289,7 +2289,7 @@
    * Define you own with
    * { <off_time[1..15]>, <hysteresis_end[-3..12]>, hysteresis_start[1..8] }
    */
-  #define CHOPPER_TIMING CHOPPER_DEFAULT_12V
+  #define CHOPPER_TIMING CHOPPER_DEFAULT_24V
 
   /**
    * Monitor Trinamic drivers
