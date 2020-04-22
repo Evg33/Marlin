@@ -497,14 +497,13 @@
   //#define DEFAULT_Ki 0.84
   //#define DEFAULT_Kd 61.81
   //200228  ZAV Mini M303 E0 C8 S230 U1
-  #define DEFAULT_Kp 12.96
-  #define DEFAULT_Ki 0.76
-  #define DEFAULT_Kd 55.09
-
-  // UNI M303 E0 C8 S230 U1
-  //#define DEFAULT_Kp 15.28
-  //#define DEFAULT_Ki 1.39
-  //#define DEFAULT_Kd 41.91
+  //#define DEFAULT_Kp 12.96
+  //#define DEFAULT_Ki 0.76
+  //#define DEFAULT_Kd 55.09
+  //200422  UNI Mini M303 E0 C3 S200 U1
+  #define DEFAULT_Kp 15.84
+  #define DEFAULT_Ki 1.03
+  #define DEFAULT_Kd 61.03
   
   // Ultimaker
   //#define DEFAULT_Kp 22.2
@@ -567,10 +566,13 @@
   //#define DEFAULT_bedKi 8.61
   //#define DEFAULT_bedKd 143.78
   //200228  ZAV Mini 200224 M303 E-1 C8 S100 U1
-  #define DEFAULT_bedKp 50.20
-  #define DEFAULT_bedKi 8.78
-  #define DEFAULT_bedKd 191.44
-
+  //#define DEFAULT_bedKp 50.20
+  //#define DEFAULT_bedKi 8.78
+  //#define DEFAULT_bedKd 191.44
+  //200422  UNI Mini M303 E-1 C3 S60 U1
+  #define DEFAULT_bedKp 70.97
+  #define DEFAULT_bedKi 9.83
+  #define DEFAULT_bedKd 341.71
   // UNI M303 E-1 C3 S70 U1    ///  M303 E-1 C8 S100 U1 /// M303 E-1 C8 S100 U1
   //#define DEFAULT_bedKp 38.36
   //#define DEFAULT_bedKi 4.56
