@@ -2104,8 +2104,8 @@
     #define Y2_CHAIN_POS     -1
   #endif
 
-  #if AXIS_IS_TMC(Z) // 0.4mm/rev
-    #define Z_CURRENT     (1500*60/100)
+  #if AXIS_IS_TMC(Z) // WANTAI 42byghw609 1.8deg 1.7A 3.0mH + 0.4mm/rev
+    #define Z_CURRENT     (1700*60/100)
     #define Z_CURRENT_HOME  Z_CURRENT
     #define Z_MICROSTEPS    USER_STEPS_Z
     #if AXIS_DRIVER_TYPE_Z(TMC5160)
