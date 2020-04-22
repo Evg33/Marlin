@@ -784,7 +784,7 @@
  *                                      X, Y, Z, E0 [, E1[, E2...]]
  */
 //#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 4000, 500 }
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { (400*USER_STEPS_XY)/(2.0*20), (400*USER_STEPS_XY)/(2.0*20), (200*USER_STEPS_Z/4), (26*USER_STEPS_E0) } //TLBMG=208
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { (400*USER_STEPS_XY)/(2.0*20), (400*USER_STEPS_XY)/(2.0*20), (200*USER_STEPS_Z/4), (8.75*USER_STEPS_E0) } //TLBMG=208 BMG=26* BMGM=8.75?
 //http://3dtoday.ru/blogs/akdzg/custom-firmware-marlin-and-pour-it-into-a-3d-printer/
 
 /**
@@ -794,7 +794,7 @@
  */
 //#define DEFAULT_MAX_FEEDRATE          { 300, 300, 10, 25 }
 //#define DEFAULT_MAX_FEEDRATE          { 300, 300, 10, 40 }
-#define DEFAULT_MAX_FEEDRATE          { 95, 95, 16, 120 } //silent mode
+#define DEFAULT_MAX_FEEDRATE          { 95, 95, 10, 120 } //silent mode
 //#define DEFAULT_MAX_FEEDRATE          { 150, 150, 16, 120 }
 
 //#define LIMITED_MAX_FR_EDITING        // Limit edit via M203 or LCD to DEFAULT_MAX_FEEDRATE * 2
