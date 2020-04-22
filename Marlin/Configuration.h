@@ -865,7 +865,7 @@
 // JD=0.4*JERK_XY^2/DEFAULT_ACCELERATION=0,4*10^2/2000=0.013
 // theoretical start point, junction deviation=0.4*(jerk^2/accel)
 //  #define JUNCTION_DEVIATION_MM 0.013 // (mm) Distance from real junction edge
-  #define JUNCTION_DEVIATION_MM 0.02  // (mm) Distance from real junction edge
+  #define JUNCTION_DEVIATION_MM 0.016  // (mm) Distance from real junction edge
 #endif
 
 /**
