@@ -88,8 +88,8 @@
   #endif
 #else
   #ifndef Z_STOP_PIN
-    //#define Z_STOP_PIN                     P1_27  // Z-STOP
-    #define Z_MAX_PIN      P1_00   // PWRDET
+    #define Z_STOP_PIN                     P1_27  // Z-STOP
+    //#define Z_MAX_PIN      P1_00   // PWRDET
   #endif
 #endif
 
