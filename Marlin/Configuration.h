@@ -1867,11 +1867,7 @@
 //
 // ULTIPANEL as seen on Thingiverse.
 //
-#define ULTIPANEL
-#define U8GLIB_SH1106
-//#define U8GLIB_SSD1306
-//SAV_3DGLCD
-//#define LCD_SCREEN_ROT_180
+//#define ULTIPANEL
 
 //
 // PanelOne from T3P3 (via RAMPS 1.4 AUX2/AUX3)
@@ -2127,7 +2123,10 @@
 //
 // TinyBoy2 128x64 OLED / Encoder Panel
 //
-//#define OLED_PANEL_TINYBOY2
+#define OLED_PANEL_TINYBOY2
+//#define LCD_SCREEN_ROT_180
+//#define U8GLIB_SH1106
+//#define U8GLIB_SSD1306
 
 //
 // MKS OLED 1.3" 128 × 64 FULL GRAPHICS CONTROLLER
