@@ -2102,7 +2102,7 @@
   #define INTERPOLATE       false //true  // Interpolate X/Y/Z_MICROSTEPS to 256
 
   #if AXIS_IS_TMC(X) // StepperOnline 17HM19-2004S 0.9deg 2.0A 3.0mH
-    #define X_CURRENT    (2000*60/100)  //1200(1150)// (mA) RMS current. Multiply by 1.414 for peak current. 
+    #define X_CURRENT    (2000*70/100)  //1200(1150)// (mA) RMS current. Multiply by 1.414 for peak current. 
     #define X_CURRENT_HOME  X_CURRENT  // (mA) RMS current for sensorless homing
     #define X_MICROSTEPS    USER_STEPS_XY  // 0..256
     #if AXIS_DRIVER_TYPE_X(TMC5160)
@@ -2122,7 +2122,7 @@
   #endif
 
   #if AXIS_IS_TMC(Y) // StepperOnline 17HM19-2004S 0.9deg 2.0A 3.0mH
-    #define Y_CURRENT    (2000*60/100)
+    #define Y_CURRENT    (2000*70/100)
     #define Y_CURRENT_HOME  Y_CURRENT
     #define Y_MICROSTEPS    USER_STEPS_XY
     #if AXIS_DRIVER_TYPE_Y(TMC5160)
@@ -2178,7 +2178,7 @@
   #endif
 
   #if AXIS_IS_TMC(E0) // StepperOnline 17HS19-2004S1 1.8deg 2.0A 3.0mH
-    #define E0_CURRENT   (2000*65/100)
+    #define E0_CURRENT   (2000*70/100)
     #define E0_MICROSTEPS   USER_STEPS_E0
     #if AXIS_DRIVER_TYPE_E0(TMC5160)
      #define E0_RSENSE 0.075
@@ -2357,16 +2357,16 @@
    */
   #define HYBRID_THRESHOLD
 
-  #define X_HYBRID_THRESHOLD     200 //105  // [mm/s]
+  #define X_HYBRID_THRESHOLD     90 //105  // [mm/s]
   #define X2_HYBRID_THRESHOLD    100
-  #define Y_HYBRID_THRESHOLD     200 //105
+  #define Y_HYBRID_THRESHOLD     90 //105
   #define Y2_HYBRID_THRESHOLD    100
   #define Z_HYBRID_THRESHOLD      50 //12
   #define Z2_HYBRID_THRESHOLD      3
   #define Z3_HYBRID_THRESHOLD      3
   #define Z4_HYBRID_THRESHOLD      3
   #define E0_HYBRID_THRESHOLD     20
-  #define E1_HYBRID_THRESHOLD     30
+  #define E1_HYBRID_THRESHOLD     20
   #define E2_HYBRID_THRESHOLD     30
   #define E3_HYBRID_THRESHOLD     30
   #define E4_HYBRID_THRESHOLD     30
