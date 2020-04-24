@@ -2297,7 +2297,7 @@
   //#define NEOPIXEL2_PIN P2_00
   #define NEOPIXEL_PIXELS 8       // Number of LEDs in the strip, larger of 2 strips if 2 neopixel strips are used
   #define NEOPIXEL_IS_SEQUENTIAL   // Sequential display for temperature change - LED by LED. Disable to change all LEDs at once.
-  #define NEOPIXEL_BRIGHTNESS 7  // Initial brightness (0-255)
+  #define NEOPIXEL_BRIGHTNESS 5  // Initial brightness (0-255)
   //#define NEOPIXEL_STARTUP_TEST // Cycle through colors at startup
 
   // Use a single Neopixel LED for static (background) lighting
