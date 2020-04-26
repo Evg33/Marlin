@@ -26,7 +26,7 @@
 
 #include "../../inc/MarlinConfigPre.h"
 
-#if HAS_LCD_MENU && ENABLED(AUTO_BED_LEVELING_UBL)
+#if BOTH(HAS_LCD_MENU, AUTO_BED_LEVELING_UBL)
 
 #include "menu.h"
 #include "../../gcode/gcode.h"
@@ -41,7 +41,8 @@ static int16_t ubl_storage_slot = 0,
                ubl_fillin_amount = 5,
                ubl_height_amount = 1;
 
-static uint8_t n_edit_pts = 1, x_plot = 0, y_plot = 0;
+static uint8_t n_edit_pts = 1;
+static int8_t x_plot = 0, y_plot = 0; // May be negative during move
 
 #if HAS_HEATED_BED
   static int16_t custom_bed_temp = 50;
