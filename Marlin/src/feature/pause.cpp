@@ -402,7 +402,7 @@ bool pause_print(const float &retract, const xyz_pos_t &park_point, const float 
   // Wait for buffered blocks to complete
   planner.synchronize();
 
-  #if ENABLED(ADVANCED_PAUSE_FANS_PAUSE) && FAN_COUNT > 0
+  #if ENABLED(ADVANCED_PAUSE_FANS_PAUSE) && HAS_FAN
     thermalManager.set_fans_paused(true);
   #endif
 
@@ -412,7 +412,7 @@ bool pause_print(const float &retract, const xyz_pos_t &park_point, const float 
 
   // Park the nozzle by moving up by z_lift and then moving to (x_pos, y_pos)
   if (!axes_need_homing())
-    nozzle.park(2, park_point);
+    nozzle.park(0, park_point);
 
   #if ENABLED(DUAL_X_CARRIAGE)
     const int8_t saved_ext        = active_extruder;
@@ -621,7 +621,7 @@ void resume_print(const float &slow_load_length/*=0*/, const float &fast_load_le
     if (did_pause_print) { card.startFileprint(); --did_pause_print; }
   #endif
 
-  #if ENABLED(ADVANCED_PAUSE_FANS_PAUSE) && FAN_COUNT > 0
+  #if ENABLED(ADVANCED_PAUSE_FANS_PAUSE) && HAS_FAN
     thermalManager.set_fans_paused(false);
   #endif
 
