@@ -34,8 +34,8 @@
   #include "game/game.h"
 #endif
 
-#define VALUE_ITEM(MSG, VALUE, STYL)    do{ strcpy_P(buffer, PSTR(": ")); strcpy(buffer + 2, VALUE); STATIC_ITEM(MSG, STYL, buffer); }while(0)
-#define VALUE_ITEM_P(MSG, PVALUE, STYL) do{ strcpy_P(buffer, PSTR(": ")); strcpy_P(buffer + 2, PSTR(PVALUE)); STATIC_ITEM(MSG, STYL, buffer); }while(0)
+#define VALUE_ITEM(MSG, VALUE, STYL)    do{ char buffer[21]; strcpy_P(buffer, PSTR(": ")); strcpy(buffer + 2, VALUE); STATIC_ITEM(MSG, STYL, buffer); }while(0)
+#define VALUE_ITEM_P(MSG, PVALUE, STYL) do{ char buffer[21]; strcpy_P(buffer, PSTR(": ")); strcpy_P(buffer + 2, PSTR(PVALUE)); STATIC_ITEM(MSG, STYL, buffer); }while(0)
 
 #if ENABLED(PRINTCOUNTER)
 
@@ -51,19 +51,22 @@
 
     printStatistics stats = print_job_timer.getStats();
 
-    START_SCREEN();                                                                           // 12345678901234567890
-    VALUE_ITEM(MSG_INFO_PRINT_COUNT, i16tostr3left(stats.totalPrints), SS_LEFT);              // Print Count: 999
-    VALUE_ITEM(MSG_INFO_COMPLETED_PRINTS, i16tostr3left(stats.finishedPrints), SS_LEFT);      // Completed  : 666
+    START_SCREEN();                                                                         // 12345678901234567890
+    VALUE_ITEM(MSG_INFO_PRINT_COUNT, i16tostr3left(stats.totalPrints), SS_LEFT);            // Print Count: 999
+    VALUE_ITEM(MSG_INFO_COMPLETED_PRINTS, i16tostr3left(stats.finishedPrints), SS_LEFT);    // Completed  : 666
 
-    STATIC_ITEM(MSG_INFO_PRINT_TIME, SS_LEFT);                                                // Total print Time:
+    STATIC_ITEM(MSG_INFO_PRINT_TIME, SS_LEFT);                                              // Total print Time:
     STATIC_ITEM_P(PSTR("> "), SS_LEFT, duration_t(stats.printTime).toString(buffer));         // > 99y 364d 23h 59m 59s
 
-    STATIC_ITEM(MSG_INFO_PRINT_LONGEST, SS_LEFT);                                             // Longest job time:
+    STATIC_ITEM(MSG_INFO_PRINT_LONGEST, SS_LEFT);                                           // Longest job time:
     STATIC_ITEM_P(PSTR("> "), SS_LEFT, duration_t(stats.longestPrint).toString(buffer));      // > 99y 364d 23h 59m 59s
 
-    STATIC_ITEM(MSG_INFO_PRINT_FILAMENT, SS_LEFT);                                            // Extruded total:
-    sprintf_P(buffer, PSTR("%ld.%im"), long(stats.filamentUsed / 1000), int16_t(stats.filamentUsed / 100) % 10);
-    STATIC_ITEM_P(PSTR("> "), SS_LEFT, buffer);                                               // > 125m
+    STATIC_ITEM(MSG_INFO_PRINT_FILAMENT, SS_LEFT);                                          // Extruded total:
+    sprintf_P(buffer, PSTR("%ld.%im")
+      , long(stats.filamentUsed / 1000)
+      , int16_t(stats.filamentUsed / 100) % 10
+    );
+    STATIC_ITEM_P(PSTR("> "), SS_LEFT, buffer);                                             // > 125m
 
     #if SERVICE_INTERVAL_1 > 0 || SERVICE_INTERVAL_2 > 0 || SERVICE_INTERVAL_3 > 0
       strcpy_P(buffer, GET_TEXT(MSG_SERVICE_IN));
@@ -94,8 +97,6 @@
 //
 void menu_info_thermistors() {
   if (ui.use_click()) return ui.go_back();
-
-  char buffer[21];  // For macro usage
 
   START_SCREEN();
 
@@ -171,54 +172,27 @@ void menu_info_thermistors() {
   #endif
 
   #if EXTRUDERS
-  {
-    STATIC_ITEM(
-      #if WATCH_HOTENDS
-        MSG_INFO_RUNAWAY_ON
-      #else
-        MSG_INFO_RUNAWAY_OFF
-      #endif
-      , SS_LEFT
-    );
-  }
+    STATIC_ITEM(TERN(WATCH_HOTENDS, MSG_INFO_RUNAWAY_ON, MSG_INFO_RUNAWAY_OFF), SS_LEFT);
   #endif
 
   #if HAS_HEATED_BED
-  {
     #undef THERMISTOR_ID
     #define THERMISTOR_ID TEMP_SENSOR_BED
     #include "../thermistornames.h"
     STATIC_ITEM_P(PSTR("BED:" THERMISTOR_NAME), SS_INVERT);
     VALUE_ITEM_P(MSG_INFO_MIN_TEMP, STRINGIFY(BED_MINTEMP), SS_LEFT);
     VALUE_ITEM_P(MSG_INFO_MAX_TEMP, STRINGIFY(BED_MAXTEMP), SS_LEFT);
-    STATIC_ITEM(
-      #if WATCH_BED
-        MSG_INFO_RUNAWAY_ON
-      #else
-        MSG_INFO_RUNAWAY_OFF
-      #endif
-      , SS_LEFT
-    );
-  }
+    STATIC_ITEM(TERN(WATCH_BED, MSG_INFO_RUNAWAY_ON, MSG_INFO_RUNAWAY_OFF), SS_LEFT);
   #endif
 
   #if HAS_HEATED_CHAMBER
-  {
     #undef THERMISTOR_ID
     #define THERMISTOR_ID TEMP_SENSOR_CHAMBER
     #include "../thermistornames.h"
     STATIC_ITEM_P(PSTR("CHAM:" THERMISTOR_NAME), SS_INVERT);
     VALUE_ITEM_P(MSG_INFO_MIN_TEMP, STRINGIFY(CHAMBER_MINTEMP), SS_LEFT);
     VALUE_ITEM_P(MSG_INFO_MAX_TEMP, STRINGIFY(CHAMBER_MAXTEMP), SS_LEFT);
-    STATIC_ITEM(
-      #if WATCH_CHAMBER
-        MSG_INFO_RUNAWAY_ON
-      #else
-        MSG_INFO_RUNAWAY_OFF
-      #endif
-      , SS_LEFT
-    );
-  }
+    STATIC_ITEM(TERN(WATCH_CHAMBER, MSG_INFO_RUNAWAY_ON, MSG_INFO_RUNAWAY_OFF), SS_LEFT);
   #endif
 
   END_SCREEN();
@@ -229,8 +203,6 @@ void menu_info_thermistors() {
 //
 void menu_info_board() {
   if (ui.use_click()) return ui.go_back();
-
-  char buffer[21];  // For macro usage
 
   START_SCREEN();
   STATIC_ITEM_P(PSTR(BOARD_INFO_NAME), SS_CENTER|SS_INVERT);       // MyPrinterController
@@ -270,7 +242,6 @@ void menu_info_board() {
     STATIC_ITEM_P(PSTR(STRING_DISTRIBUTION_DATE));              // YYYY-MM-DD HH:MM
     STATIC_ITEM_P(PSTR(MACHINE_NAME));                          // My3DPrinter
     STATIC_ITEM_P(PSTR(WEBSITE_URL));                           // www.my3dprinter.com
-    char buffer[21];
     VALUE_ITEM_P(MSG_INFO_EXTRUDERS, STRINGIFY(EXTRUDERS), SS_CENTER); // Extruders: 2
     #if ENABLED(AUTO_BED_LEVELING_3POINT)
       STATIC_ITEM(MSG_3POINT_LEVELING);                         // 3-Point Leveling
@@ -295,13 +266,7 @@ void menu_info() {
   START_MENU();
   BACK_ITEM(MSG_MAIN);
   #if ENABLED(LCD_PRINTER_INFO_IS_BOOTSCREEN)
-    SUBMENU(MSG_INFO_PRINTER_MENU, (
-      #if ENABLED(SHOW_CUSTOM_BOOTSCREEN)
-        menu_show_custom_bootscreen
-      #else
-        menu_show_marlin_bootscreen
-      #endif
-    ));
+    SUBMENU(MSG_INFO_PRINTER_MENU, TERN(SHOW_CUSTOM_BOOTSCREEN, menu_show_custom_bootscreen, menu_show_marlin_bootscreen));
   #else
     SUBMENU(MSG_INFO_PRINTER_MENU, menu_info_printer);           // Printer Info >
     SUBMENU(MSG_INFO_BOARD_MENU, menu_info_board);               // Board Info >
