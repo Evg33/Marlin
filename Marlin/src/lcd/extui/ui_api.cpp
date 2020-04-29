@@ -70,9 +70,6 @@
 
 #if ENABLED(SDSUPPORT)
   #include "../../sd/cardreader.h"
-  #define IFSD(A,B) (A)
-#else
-  #define IFSD(A,B) (B)
 #endif
 
 #if HAS_TRINAMIC_CONFIG
@@ -164,12 +161,11 @@ namespace ExtUI {
   }
 
   void yield() {
-    if (!flags.printer_killed)
-      thermalManager.manage_heater();
+    if (!flags.printer_killed) thermalManager.manage_heater();
   }
 
   void enableHeater(const extruder_t extruder) {
-    #if HOTENDS && HEATER_IDLE_HANDLER
+    #if HAS_HOTEND && HEATER_IDLE_HANDLER
       thermalManager.reset_hotend_idle_timer(extruder - E0);
     #else
       UNUSED(extruder);
@@ -180,13 +176,9 @@ namespace ExtUI {
     #if HEATER_IDLE_HANDLER
       switch (heater) {
         #if HAS_HEATED_BED
-          case BED:
-            thermalManager.reset_bed_idle_timer();
-            return;
+          case BED: thermalManager.reset_bed_idle_timer(); return;
         #endif
-        #if HAS_HEATED_CHAMBER
-          case CHAMBER: return; // Chamber has no idle timer
-        #endif
+        TERN_(HAS_HEATED_CHAMBER, case CHAMBER: return); // Chamber has no idle timer
         default:
           TERN_(HAS_HOTEND, thermalManager.reset_hotend_idle_timer(heater - H0));
           break;
@@ -233,28 +225,21 @@ namespace ExtUI {
   #endif
 
   bool isHeaterIdle(const extruder_t extruder) {
-    return false
-      #if HOTENDS && HEATER_IDLE_HANDLER
-        || thermalManager.hotend_idle[extruder - E0].timed_out
-      #else
-        ; UNUSED(extruder)
-      #endif
-    ;
+    #if HAS_HOTEND && HEATER_IDLE_HANDLER
+      return thermalManager.hotend_idle[extruder - E0].timed_out
+    #else
+      UNUSED(extruder);
+      return false;
+    #endif
   }
 
   bool isHeaterIdle(const heater_t heater) {
     #if HEATER_IDLE_HANDLER
       switch (heater) {
         TERN_(HAS_HEATED_BED, case BED: return thermalManager.bed_idle.timed_out);
-        #if HAS_HEATED_CHAMBER
-          case CHAMBER: return false; // Chamber has no idle timer
-        #endif
+        TERN_(HAS_HEATED_CHAMBER, case CHAMBER: return false); // Chamber has no idle timer
         default:
-          #if HAS_HOTEND
-            return thermalManager.hotend_idle[heater - H0].timed_out;
-          #else
-            return false;
-          #endif
+          return TERN0(HAS_HOTEND, thermalManager.hotend_idle[heater - H0].timed_out);
       }
     #else
       UNUSED(heater);
@@ -311,22 +296,13 @@ namespace ExtUI {
   }
 
   float getAxisPosition_mm(const axis_t axis) {
-    return
-      #if ENABLED(JOYSTICK)
-        flags.jogging ? destination[axis] :
-      #endif
-      current_position[axis];
+    return TERN_(JOYSTICK, flags.jogging ? destination[axis] :) current_position[axis];
   }
 
   float getAxisPosition_mm(const extruder_t extruder) {
     const extruder_t old_tool = getActiveTool();
     setActiveTool(extruder, true);
-    const float epos = (
-      #if ENABLED(JOYSTICK)
-        flags.jogging ? destination.e :
-      #endif
-      current_position.e
-    );
+    const float epos = TERN_(JOYSTICK, flags.jogging ? destination.e :) current_position.e;
     setActiveTool(old_tool, true);
     return epos;
   }
@@ -746,13 +722,13 @@ namespace ExtUI {
   #endif
 
   float getZOffset_mm() {
-    #if HAS_BED_PROBE
-      return probe.offset.z;
-    #elif ENABLED(BABYSTEP_DISPLAY_TOTAL)
-      return (planner.steps_to_mm[Z_AXIS] * babystep.axis_total[BS_AXIS_IND(Z_AXIS)]);
-    #else
-      return 0.0;
-    #endif
+    return (0.0f
+      #if HAS_BED_PROBE
+        + probe.offset.z
+      #elif ENABLED(BABYSTEP_DISPLAY_TOTAL)
+        + planner.steps_to_mm[Z_AXIS] * babystep.axis_total[BS_AXIS_IND(Z_AXIS)]
+      #endif
+    );
   }
 
   void setZOffset_mm(const float value) {
@@ -857,17 +833,9 @@ namespace ExtUI {
   float getFeedrate_percent() { return feedrate_percentage; }
 
   #if ENABLED(PIDTEMP)
-    float getPIDValues_Kp(const extruder_t tool) {
-      return PID_PARAM(Kp, tool);
-    }
-
-    float getPIDValues_Ki(const extruder_t tool) {
-      return unscalePID_i(PID_PARAM(Ki, tool));
-    }
-
-    float getPIDValues_Kd(const extruder_t tool) {
-      return unscalePID_d(PID_PARAM(Kd, tool));
-    }
+    float getPIDValues_Kp(const extruder_t tool) { return PID_PARAM(Kp, tool); }
+    float getPIDValues_Ki(const extruder_t tool) { return unscalePID_i(PID_PARAM(Ki, tool)); }
+    float getPIDValues_Kd(const extruder_t tool) { return unscalePID_d(PID_PARAM(Kd, tool)); }
 
     void setPIDValues(const float p, const float i, const float d, extruder_t tool) {
       thermalManager.temp_hotend[tool].pid.Kp = p;
@@ -876,23 +844,15 @@ namespace ExtUI {
       thermalManager.updatePID();
     }
 
-    void startPIDTune(const float temp, extruder_t tool){
+    void startPIDTune(const float temp, extruder_t tool) {
       thermalManager.PID_autotune(temp, (heater_ind_t)tool, 8, true);
     }
   #endif
 
   #if ENABLED(PIDTEMPBED)
-    float getBedPIDValues_Kp() {
-      return thermalManager.temp_bed.pid.Kp;
-    }
-
-    float getBedPIDValues_Ki() {
-      return unscalePID_i(thermalManager.temp_bed.pid.Ki);
-    }
-
-    float getBedPIDValues_Kd() {
-      return unscalePID_d(thermalManager.temp_bed.pid.Kd);
-    }
+    float getBedPIDValues_Kp() { return thermalManager.temp_bed.pid.Kp; }
+    float getBedPIDValues_Ki() { return unscalePID_i(thermalManager.temp_bed.pid.Ki); }
+    float getBedPIDValues_Kd() { return unscalePID_d(thermalManager.temp_bed.pid.Kd); }
 
     void setBedPIDValues(const float p, const float i, const float d) {
       thermalManager.temp_bed.pid.Kp = p;
@@ -906,20 +866,12 @@ namespace ExtUI {
     }
   #endif
 
-  void injectCommands_P(PGM_P const gcode) {
-    queue.inject_P(gcode);
-  }
+  void injectCommands_P(PGM_P const gcode) { queue.inject_P(gcode); }
 
   bool commandsInQueue() { return (planner.movesplanned() || queue.has_commands_queued()); }
 
-  bool isAxisPositionKnown(const axis_t axis) {
-    return TEST(axis_known_position, axis);
-  }
-
-  bool isAxisPositionKnown(const extruder_t) {
-    return TEST(axis_known_position, E_AXIS);
-  }
-
+  bool isAxisPositionKnown(const axis_t axis) { return TEST(axis_known_position, axis); }
+  bool isAxisPositionKnown(const extruder_t) { return TEST(axis_known_position, E_AXIS); }
   bool isPositionKnown() { return all_axes_known(); }
   bool isMachineHomed() { return all_axes_homed(); }
 
@@ -1008,17 +960,9 @@ namespace ExtUI {
     return IFSD(IS_SD_INSERTED() && card.isMounted(), false);
   }
 
-  void pausePrint() {
-    ui.pause_print();
-  }
-
-  void resumePrint() {
-    ui.resume_print();
-  }
-
-  void stopPrint() {
-    ui.abort_print();
-  }
+  void pausePrint() { ui.pause_print(); }
+  void resumePrint() { ui.resume_print(); }
+  void stopPrint() { ui.abort_print(); }
 
   void onUserConfirmRequired_P(PGM_P const pstr) {
     char msg[strlen_P(pstr) + 1];
@@ -1069,11 +1013,7 @@ namespace ExtUI {
   }
 
   bool FileList::isAtRootDir() {
-    return (true
-      #if ENABLED(SDSUPPORT)
-        && card.flag.workDirIsRoot
-      #endif
-    );
+    return IFSD(card.flag.workDirIsRoot, true);
   }
 
   void FileList::upDir() {
