@@ -1508,6 +1508,9 @@
   // Disable Z axis sensorless homing if a probe is used to home the Z axis
   #if HOMING_Z_WITH_PROBE
     #undef Z_STALL_SENSITIVITY
+    #undef Z2_STALL_SENSITIVITY
+    #undef Z3_STALL_SENSITIVITY
+    #undef Z4_STALL_SENSITIVITY
   #endif
   #if defined(X_STALL_SENSITIVITY)  && AXIS_HAS_STALLGUARD(X)
     #define X_SENSORLESS 1
@@ -1653,7 +1656,7 @@
   #define HAS_TEMP_ADC_CHAMBER 1
 #endif
 
-#if HOTENDS && EITHER(HAS_TEMP_ADC_0, HEATER_0_USES_MAX6675)
+#if HAS_HOTEND && EITHER(HAS_TEMP_ADC_0, HEATER_0_USES_MAX6675)
   #define HAS_TEMP_HOTEND 1
 #endif
 #define HAS_TEMP_BED        HAS_TEMP_ADC_BED
