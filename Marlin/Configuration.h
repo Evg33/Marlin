@@ -145,13 +145,13 @@
 
 // This defines the number of extruders
 // :[1, 2, 3, 4, 5, 6, 7, 8]
-#define EXTRUDERS 1
+#define EXTRUDERS 2
 
 // Generally expected filament diameter (1.75, 2.85, 3.0, ...). Used for Volumetric, Filament Width Sensor, etc.
 #define DEFAULT_NOMINAL_FILAMENT_DIA 1.75
 
 // For Cyclops or any "multi-extruder" that shares a single nozzle.
-//#define SINGLENOZZLE
+#define SINGLENOZZLE
 
 // Save and restore temperature and fan speed on tool-change.
 // Set standby for the unselected tool with M104/106/109 T...
@@ -735,7 +735,7 @@
 //#define Z4_DRIVER_TYPE A4988
 //#define E0_DRIVER_TYPE TMC2209
 #define E0_DRIVER_TYPE TMC2209
-//#define E1_DRIVER_TYPE A4988
+#define E1_DRIVER_TYPE LV8729
 //#define E2_DRIVER_TYPE A4988
 //#define E3_DRIVER_TYPE A4988
 //#define E4_DRIVER_TYPE A4988
@@ -779,11 +779,12 @@
  * following movement settings. If fewer factors are given than the
  * total number of extruders, the last value applies to the rest.
  */
-//#define DISTINCT_E_FACTORS
+#define DISTINCT_E_FACTORS
 
 #define USER_STEPS_XY 64 //32
 #define USER_STEPS_Z 32 //8
 #define USER_STEPS_E0 32 //8
+#define USER_STEPS_E1 32 //8
 
 /**
  * Default Axis Steps Per Unit (steps/mm)
@@ -791,7 +792,7 @@
  *                                      X, Y, Z, E0 [, E1[, E2...]]
  */
 //#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 4000, 500 }
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { (400*USER_STEPS_XY)/(2.0*20), (400*USER_STEPS_XY)/(2.0*20), (200*USER_STEPS_Z/4), (8.5*USER_STEPS_E0) } //TLBMG=208 BMG=26* BMGM=8.5 M92 E272(32)
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { (400*USER_STEPS_XY)/(2.0*20), (400*USER_STEPS_XY)/(2.0*20), (200*USER_STEPS_Z/4), (8.5*USER_STEPS_E0), (8.5*USER_STEPS_E1) } //TLBMG=208 BMG=26* BMGM=8.5 M92 E272(32)
 //http://3dtoday.ru/blogs/akdzg/custom-firmware-marlin-and-pour-it-into-a-3d-printer/
 
 /**
@@ -803,7 +804,7 @@
 //#define DEFAULT_MAX_FEEDRATE          { 300, 300, 10, 40 }
 //#define DEFAULT_MAX_FEEDRATE          { 150, 150, 16, 120 }
 //#define DEFAULT_MAX_FEEDRATE          { 95, 95, 20, 100 } //silent mode
-#define DEFAULT_MAX_FEEDRATE          { 150, 150, 20, 100 }
+#define DEFAULT_MAX_FEEDRATE          { 150, 150, 20, 100, 100 }
 
 //#define LIMITED_MAX_FR_EDITING        // Limit edit via M203 or LCD to DEFAULT_MAX_FEEDRATE * 2
 #if ENABLED(LIMITED_MAX_FR_EDITING)
@@ -819,7 +820,7 @@
 //#define DEFAULT_MAX_ACCELERATION      { 3000, 3000, 100, 10000 }
 //#define DEFAULT_MAX_ACCELERATION      { 3000, 3000, 100, 5000 }
 //#define DEFAULT_MAX_ACCELERATION      { 2000, 2000, 100, 2000 } //Lerdge defaults
-#define DEFAULT_MAX_ACCELERATION      { 5000, 5000, 100, 10000 }
+#define DEFAULT_MAX_ACCELERATION      { 5000, 5000, 100, 5000, 5000 }
 
 //#define LIMITED_MAX_ACCEL_EDITING     // Limit edit via M201 or LCD to DEFAULT_MAX_ACCELERATION * 2
 #if ENABLED(LIMITED_MAX_ACCEL_EDITING)
