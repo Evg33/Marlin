@@ -2187,7 +2187,7 @@
   #endif
 
   #if AXIS_IS_TMC(E0) // https://aliexpress.ru/item/32768043304.html Nema 17 22 1.8deg 0.8A 3.8mH 120nM
-    #define E0_CURRENT   (800*65/100)
+    #define E0_CURRENT   (800*70/100)
     #define E0_MICROSTEPS   USER_STEPS_E0
     #if AXIS_DRIVER_TYPE_E0(TMC5160)
      #define E0_RSENSE 0.075

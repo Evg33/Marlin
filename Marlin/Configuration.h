@@ -783,8 +783,8 @@
 
 #define USER_STEPS_XY 64 //32
 #define USER_STEPS_Z 32 //8
-#define USER_STEPS_E0 32 //8 bmg 816@32
-#define USER_STEPS_E1 32 //8 
+#define USER_STEPS_E0 16 //8 BMG     204@8(cheep) 408@16(ok) 816@32
+#define USER_STEPS_E1 16 //8 BMG Mini 68@8 136@16 272@32
 
 /**
  * Default Axis Steps Per Unit (steps/mm)
@@ -792,7 +792,7 @@
  *                                      X, Y, Z, E0 [, E1[, E2...]]
  */
 //#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 4000, 500 }
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { (400*USER_STEPS_XY)/(2.0*20), (400*USER_STEPS_XY)/(2.0*20), (200*USER_STEPS_Z/4), (25.5*USER_STEPS_E0), (8.5*USER_STEPS_E1) } //TLBMG=208 BMG=25.5-26* BMGM=8.5 M92 E272(32)
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { (400*USER_STEPS_XY)/(2.0*20), (400*USER_STEPS_XY)/(2.0*20), (200*USER_STEPS_Z/4), (25.5*USER_STEPS_E0), (8.5*USER_STEPS_E1) }
 //http://3dtoday.ru/blogs/akdzg/custom-firmware-marlin-and-pour-it-into-a-3d-printer/
 
 /**
