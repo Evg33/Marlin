@@ -2186,8 +2186,8 @@
     #define Z4_CHAIN_POS     -1
   #endif
 
-  #if AXIS_IS_TMC(E0) // StepperOnline 17HS19-2004S1 1.8deg 2.0A 3.0mH
-    #define E0_CURRENT   (2000*65/100)
+  #if AXIS_IS_TMC(E0) // https://aliexpress.ru/item/32768043304.html Nema 17 22 1.8deg 0.8A 3.8mH 120nM
+    #define E0_CURRENT   (800*65/100)
     #define E0_MICROSTEPS   USER_STEPS_E0
     #if AXIS_DRIVER_TYPE_E0(TMC5160)
      #define E0_RSENSE 0.075
@@ -2197,9 +2197,9 @@
     #define E0_CHAIN_POS   -1
   #endif
 
-  #if AXIS_IS_TMC(E1)
-    #define E1_CURRENT      800
-    #define E1_MICROSTEPS    16
+  #if AXIS_IS_TMC(E1) // StepperOnline 17HS19-2004S1 1.8deg 2.0A 3.0mH
+    #define E1_CURRENT      (2000*65/100)
+    #define E1_MICROSTEPS    USER_STEPS_E1
     #define E1_RSENSE         0.11
     #define E1_CHAIN_POS     -1
   #endif
