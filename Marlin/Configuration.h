@@ -786,7 +786,7 @@
 #define USER_STEPS_XY 64 //32
 #define USER_STEPS_Z 32 //8
 #define USER_STEPS_E0 16 //8 BMG     204@8(cheep) 408@16(ok) 816@32
-#define USER_STEPS_E1 16 //8 BMG Mini 68@8 136@16 272@32
+#define USER_STEPS_E1 32 //16 //8 BMG Mini 68@8 136@16 272@32
 
 /**
  * Default Axis Steps Per Unit (steps/mm)
