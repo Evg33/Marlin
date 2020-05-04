@@ -2201,7 +2201,11 @@
   #if AXIS_IS_TMC(E1) // StepperOnline 17HS19-2004S1 1.8deg 2.0A 3.0mH
     #define E1_CURRENT      (2000*65/100)
     #define E1_MICROSTEPS    USER_STEPS_E1
-    #define E1_RSENSE         0.11
+    #if AXIS_DRIVER_TYPE_E1(TMC5160)
+     #define E1_RSENSE 0.075
+    #else
+     #define E1_RSENSE  0.11
+    #endif
     #define E1_CHAIN_POS     -1
   #endif
 
