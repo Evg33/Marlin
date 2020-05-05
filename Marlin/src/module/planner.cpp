@@ -130,13 +130,12 @@ planner_settings_t Planner::settings;           // Initialized by settings.load(
 
 uint32_t Planner::max_acceleration_steps_per_s2[XYZE_N]; // (steps/s^2) Derived from mm_per_s2
 
-float Planner::steps_to_mm[XYZE_N];           // (mm) Millimeters per step
+float Planner::steps_to_mm[XYZE_N];             // (mm) Millimeters per step
 
 #if HAS_JUNCTION_DEVIATION
-  float Planner::junction_deviation_mm;       // (mm) M205 J
-  #if ENABLED(LIN_ADVANCE)
-    float Planner::max_e_jerk               // Calculated from junction_deviation_mm
-      TERN_(DISTINCT_E_FACTORS, [EXTRUDERS]);
+  float Planner::junction_deviation_mm;         // (mm) M205 J
+  #if HAS_LINEAR_E_JERK
+    float Planner::max_e_jerk[DISTINCT_E];      // Calculated from junction_deviation_mm
   #endif
 #endif
 
@@ -2139,15 +2138,7 @@ bool Planner::_populate_block(block_t * const block, bool split_move,
 
     #if ENABLED(LIN_ADVANCE)
 
-      #if HAS_JUNCTION_DEVIATION
-        #if ENABLED(DISTINCT_E_FACTORS)
-          #define MAX_E_JERK max_e_jerk[extruder]
-        #else
-          #define MAX_E_JERK max_e_jerk
-        #endif
-      #else
-        #define MAX_E_JERK max_jerk.e
-      #endif
+      #define MAX_E_JERK(N) TERN(HAS_LINEAR_E_JERK, max_e_jerk[E_INDEX_N(N)], max_jerk.e)
 
       /**
        *
@@ -2179,7 +2170,7 @@ bool Planner::_populate_block(block_t * const block, bool split_move,
         if (block->e_D_ratio > 3.0f)
           block->use_advance_lead = false;
         else {
-          const uint32_t max_accel_steps_per_s2 = MAX_E_JERK / (extruder_advance_K[active_extruder] * block->e_D_ratio) * steps_per_mm;
+          const uint32_t max_accel_steps_per_s2 = MAX_E_JERK(extruder) / (extruder_advance_K[active_extruder] * block->e_D_ratio) * steps_per_mm;
           if (TERN0(LA_DEBUG, accel > max_accel_steps_per_s2))
             SERIAL_ECHOLNPGM("Acceleration limited.");
           NOMORE(accel, max_accel_steps_per_s2);
@@ -2187,24 +2178,18 @@ bool Planner::_populate_block(block_t * const block, bool split_move,
       }
     #endif
 
-    #if ENABLED(DISTINCT_E_FACTORS)
-      #define ACCEL_IDX extruder
-    #else
-      #define ACCEL_IDX 0
-    #endif
-
     // Limit acceleration per axis
     if (block->step_event_count <= cutoff_long) {
       LIMIT_ACCEL_LONG(A_AXIS, 0);
       LIMIT_ACCEL_LONG(B_AXIS, 0);
       LIMIT_ACCEL_LONG(C_AXIS, 0);
-      LIMIT_ACCEL_LONG(E_AXIS, ACCEL_IDX);
+      LIMIT_ACCEL_LONG(E_AXIS, E_INDEX_N(extruder));
     }
     else {
       LIMIT_ACCEL_FLOAT(A_AXIS, 0);
       LIMIT_ACCEL_FLOAT(B_AXIS, 0);
       LIMIT_ACCEL_FLOAT(C_AXIS, 0);
-      LIMIT_ACCEL_FLOAT(E_AXIS, ACCEL_IDX);
+      LIMIT_ACCEL_FLOAT(E_AXIS, E_INDEX_N(extruder));
     }
   }
   block->acceleration_steps_per_s2 = accel;
