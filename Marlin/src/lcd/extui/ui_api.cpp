@@ -54,6 +54,7 @@
 #include "../../module/printcounter.h"
 #include "../../libs/duration_t.h"
 #include "../../HAL/shared/Delay.h"
+#include "../../sd/cardreader.h"
 
 #if ENABLED(PRINTCOUNTER)
   #include "../../core/utility.h"
@@ -66,10 +67,6 @@
 
 #if ENABLED(EMERGENCY_PARSER)
   #include "../../feature/e_parser.h"
-#endif
-
-#if ENABLED(SDSUPPORT)
-  #include "../../sd/cardreader.h"
 #endif
 
 #if HAS_TRINAMIC_CONFIG
@@ -333,8 +330,8 @@ namespace ExtUI {
     // Delta limits XY based on the current offset from center
     // This assumes the center is 0,0
     #if ENABLED(DELTA)
-      if (axis != Z_AXIS) {
-        max = SQRT(sq((float)(DELTA_PRINTABLE_RADIUS)) - sq(current_position[Y_AXIS - axis])); // (Y_AXIS - axis) == the other axis
+      if (axis != Z) {
+        max = SQRT(sq(float(DELTA_PRINTABLE_RADIUS)) - sq(current_position[Y - axis])); // (Y - axis) == the other axis
         min = -max;
       }
     #endif
@@ -489,9 +486,14 @@ namespace ExtUI {
 
     int getTMCBumpSensitivity(const axis_t axis) {
       switch (axis) {
-        TERN_(X_SENSORLESS, case X: return stepperX.homing_threshold());
-        TERN_(Y_SENSORLESS, case Y: return stepperY.homing_threshold());
-        TERN_(Z_SENSORLESS, case Z: return stepperZ.homing_threshold());
+        TERN_(X_SENSORLESS,  case X:  return stepperX.homing_threshold());
+        TERN_(X2_SENSORLESS, case X2: return stepperX2.homing_threshold());
+        TERN_(Y_SENSORLESS,  case Y:  return stepperY.homing_threshold());
+        TERN_(Y2_SENSORLESS, case Y2: return stepperY2.homing_threshold());
+        TERN_(Z_SENSORLESS,  case Z:  return stepperZ.homing_threshold());
+        TERN_(Z2_SENSORLESS, case Z2: return stepperZ2.homing_threshold());
+        TERN_(Z3_SENSORLESS, case Z3: return stepperZ3.homing_threshold());
+        TERN_(Z4_SENSORLESS, case Z4: return stepperZ4.homing_threshold());
         default: return 0;
       }
     }
@@ -500,13 +502,28 @@ namespace ExtUI {
       switch (axis) {
         #if X_SENSORLESS || Y_SENSORLESS || Z_SENSORLESS
           #if X_SENSORLESS
-            case X: stepperX.homing_threshold(value); break;
+            case X:  stepperX.homing_threshold(value);  break;
+          #endif
+          #if X2_SENSORLESS
+            case X2: stepperX2.homing_threshold(value); break;
           #endif
           #if Y_SENSORLESS
             case Y: stepperY.homing_threshold(value); break;
           #endif
+          #if Y2_SENSORLESS
+            case Y2: stepperY2.homing_threshold(value); break;
+          #endif
           #if Z_SENSORLESS
             case Z: stepperZ.homing_threshold(value); break;
+          #endif
+          #if Z2_SENSORLESS
+            case Z2: stepperZ2.homing_threshold(value); break;
+          #endif
+          #if Z3_SENSORLESS
+            case Z3: stepperZ3.homing_threshold(value); break;
+          #endif
+          #if Z4_SENSORLESS
+            case Z4: stepperZ4.homing_threshold(value); break;
           #endif
         #else
           UNUSED(value);
@@ -876,7 +893,7 @@ namespace ExtUI {
   bool isMachineHomed() { return all_axes_homed(); }
 
   PGM_P getFirmwareName_str() {
-    static const char firmware_name[] PROGMEM = "Marlin " SHORT_BUILD_VERSION;
+    static PGMSTR(firmware_name, "Marlin " SHORT_BUILD_VERSION);
     return firmware_name;
   }
 
