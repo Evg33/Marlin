@@ -781,12 +781,12 @@
  * following movement settings. If fewer factors are given than the
  * total number of extruders, the last value applies to the rest.
  */
-#define DISTINCT_E_FACTORS
+//#define DISTINCT_E_FACTORS
 
 #define USER_STEPS_XY 64 //32
 #define USER_STEPS_Z 32 //8
 #define USER_STEPS_E0 16 //8 BMG     204@8(cheep) 408@16(ok) 816@32
-#define USER_STEPS_E1 32 //16 //8 BMG Mini 68@8 136@16 272@32
+#define USER_STEPS_E1 16 //32 //16 //8 BMG Mini 68@8 136@16 272@32
 
 /**
  * Default Axis Steps Per Unit (steps/mm)
@@ -794,7 +794,8 @@
  *                                      X, Y, Z, E0 [, E1[, E2...]]
  */
 //#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 4000, 500 }
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { (400*USER_STEPS_XY)/(2.0*20), (400*USER_STEPS_XY)/(2.0*20), (200*USER_STEPS_Z/4), (25.5*USER_STEPS_E0), (8.5*USER_STEPS_E1) }
+//#define DEFAULT_AXIS_STEPS_PER_UNIT   { (400*USER_STEPS_XY)/(2.0*20), (400*USER_STEPS_XY)/(2.0*20), (200*USER_STEPS_Z/4), (25.5*USER_STEPS_E0), (8.5*USER_STEPS_E1) }
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { (400*USER_STEPS_XY)/(2.0*20), (400*USER_STEPS_XY)/(2.0*20), (200*USER_STEPS_Z/4), (25.5*USER_STEPS_E0) }
 //http://3dtoday.ru/blogs/akdzg/custom-firmware-marlin-and-pour-it-into-a-3d-printer/
 
 /**
@@ -806,7 +807,7 @@
 //#define DEFAULT_MAX_FEEDRATE          { 300, 300, 10, 40 }
 //#define DEFAULT_MAX_FEEDRATE          { 150, 150, 16, 120 }
 //#define DEFAULT_MAX_FEEDRATE          { 95, 95, 20, 100 } //silent mode
-#define DEFAULT_MAX_FEEDRATE          { 150, 150, 20, 100, 100 }
+#define DEFAULT_MAX_FEEDRATE          { 150, 150, 20, 50 }
 
 //#define LIMITED_MAX_FR_EDITING        // Limit edit via M203 or LCD to DEFAULT_MAX_FEEDRATE * 2
 #if ENABLED(LIMITED_MAX_FR_EDITING)
@@ -822,7 +823,7 @@
 //#define DEFAULT_MAX_ACCELERATION      { 3000, 3000, 100, 10000 }
 //#define DEFAULT_MAX_ACCELERATION      { 3000, 3000, 100, 5000 }
 //#define DEFAULT_MAX_ACCELERATION      { 2000, 2000, 100, 2000 } //Lerdge defaults
-#define DEFAULT_MAX_ACCELERATION      { 5000, 5000, 100, 5000, 5000 }
+#define DEFAULT_MAX_ACCELERATION      { 5000, 5000, 100, 5000 }
 
 //#define LIMITED_MAX_ACCEL_EDITING     // Limit edit via M201 or LCD to DEFAULT_MAX_ACCELERATION * 2
 #if ENABLED(LIMITED_MAX_ACCEL_EDITING)
