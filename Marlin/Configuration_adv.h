@@ -2459,10 +2459,7 @@
    * }
    */
   //#define TMC_ADV() {  }
-  //#define TMC_ADV() { \
-  //  stepperX.intpol(1); \
-  //  stepperY.intpol(1); \
-  // }
+  //#define TMC_ADV() { stepperX.intpol(1); stepperY.intpol(1); }
 #endif // HAS_TRINAMIC_CONFIG
 
 // @section L64XX
