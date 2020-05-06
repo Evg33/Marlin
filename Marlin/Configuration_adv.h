@@ -2104,7 +2104,7 @@
 #if HAS_TRINAMIC_CONFIG
 
   #define HOLD_MULTIPLIER    0.5  // Scales down the holding current from run current
-  #define INTERPOLATE       false //true  // Interpolate X/Y/Z_MICROSTEPS to 256
+  #define INTERPOLATE       true  // Interpolate X/Y/Z_MICROSTEPS to 256
 
   #if AXIS_IS_TMC(X) // StepperOnline 17HM19-2004S 0.9deg 2.0A 3.0mH
     #define X_CURRENT    (2000*60/100)  //1200(1150)// (mA) RMS current. Multiply by 1.414 for peak current. 
@@ -2459,10 +2459,10 @@
    * }
    */
   //#define TMC_ADV() {  }
-  #define TMC_ADV() { \
-    stepperX.intpol(1); \
-    stepperY.intpol(1); \
-   }
+  //#define TMC_ADV() { \
+  //  stepperX.intpol(1); \
+  //  stepperY.intpol(1); \
+  // }
 #endif // HAS_TRINAMIC_CONFIG
 
 // @section L64XX
