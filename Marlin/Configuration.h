@@ -510,10 +510,13 @@
   //#define DEFAULT_Ki 0.76
   //#define DEFAULT_Kd 55.09
   //200422  UNI Mini M303 E0 C3 S200 U1
-  #define DEFAULT_Kp 15.84
-  #define DEFAULT_Ki 1.03
-  #define DEFAULT_Kd 61.03
-  
+  //#define DEFAULT_Kp 15.84
+  //#define DEFAULT_Ki 1.03
+  //#define DEFAULT_Kd 61.03
+  //200508  UNI Mini M303 E0 C3 S200 U1 mosq
+  #define DEFAULT_Kp 28.12
+  #define DEFAULT_Ki 2.15
+  #define DEFAULT_Kd 91.81
   // Ultimaker
   //#define DEFAULT_Kp 22.2
   //#define DEFAULT_Ki 1.08
