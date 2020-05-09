@@ -514,9 +514,14 @@
   //#define DEFAULT_Ki 1.03
   //#define DEFAULT_Kd 61.03
   //200508  UNI Mini M303 E0 C3 S200 U1 mosq
-  #define DEFAULT_Kp 28.12
-  #define DEFAULT_Ki 2.15
-  #define DEFAULT_Kd 91.81
+  //#define DEFAULT_Kp 28.12
+  //#define DEFAULT_Ki 2.15
+  //#define DEFAULT_Kd 91.81
+  //200509  UNI Mini M303 E0 C8 S230 U1
+  #define DEFAULT_Kp 23.85
+  #define DEFAULT_Ki 1.84
+  #define DEFAULT_Kd 77.49
+
   // Ultimaker
   //#define DEFAULT_Kp 22.2
   //#define DEFAULT_Ki 1.08
@@ -582,13 +587,14 @@
   //#define DEFAULT_bedKi 8.78
   //#define DEFAULT_bedKd 191.44
   //200422  UNI Mini M303 E-1 C3 S60 U1
-  #define DEFAULT_bedKp 70.97
-  #define DEFAULT_bedKi 9.83
-  #define DEFAULT_bedKd 341.71
-  // UNI M303 E-1 C3 S70 U1    ///  M303 E-1 C8 S100 U1 /// M303 E-1 C8 S100 U1
-  //#define DEFAULT_bedKp 38.36
-  //#define DEFAULT_bedKi 4.56
-  //#define DEFAULT_bedKd 215.04
+  //#define DEFAULT_bedKp 70.97
+  //#define DEFAULT_bedKi 9.83
+  //#define DEFAULT_bedKd 341.71
+  //200509  UNI Mini M303 E-1 C8 S70 U1
+  #define DEFAULT_bedKp 109.88
+  #define DEFAULT_bedKi 17.27
+  #define DEFAULT_bedKd 465.98
+
 
   //120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   //from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
