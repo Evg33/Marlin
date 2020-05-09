@@ -418,7 +418,7 @@
  *   998 : Dummy Table that ALWAYS reads 25°C or the temperature defined below.
  *   999 : Dummy Table that ALWAYS reads 100°C or the temperature defined below.
  */
-#define TEMP_SENSOR_0 1 //ZMI=1
+#define TEMP_SENSOR_0 5 // 5 - ATC Semitec 104GT-2 https://aliexpress.ru/item/32843785247.html
 #define TEMP_SENSOR_1 0
 #define TEMP_SENSOR_2 0
 #define TEMP_SENSOR_3 0
@@ -518,9 +518,13 @@
   //#define DEFAULT_Ki 2.15
   //#define DEFAULT_Kd 91.81
   //200509  UNI Mini M303 E0 C8 S230 U1
-  #define DEFAULT_Kp 23.85
-  #define DEFAULT_Ki 1.84
-  #define DEFAULT_Kd 77.49
+  //#define DEFAULT_Kp 23.85
+  //#define DEFAULT_Ki 1.84
+  //#define DEFAULT_Kd 77.49
+  //200510  UNI Mini M303 E0 C8 S230 U1
+  #define DEFAULT_Kp 21.63
+  #define DEFAULT_Ki 1.41
+  #define DEFAULT_Kd 83.06
 
   // Ultimaker
   //#define DEFAULT_Kp 22.2
