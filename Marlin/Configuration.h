@@ -1203,8 +1203,8 @@
 //#define X_MAX_POS 240
 #define Y_MAX_POS Y_BED_SIZE
 //#define Z_MAX_POS 200
-//#define Z_MAX_POS 163.4 //e3d
-#define Z_MAX_POS 162 //mosq
+#define Z_MAX_POS 163.6
+
 
 
 /**
