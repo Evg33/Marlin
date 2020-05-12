@@ -1665,6 +1665,16 @@
 //#define BEZIER_CURVE_SUPPORT
 
 /**
+ * Direct Stepping
+ *
+ * Comparable to the method used by Klipper, G6 direct stepping significantly
+ * reduces motion calculations, increases top printing speeds, and results in
+ * less step aliasing by calculating all motions in advance.
+ * Preparing your G-code: https://github.com/colinrgodsey/step-daemon
+ */
+//#define DIRECT_STEPPING
+
+/**
  * G38 Probe Target
  *
  * This option adds G38.2 and G38.3 (probe towards target)
@@ -1733,16 +1743,16 @@
 //================================= Buffers =================================
 //===========================================================================
 
-// @section hidden
+// @section motion
 
-// The number of linear motions that can be in the plan at any give time.
-// THE BLOCK_BUFFER_SIZE NEEDS TO BE A POWER OF 2 (e.g. 8, 16, 32) because shifts and ors are used to do the ring-buffering.
-#if ENABLED(SDSUPPORT)
-  //#define BLOCK_BUFFER_SIZE 16 // SD,LCD,Buttons take more memory, block buffer needs to be smaller
-  #define BLOCK_BUFFER_SIZE 32 //Evg33 https://github.com/foosel/OctoPrint/issues/2834
+// The number of lineear moves that can be in the planner at once.
+// The value of BLOCK_BUFFER_SIZE must be a power of 2 (e.g. 8, 16, 32)
+#if BOTH(SDSUPPORT, DIRECT_STEPPING)
+  #define BLOCK_BUFFER_SIZE  8
+#elif ENABLED(SDSUPPORT)
+  #define BLOCK_BUFFER_SIZE 16
 #else
-  //#define BLOCK_BUFFER_SIZE 16 // maximize block buffer
-  #define BLOCK_BUFFER_SIZE 32 //Evg33 https://github.com/foosel/OctoPrint/issues/2834
+  #define BLOCK_BUFFER_SIZE 16
 #endif
 
 // @section serial
@@ -1796,7 +1806,7 @@
 // Enable an emergency-command parser to intercept certain commands as they
 // enter the serial receive buffer, so they cannot be blocked.
 // Currently handles M108, M112, M410
-// Does not work on boards using AT90USB (USBCON) processors!
+// Does not work on boards using AT90USB (USBCON), ESP32, STM32F1/4/7, or Teensy 3.5/3.6 processors!
 #define EMERGENCY_PARSER
 
 // Bad Serial-connections can miss a received command by sending an 'ok'
