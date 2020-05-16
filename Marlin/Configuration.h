@@ -521,10 +521,14 @@
   //#define DEFAULT_Kp 23.85
   //#define DEFAULT_Ki 1.84
   //#define DEFAULT_Kd 77.49
-  //200510  UNI Mini M303 E0 C8 S230 U1
-  #define DEFAULT_Kp 21.63
-  #define DEFAULT_Ki 1.41
-  #define DEFAULT_Kd 83.06
+  //200510  UNI Mini M303 E0 C8 S230 U1 (Mosquito@40W)
+  //#define DEFAULT_Kp 21.63
+  //#define DEFAULT_Ki 1.41
+  //#define DEFAULT_Kd 83.06
+  //200516  UNI Mini M303 E0 C8 S230 U1 (Mosquito@50W)
+  #define DEFAULT_Kp 16.72
+  #define DEFAULT_Ki 0.98
+  #define DEFAULT_Kd 71.52
 
   // Ultimaker
   //#define DEFAULT_Kp 22.2
