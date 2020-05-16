@@ -71,7 +71,7 @@
 // @section info
 
 // Author info of this build printed to the host during boot and M115
-#define STRING_CONFIG_H_AUTHOR "(Evg33, ZAVMini)" // Who made the changes.
+#define STRING_CONFIG_H_AUTHOR "(Evg33, UNI_Mini)" // Who made the changes.
 //#define CUSTOM_VERSION_FILE Version.h // Path from the root directory (no quotes)
 
 /**
@@ -796,10 +796,10 @@
  */
 //#define DISTINCT_E_FACTORS
 
-#define USER_STEPS_XY 64 //32
-#define USER_STEPS_Z 32 //8
-#define USER_STEPS_E0 16 //8 BMG     204@8(cheep) 408@16(ok) 816@32
-#define USER_STEPS_E1 16 //32 //16 //8 BMG Mini 68@8 136@16 272@32
+//#define USER_STEPS_XY 64 //32
+//#define USER_STEPS_Z 32 //8
+//#define USER_STEPS_E0 16 //8 BMG     204@8(cheep) 408@16(ok) 816@32
+//#define USER_STEPS_E1 16 //32 //16 //8 BMG Mini 68@8 136@16 272@32
 
 /**
  * Default Axis Steps Per Unit (steps/mm)
@@ -808,7 +808,7 @@
  */
 //#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 4000, 500 }
 //#define DEFAULT_AXIS_STEPS_PER_UNIT   { (400*USER_STEPS_XY)/(2.0*20), (400*USER_STEPS_XY)/(2.0*20), (200*USER_STEPS_Z/4), (25.5*USER_STEPS_E0), (8.5*USER_STEPS_E1) }
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { (400*USER_STEPS_XY)/(2.0*20), (400*USER_STEPS_XY)/(2.0*20), (200*USER_STEPS_Z/4), (25.5*USER_STEPS_E0) }
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { (400*X_MICROSTEPS)/(2.0*20), (400*Y_MICROSTEPS)/(2.0*20), (200*Z_MICROSTEPS/4), (25.5*E0_MICROSTEPS) }
 //http://3dtoday.ru/blogs/akdzg/custom-firmware-marlin-and-pour-it-into-a-3d-printer/
 
 /**
@@ -855,9 +855,9 @@
 //#define DEFAULT_ACCELERATION          1200    // X, Y, Z and E acceleration for printing moves
 //#define DEFAULT_RETRACT_ACCELERATION  1500    // E acceleration for retracts
 //#define DEFAULT_TRAVEL_ACCELERATION   2000    // X, Y, Z acceleration for travel (non printing) moves
-#define DEFAULT_ACCELERATION          2800    // X, Y, Z and E acceleration for printing moves
-#define DEFAULT_RETRACT_ACCELERATION  4000    // E acceleration for retracts
-#define DEFAULT_TRAVEL_ACCELERATION   4000    // X, Y, Z acceleration for travel (non printing) moves
+#define DEFAULT_ACCELERATION          2000    // X, Y, Z and E acceleration for printing moves
+#define DEFAULT_RETRACT_ACCELERATION  3000    // E acceleration for retracts
+#define DEFAULT_TRAVEL_ACCELERATION   2000    // X, Y, Z acceleration for travel (non printing) moves
 
 /**
  * Default Jerk limits (mm/s)

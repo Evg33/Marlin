@@ -1029,7 +1029,7 @@
 #define LCD_SET_PROGRESS_MANUALLY
 
 // Show the E position (filament used) during printing
-#define LCD_SHOW_E_TOTAL
+//#define LCD_SHOW_E_TOTAL
 
 #if ENABLED(SHOW_BOOTSCREEN)
   //#define BOOTSCREEN_TIMEOUT 4000        // (ms) Total Duration to display the boot screen(s)
@@ -1037,7 +1037,7 @@
 #endif
 
 #if HAS_GRAPHICAL_LCD && EITHER(SDSUPPORT, LCD_SET_PROGRESS_MANUALLY)
-  //#define PRINT_PROGRESS_SHOW_DECIMALS // Show progress with decimal digits
+  #define PRINT_PROGRESS_SHOW_DECIMALS // Show progress with decimal digits
   #define SHOW_REMAINING_TIME          // Display estimated time to completion
   #if ENABLED(SHOW_REMAINING_TIME)
     #define USE_M73_REMAINING_TIME     // Use remaining time from M73 command instead of estimation
@@ -2123,7 +2123,7 @@
   #if AXIS_IS_TMC(X) // StepperOnline 17HM19-2004S 0.9deg 2.0A 3.0mH
     #define X_CURRENT    (2000*60/100)  //1200(1150)// (mA) RMS current. Multiply by 1.414 for peak current. 
     #define X_CURRENT_HOME  X_CURRENT  // (mA) RMS current for sensorless homing
-    #define X_MICROSTEPS    USER_STEPS_XY  // 0..256
+    #define X_MICROSTEPS    64  // 0..256
     #if AXIS_DRIVER_TYPE_X(TMC5160)
      #define X_RSENSE 0.075
     #else
@@ -2143,7 +2143,7 @@
   #if AXIS_IS_TMC(Y) // StepperOnline 17HM19-2004S 0.9deg 2.0A 3.0mH
     #define Y_CURRENT    (2000*60/100)
     #define Y_CURRENT_HOME  Y_CURRENT
-    #define Y_MICROSTEPS    USER_STEPS_XY
+    #define Y_MICROSTEPS    64
     #if AXIS_DRIVER_TYPE_Y(TMC5160)
      #define Y_RSENSE 0.075
     #else
@@ -2163,7 +2163,7 @@
   #if AXIS_IS_TMC(Z) // WANTAI 42byghw609 1.8deg 1.7A 3.0mH + 0.4mm/rev
     #define Z_CURRENT     (1700*60/100)
     #define Z_CURRENT_HOME  Z_CURRENT
-    #define Z_MICROSTEPS    USER_STEPS_Z
+    #define Z_MICROSTEPS    32
     #if AXIS_DRIVER_TYPE_Z(TMC5160)
      #define Z_RSENSE 0.075
     #else
@@ -2198,7 +2198,7 @@
 
   #if AXIS_IS_TMC(E0) // StepperOnline 17HS19-2004S1 1.8deg 2.0A 3.0mH
     #define E0_CURRENT   (2000*65/100)
-    #define E0_MICROSTEPS   USER_STEPS_E0
+    #define E0_MICROSTEPS   16
     #if AXIS_DRIVER_TYPE_E0(TMC5160)
      #define E0_RSENSE 0.075
     #else
@@ -2209,7 +2209,7 @@
 
   #if AXIS_IS_TMC(E1) // https://aliexpress.ru/item/32768043304.html Nema 17 22 1.8deg 0.8A 3.8mH 120nM
     #define E1_CURRENT   (800*70/100)
-    #define E1_MICROSTEPS    USER_STEPS_E1
+    #define E1_MICROSTEPS   16
     #if AXIS_DRIVER_TYPE_E1(TMC5160)
      #define E1_RSENSE 0.075
     #else
