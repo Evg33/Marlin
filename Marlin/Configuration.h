@@ -495,28 +495,6 @@
 
   // If you are using a pre-configured hotend then you can use one of the value sets by uncommenting it
 
-  // ZAV Mini M303 E0 C8 S230 U1
-  // M301 P12.63 I0.70 D56.76
-  // M301 P13.41 I0.80 D56.54
-  //#define DEFAULT_Kp 13.41
-  //#define DEFAULT_Ki  0.80
-  //#define DEFAULT_Kd 56.54
-  //200224  ZAV Mini M303 E0 C8 S190 U1
-  //#define DEFAULT_Kp 14.45
-  //#define DEFAULT_Ki 0.84
-  //#define DEFAULT_Kd 61.81
-  //200228  ZAV Mini M303 E0 C8 S230 U1
-  //#define DEFAULT_Kp 12.96
-  //#define DEFAULT_Ki 0.76
-  //#define DEFAULT_Kd 55.09
-  //200422  UNI Mini M303 E0 C3 S200 U1
-  //#define DEFAULT_Kp 15.84
-  //#define DEFAULT_Ki 1.03
-  //#define DEFAULT_Kd 61.03
-  //200508  UNI Mini M303 E0 C3 S200 U1 mosq
-  //#define DEFAULT_Kp 28.12
-  //#define DEFAULT_Ki 2.15
-  //#define DEFAULT_Kd 91.81
   //200509  UNI Mini M303 E0 C8 S230 U1
   //#define DEFAULT_Kp 23.85
   //#define DEFAULT_Ki 1.84
@@ -579,30 +557,10 @@
 #if ENABLED(PIDTEMPBED)
   //#define MIN_BED_POWER 0
   //#define PID_BED_DEBUG // Sends debug data to the serial port.
-
-  // ZAV Mini M303 E-1 C8 S70 U1
-  // M304 P35.93 I6.98 D123.37
-  // M304 P32.33 I6.03 D115.54
-  //#define DEFAULT_bedKp  32.33
-  //#define DEFAULT_bedKi   6.03
-  //#define DEFAULT_bedKd 115.54
-  //200224  ZAV Mini 200224 M303 E-1 C8 S70 U1
-  //#define DEFAULT_bedKp 43.09
-  //#define DEFAULT_bedKi 8.61
-  //#define DEFAULT_bedKd 143.78
-  //200228  ZAV Mini 200224 M303 E-1 C8 S100 U1
-  //#define DEFAULT_bedKp 50.20
-  //#define DEFAULT_bedKi 8.78
-  //#define DEFAULT_bedKd 191.44
-  //200422  UNI Mini M303 E-1 C3 S60 U1
-  //#define DEFAULT_bedKp 70.97
-  //#define DEFAULT_bedKi 9.83
-  //#define DEFAULT_bedKd 341.71
   //200509  UNI Mini M303 E-1 C8 S70 U1
   #define DEFAULT_bedKp 109.88
   #define DEFAULT_bedKi 17.27
   #define DEFAULT_bedKd 465.98
-
 
   //120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   //from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
