@@ -1876,7 +1876,7 @@
     #define MIN_AUTORETRACT 0.1           // (mm) Don't convert E moves under this length
     #define MAX_AUTORETRACT 10.0          // (mm) Don't convert E moves over this length
   #endif
-  #define RETRACT_LENGTH 5 //3                // (mm) Default retract length (positive value)
+  #define RETRACT_LENGTH 5.5 //3                // (mm) Default retract length (positive value)
   #define RETRACT_LENGTH_SWAP 0 //13          // (mm) Default swap retract length (positive value)
   #define RETRACT_FEEDRATE 30 //45             // (mm/s) Default feedrate for retracting
   #define RETRACT_ZRAISE 0                // (mm) Default retract Z-raise
@@ -1976,7 +1976,7 @@
                                                   // This short retract is done immediately, before parking the nozzle.
   #define FILAMENT_CHANGE_UNLOAD_FEEDRATE     30  // (mm/s) Unload filament feedrate. This can be pretty fast.
   #define FILAMENT_CHANGE_UNLOAD_ACCEL        25  // (mm/s^2) Lower acceleration may allow a faster feedrate.
-  #define FILAMENT_CHANGE_UNLOAD_LENGTH      643  //550  // (mm) The length of filament for a complete unload.  // 680 mosq
+  #define FILAMENT_CHANGE_UNLOAD_LENGTH      653  //550  // (mm) The length of filament for a complete unload.  // 680 mosq
                                                   //   For Bowden, the full length of the tube and nozzle.
                                                   //   For direct drive, the full length of the nozzle.
                                                   //   Set to 0 for manual unloading.
