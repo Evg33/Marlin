@@ -417,8 +417,8 @@
  *   998 : Dummy Table that ALWAYS reads 25°C or the temperature defined below.
  *   999 : Dummy Table that ALWAYS reads 100°C or the temperature defined below.
  */
-#define TEMP_SENSOR_0 1 //evg dual
-//#define TEMP_SENSOR_0 5 // 5 - ATC Semitec 104GT-2 https://aliexpress.ru/item/32843785247.html //evg mosq
+//#define TEMP_SENSOR_0 1 //evg dual
+#define TEMP_SENSOR_0 5 // evg mosq 5 - ATC Semitec 104GT-2 https://aliexpress.ru/item/32843785247.html
 #define TEMP_SENSOR_1 0
 #define TEMP_SENSOR_2 0
 #define TEMP_SENSOR_3 0
@@ -496,13 +496,13 @@
   //#define DEFAULT_Ki 1.84
   //#define DEFAULT_Kd 77.49
   //200516  UNI Mini M303 E0 C8 S230 U1 (Mosquito@50W)
-  //#define DEFAULT_Kp 16.72
-  //#define DEFAULT_Ki 0.98
-  //#define DEFAULT_Kd 71.52
+  #define DEFAULT_Kp 16.72
+  #define DEFAULT_Ki 0.98
+  #define DEFAULT_Kd 71.52
   //200516  UNI Mini M303 E0 C8 S230 U1 (dual@40W)
-  #define DEFAULT_Kp 12.86
-  #define DEFAULT_Ki 0.81
-  #define DEFAULT_Kd 50.93
+  //#define DEFAULT_Kp 12.86
+  //#define DEFAULT_Ki 0.81
+  //#define DEFAULT_Kd 50.93
 
   // Ultimaker
   //#define DEFAULT_Kp 22.2
