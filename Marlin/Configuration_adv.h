@@ -2221,8 +2221,10 @@
     #define Z4_CHAIN_POS     -1
   #endif
 
-  #if AXIS_IS_TMC(E0) // StepperOnline 17HS19-2004S1 1.8deg 2.0A 3.0mH
-    #define E0_CURRENT   (2000*65/100)
+//  #if AXIS_IS_TMC(E0) // StepperOnline 17HS19-2004S1 1.8deg 2.0A 3.0mH
+//    #define E0_CURRENT   (2000*65/100)
+  #if AXIS_IS_TMC(E0) // StepperOnline 17HS08-1004S 1.8deg 1.0A 4.5mH
+    #define E0_CURRENT   (1000*60/100) //600
     #define E0_MICROSTEPS   16
     #if AXIS_DRIVER_TYPE_E0(TMC5160)
      #define E0_RSENSE 0.075
