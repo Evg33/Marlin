@@ -149,7 +149,11 @@
 // This defines the number of extruders
 // :[1, 2, 3, 4, 5, 6, 7, 8]
 //#define EXTRUDERS 1
-#define EXTRUDERS 5 //MMU2
+#if ENABLED(PRUSA_MMU2)
+ #define EXTRUDERS 5 //MMU2
+#else
+ #define EXTRUDERS 1
+#endif
 
 // Generally expected filament diameter (1.75, 2.85, 3.0, ...). Used for Volumetric, Filament Width Sensor, etc.
 #define DEFAULT_NOMINAL_FILAMENT_DIA 1.75
@@ -191,7 +195,7 @@
  *
  * For additional configuration see Configuration_adv.h
  */
-#define PRUSA_MMU2
+//#define PRUSA_MMU2
 
 // A dual extruder that uses a single stepper motor
 //#define SWITCHING_EXTRUDER
