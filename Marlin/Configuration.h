@@ -104,17 +104,16 @@
  *
  * :[-1, 0, 1, 2, 3, 4, 5, 6, 7]
  */
-//#define SERIAL_PORT 0
 #define SERIAL_PORT -1
-// -1 - USB
-// 0 -TFT
-// 3 - WiFi
 
 /**
  * Select a secondary serial port on the board to use for communication with the host.
  * :[-1, 0, 1, 2, 3, 4, 5, 6, 7]
  */
-#define SERIAL_PORT_2 0
+#define SERIAL_PORT_2 3
+// -1 - USB
+// 0 - TFT
+// 3 - WiFi
 
 /**
  * This setting determines the communication speed of the printer.
