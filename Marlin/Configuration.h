@@ -106,13 +106,16 @@
  */
 //#define SERIAL_PORT 0
 #define SERIAL_PORT -1
+// -1 - USB
+// 0 -TFT
+// 3 - WiFi
 
 /**
  * Select a secondary serial port on the board to use for communication with the host.
  * :[-1, 0, 1, 2, 3, 4, 5, 6, 7]
  */
-//#define SERIAL_PORT_2 -1
-#define SERIAL_PORT_2 0
+//#define SERIAL_PORT_2 0
+
 
 /**
  * This setting determines the communication speed of the printer.
@@ -145,13 +148,14 @@
 
 // This defines the number of extruders
 // :[1, 2, 3, 4, 5, 6, 7, 8]
-#define EXTRUDERS 1
+//#define EXTRUDERS 1
+#define EXTRUDERS 5 //MMU2
 
 // Generally expected filament diameter (1.75, 2.85, 3.0, ...). Used for Volumetric, Filament Width Sensor, etc.
 #define DEFAULT_NOMINAL_FILAMENT_DIA 1.75
 
 // For Cyclops or any "multi-extruder" that shares a single nozzle.
-//#define SINGLENOZZLE
+#define SINGLENOZZLE
 
 // Save and restore temperature and fan speed on tool-change.
 // Set standby for the unselected tool with M104/106/109 T...
@@ -187,7 +191,7 @@
  *
  * For additional configuration see Configuration_adv.h
  */
-//#define PRUSA_MMU2
+#define PRUSA_MMU2
 
 // A dual extruder that uses a single stepper motor
 //#define SWITCHING_EXTRUDER
