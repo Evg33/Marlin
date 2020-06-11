@@ -3385,12 +3385,9 @@
     // This is for Prusa MK3-style extruders. Customize for your hardware.
     #define MMU2_FILAMENTCHANGE_EJECT_FEED 80.0
     #define MMU2_LOAD_TO_NOZZLE_SEQUENCE \
-      {  7.2, 1145 }, \
-      { 14.4,  871 }, \
-      { 36.0, 1393 }, \
-      { 14.4,  871 }, \
-      { 50.0,  198 }
-
+      { 10.0,  562 }, \
+      { 30.0,  871 }, \
+      { 30.0,  198 } // E distances and feed rates in mm/m
     #define MMU2_RAMMING_SEQUENCE \
       {   1.0, 1000 }, \
       {   1.0, 1500 }, \
