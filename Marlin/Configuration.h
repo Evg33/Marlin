@@ -148,14 +148,13 @@
 
 // This defines the number of extruders
 // :[1, 2, 3, 4, 5, 6, 7, 8]
-//#define EXTRUDERS 1
-#define EXTRUDERS 5 //MMU2
+#define EXTRUDERS 1
 
 // Generally expected filament diameter (1.75, 2.85, 3.0, ...). Used for Volumetric, Filament Width Sensor, etc.
 #define DEFAULT_NOMINAL_FILAMENT_DIA 1.75
 
 // For Cyclops or any "multi-extruder" that shares a single nozzle.
-#define SINGLENOZZLE
+//#define SINGLENOZZLE
 
 // Save and restore temperature and fan speed on tool-change.
 // Set standby for the unselected tool with M104/106/109 T...
@@ -191,7 +190,12 @@
  *
  * For additional configuration see Configuration_adv.h
  */
-#define PRUSA_MMU2
+//#define PRUSA_MMU2
+#if ENABLED(PRUSA_MMU2)
+ #undef EXTRUDERS
+ #define EXTRUDERS 5
+ #define SINGLENOZZLE
+#endif
 
 // A dual extruder that uses a single stepper motor
 //#define SWITCHING_EXTRUDER
