@@ -1796,9 +1796,7 @@ void MarlinSettings::postprocess() {
         struct {
           bool volumetric_enabled;
           float filament_size[EXTRUDERS];
-          #if ENABLED(VOLUMETRIC_EXTRUDER_LIMIT)
-            float volumetric_extruder_limit[EXTRUDERS];
-          #endif
+          float volumetric_extruder_limit[EXTRUDERS];
         } storage;
 
         _FIELD_TEST(parser_volumetric_enabled);
@@ -2785,7 +2783,7 @@ void MarlinSettings::reset() {
       #if EXTRUDERS == 1
         CONFIG_ECHO_START();
         SERIAL_ECHOLNPAIR("  M200 S", int(parser.volumetric_enabled)
-                              , " D", LINEAR_UNIT(planner.filament_size[0]),
+                              , " D", LINEAR_UNIT(planner.filament_size[0])
                               #if ENABLED(VOLUMETRIC_EXTRUDER_LIMIT)
                                 , " L", LINEAR_UNIT(planner.volumetric_extruder_limit[0])
                               #endif
