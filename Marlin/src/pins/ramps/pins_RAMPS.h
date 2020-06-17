@@ -603,7 +603,7 @@
         #define KILL_PIN                      41
       #endif
 
-      #if ENABLED(MKS_MINI_12864)                 // Added in Marlin 1.1.6
+      #if ENABLED(MKS_MINI_12864)
 
         #define DOGLCD_A0                     27
         #define DOGLCD_CS                     25
@@ -726,7 +726,7 @@
 
   #error "CAUTION! LCD_FYSETC_TFT81050 requires wiring modifications. See 'pins_RAMPS.h' for details. Comment out this line to continue."
 
-  /** FYSECT TFT TFT81050 display pinout
+  /** FYSETC TFT TFT81050 display pinout
    *
    *               Board                                     Display
    *               _____                                     _____
