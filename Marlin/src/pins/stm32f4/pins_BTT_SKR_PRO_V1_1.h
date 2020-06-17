@@ -221,9 +221,9 @@
 #define HEATER_1_PIN                        PD14  // Heater1
 #define HEATER_2_PIN                        PB0   // Heater1
 #define HEATER_BED_PIN                      PD12  // Hotbed
-#define FAN_PIN                             PE6   //PC8   // Fan0
+#define FAN_PIN                             PE6   //PC8 swap 0/2
 #define FAN1_PIN                            PE5   // Fan1
-#define FAN2_PIN                            PE6
+#define FAN2_PIN                            PC8   //PE6 swap 0/2
 
 #ifndef E0_AUTO_FAN_PIN
   #define E0_AUTO_FAN_PIN               FAN1_PIN
