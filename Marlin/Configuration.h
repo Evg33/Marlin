@@ -509,14 +509,18 @@
   //#define DEFAULT_Ki 0.98
   //#define DEFAULT_Kd 71.52
   //200606  UNI Mini M303 E0 C8 S230 U (Mosquito@50W and camera)
-  #define DEFAULT_Kp 16.66
-  #define DEFAULT_Ki 0.93
-  #define DEFAULT_Kd 74.51
-
+  //#define DEFAULT_Kp 16.66
+  //#define DEFAULT_Ki 0.93
+  //#define DEFAULT_Kd 74.51
   //200516  UNI Mini M303 E0 C8 S230 U1 (dual@40W)
   //#define DEFAULT_Kp 12.86
   //#define DEFAULT_Ki 0.81
   //#define DEFAULT_Kd 50.93
+
+  //200620  UNI Mini M303 E0 C10 S230 U (Mosquito@50W and camera)
+  #define DEFAULT_Kp 17.38
+  #define DEFAULT_Ki 0.98
+  #define DEFAULT_Kd 77.28
 
   // Ultimaker
   //#define DEFAULT_Kp 22.2
@@ -572,9 +576,13 @@
   //#define DEFAULT_bedKi 17.27
   //#define DEFAULT_bedKd 465.98
   //200606  UNI Mini M303 E-1 C8 S90 U (camera)
-  #define DEFAULT_bedKp 131.91
-  #define DEFAULT_bedKi 21.55
-  #define DEFAULT_bedKd 538.26
+  //#define DEFAULT_bedKp 131.91
+  //#define DEFAULT_bedKi 21.55
+  //#define DEFAULT_bedKd 538.26
+  //200620  UNI Mini M303 E-1 C10 S90 U (camera)
+  #define DEFAULT_bedKp 134.30
+  #define DEFAULT_bedKi 22.91
+  #define DEFAULT_bedKd 524.77
 
   //120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   //from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
