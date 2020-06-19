@@ -804,7 +804,7 @@
 //#define DEFAULT_MAX_FEEDRATE          { 300, 300, 10, 40 }
 //#define DEFAULT_MAX_FEEDRATE          { 150, 150, 16, 120 }
 //#define DEFAULT_MAX_FEEDRATE          { 95, 95, 20, 100 } //silent mode
-#define DEFAULT_MAX_FEEDRATE          { 150, 150, 20, 50 }
+#define DEFAULT_MAX_FEEDRATE          { 150, 150, 17, 50 }
 
 //#define LIMITED_MAX_FR_EDITING        // Limit edit via M203 or LCD to DEFAULT_MAX_FEEDRATE * 2
 #if ENABLED(LIMITED_MAX_FR_EDITING)
@@ -1455,7 +1455,7 @@
 
 // Homing speeds (mm/m)
 #define HOMING_FEEDRATE_XY (60*60)
-#define HOMING_FEEDRATE_Z  (10*60)
+#define HOMING_FEEDRATE_Z  (17*60)
 
 // Validate that endstops are triggered on homing moves
 #define VALIDATE_HOMING_ENDSTOPS
