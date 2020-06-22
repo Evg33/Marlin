@@ -2,6 +2,7 @@ Import("env")
 import os
 
 FIRMWARE=""
+#FIRMWARE="Lerdge_X_firmware_force"
 
 # Specify output file name with -DFIRMWARE=<filename.bin> build parameter
 for define in env['CPPDEFINES']:
@@ -9,7 +10,8 @@ for define in env['CPPDEFINES']:
         FIRMWARE=define[1]
 
 if FIRMWARE == "":
-  print("You need to define output file via '-DFIRMWARE' build parameter", file=sys.stderr)
+  #print("You need to define output file via '-DFIRMWARE' build parameter", file=sys.stderr)
+  print("You need to define output file via '-DFIRMWARE' build parameter")
   exit(1);
 
 # Relocate firmware from 0x08000000 to 0x08008800
