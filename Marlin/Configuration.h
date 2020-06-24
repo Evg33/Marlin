@@ -1,3 +1,4 @@
+//#define CONFMMU2
 /**
  * Marlin 3D Printer Firmware
  * Copyright (c) 2020 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
@@ -148,7 +149,7 @@
 // This defines the number of extruders
 // :[1, 2, 3, 4, 5, 6, 7, 8]
 //#define EXTRUDERS 1
-#if ENABLED(PRUSA_MMU2)
+#if ENABLED(CONFMMU2)
  #define EXTRUDERS 5 //MMU2
 #else
  #define EXTRUDERS 1
@@ -159,6 +160,10 @@
 
 // For Cyclops or any "multi-extruder" that shares a single nozzle.
 //#define SINGLENOZZLE
+#if ENABLED(CONFMMU2)
+ #define SINGLENOZZLE
+#endif
+
 
 // Save and restore temperature and fan speed on tool-change.
 // Set standby for the unselected tool with M104/106/109 T...
@@ -195,6 +200,9 @@
  * For additional configuration see Configuration_adv.h
  */
 //#define PRUSA_MMU2
+#if ENABLED(CONFMMU2)
+ #define PRUSA_MMU2
+#endif
 
 // A dual extruder that uses a single stepper motor
 //#define SWITCHING_EXTRUDER

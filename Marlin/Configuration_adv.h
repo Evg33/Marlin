@@ -1963,7 +1963,7 @@
  */
 #if EXTRUDERS > 1
   // Z raise distance for tool-change, as needed for some extruders
-  #define TOOLCHANGE_ZRAISE                 2 // (mm)
+  #define TOOLCHANGE_ZRAISE                 0 // (mm)
   //#define TOOLCHANGE_ZRAISE_BEFORE_RETRACT  // Apply raise before swap retraction (if enabled)
   //#define TOOLCHANGE_NO_RETURN              // Never return to previous position on tool-change
   #if ENABLED(TOOLCHANGE_NO_RETURN)
@@ -3423,7 +3423,7 @@
   #define MMU2_SERIAL Serial
 
   // Use hardware reset for MMU if a pin is defined for it
-  //#define MMU2_RST_PIN 23
+  #define MMU2_RST_PIN P2_00
 
   // Enable if the MMU2 has 12V stepper motors (MMU2 Firmware 1.0.2 and up)
   //#define MMU2_MODE_12V
@@ -3440,9 +3440,11 @@
     #define MMU2_LOAD_TO_NOZZLE_SEQUENCE \
       {  7.2, 1145 }, \
       { 14.4,  871 }, \
-      { 36.0, 1393 }, \
+      { 59.0, 1393 }, \
       { 14.4,  871 }, \
       { 50.0,  198 }
+
+// { 36.0, 1393 },  -> 59
 //      {  7.2, 1145 }, 
 //      {  3.0,  562 }, 
 
@@ -3457,7 +3459,8 @@
       {  -6.0,  600 }, \
       {  10.0,  700 }, \
       { -10.0,  400 }, \
-      { -50.0, 2000 }
+      { -118.0, 2000 }
+//      { -50.0, 2000 }
   #endif
 
   /**
