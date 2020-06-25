@@ -1944,7 +1944,7 @@
     #define MIN_AUTORETRACT 0.1           // (mm) Don't convert E moves under this length
     #define MAX_AUTORETRACT 10.0          // (mm) Don't convert E moves over this length
   #endif
-  #define RETRACT_LENGTH 0.3 //3                // (mm) Default retract length (positive value)
+  #define RETRACT_LENGTH 0.5 //3                // (mm) Default retract length (positive value)
   #define RETRACT_LENGTH_SWAP 0 //13          // (mm) Default swap retract length (positive value)
   #define RETRACT_FEEDRATE 30 //45             // (mm/s) Default feedrate for retracting
   #define RETRACT_ZRAISE 0                // (mm) Default retract Z-raise
@@ -2214,7 +2214,7 @@
   #define INTERPOLATE       true  // Interpolate X/Y/Z_MICROSTEPS to 256
 
   #if AXIS_IS_TMC(X) // StepperOnline 17HM19-2004S 0.9deg 2.0A 3.0mH
-    #define X_CURRENT    (2000*60/100)  //1200(1150)// (mA) RMS current. Multiply by 1.414 for peak current. 
+    #define X_CURRENT    (2000*55/100)  //1200(1150)// (mA) RMS current. Multiply by 1.414 for peak current. 
     #define X_CURRENT_HOME  X_CURRENT  // (mA) RMS current for sensorless homing
     #define X_MICROSTEPS    64  // 0..256
     #if AXIS_DRIVER_TYPE_X(TMC5160)
@@ -2234,7 +2234,7 @@
   #endif
 
   #if AXIS_IS_TMC(Y) // StepperOnline 17HM19-2004S 0.9deg 2.0A 3.0mH
-    #define Y_CURRENT    (2000*60/100)
+    #define Y_CURRENT    (2000*55/100)
     #define Y_CURRENT_HOME  Y_CURRENT
     #define Y_MICROSTEPS    64
     #if AXIS_DRIVER_TYPE_Y(TMC5160)

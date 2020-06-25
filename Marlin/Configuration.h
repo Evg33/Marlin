@@ -796,11 +796,6 @@
  */
 //#define DISTINCT_E_FACTORS
 
-//#define USER_STEPS_XY 64 //32
-//#define USER_STEPS_Z 32 //8
-//#define USER_STEPS_E0 16 //8 BMG     204@8(cheep) 408@16(ok) 816@32
-//#define USER_STEPS_E1 16 //32 //16 //8 BMG Mini 68@8 136@16 272@32
-
 /**
  * Default Axis Steps Per Unit (steps/mm)
  * Override with M92
@@ -810,6 +805,7 @@
 //#define DEFAULT_AXIS_STEPS_PER_UNIT   { (400*USER_STEPS_XY)/(2.0*20), (400*USER_STEPS_XY)/(2.0*20), (200*USER_STEPS_Z/4), (25.5*USER_STEPS_E0), (8.5*USER_STEPS_E1) }
 #define DEFAULT_AXIS_STEPS_PER_UNIT   { (400*X_MICROSTEPS)/(2.0*20), (400*Y_MICROSTEPS)/(2.0*20), (200*Z_MICROSTEPS/4), (25.5*E0_MICROSTEPS) }
 //http://3dtoday.ru/blogs/akdzg/custom-firmware-marlin-and-pour-it-into-a-3d-printer/
+//#define USER_STEPS_E1 16 //32 //16 //8 BMG Mini 68@8 136@16 272@32
 
 /**
  * Default Max Feed Rate (mm/s)
@@ -820,7 +816,7 @@
 //#define DEFAULT_MAX_FEEDRATE          { 300, 300, 10, 40 }
 //#define DEFAULT_MAX_FEEDRATE          { 150, 150, 16, 120 }
 //#define DEFAULT_MAX_FEEDRATE          { 95, 95, 20, 100 } //silent mode
-#define DEFAULT_MAX_FEEDRATE          { 150, 150, 17, 50 }
+#define DEFAULT_MAX_FEEDRATE          { 100, 100, 17, 50 }
 
 //#define LIMITED_MAX_FR_EDITING        // Limit edit via M203 or LCD to DEFAULT_MAX_FEEDRATE * 2
 #if ENABLED(LIMITED_MAX_FR_EDITING)
@@ -855,9 +851,9 @@
 //#define DEFAULT_ACCELERATION          1200    // X, Y, Z and E acceleration for printing moves
 //#define DEFAULT_RETRACT_ACCELERATION  1500    // E acceleration for retracts
 //#define DEFAULT_TRAVEL_ACCELERATION   2000    // X, Y, Z acceleration for travel (non printing) moves
-#define DEFAULT_ACCELERATION          2000    // X, Y, Z and E acceleration for printing moves
+#define DEFAULT_ACCELERATION          2700    // X, Y, Z and E acceleration for printing moves
 #define DEFAULT_RETRACT_ACCELERATION  3000    // E acceleration for retracts
-#define DEFAULT_TRAVEL_ACCELERATION   2000    // X, Y, Z acceleration for travel (non printing) moves
+#define DEFAULT_TRAVEL_ACCELERATION   3000    // X, Y, Z acceleration for travel (non printing) moves
 
 /**
  * Default Jerk limits (mm/s)
@@ -892,7 +888,7 @@
  *   http://blog.kyneticcnc.com/2018/10/computing-junction-deviation-for-marlin.html
  */
 #if DISABLED(CLASSIC_JERK)
-  #define JUNCTION_DEVIATION_MM 0.016 // (mm) Distance from real junction edge
+  #define JUNCTION_DEVIATION_MM 0.02 //0.016 // (mm) Distance from real junction edge
   #define JD_HANDLE_SMALL_SEGMENTS    // Use curvature estimation instead of just the junction angle
                                       // for small segments (< 1mm) with large junction angles (> 135°).
 #endif
