@@ -33,6 +33,9 @@
 #ifdef UI_320x240
   #define TFT_WIDTH         320
   #define TFT_HEIGHT        240
+#elif defined(UI_480x320)
+  #define TFT_WIDTH         480
+  #define TFT_HEIGHT        320
 #else
   #error Unsupported display resolution!
 #endif
@@ -50,11 +53,11 @@
   #ifdef STM32F103xB
     #define TFT_BUFFER_SIZE       1024
   #elif defined(STM32F103xE)
-    #define TFT_BUFFER_SIZE       19200
+    #define TFT_BUFFER_SIZE       19200 // 320 * 60
   #elif defined(STM32F1)
     #define TFT_BUFFER_SIZE       8192
   #else
-    #define TFT_BUFFER_SIZE       19200 // 320 * 120
+    #define TFT_BUFFER_SIZE       19200 // 320 * 60
   #endif
 #endif
 

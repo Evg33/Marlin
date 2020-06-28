@@ -22,7 +22,7 @@
 
 #include "../../inc/MarlinConfigPre.h"
 
-#ifdef TFT_320x240
+#ifdef UI_320x240
 
 #include "ui_320x240.h"
 
@@ -49,7 +49,7 @@
   #error "Seriously? High resolution TFT screen without menu?"
 #endif
 
-bool draw_menu_navigation = false;
+static bool draw_menu_navigation = false;
 
 void MarlinUI::tft_idle() {
   #if ENABLED(TOUCH_SCREEN)
@@ -116,19 +116,19 @@ void MarlinUI::draw_kill_screen() {
   tft.set_background(COLOR_KILL_SCREEN_BG);
   tft_string.set(status_message);
   tft_string.trim();
-  tft.add_text(tft_string.width() > TFT_WIDTH ? 0 : (TFT_WIDTH - tft_string.width()) / 2, 0, COLOR_KILL_SCREEN_TEXT, tft_string);
+  tft.add_text(tft_string.center(TFT_WIDTH), 0, COLOR_KILL_SCREEN_TEXT, tft_string);
 
   tft.canvas(0, 120, TFT_WIDTH, 20);
   tft.set_background(COLOR_KILL_SCREEN_BG);
   tft_string.set(GET_TEXT(MSG_HALTED));
   tft_string.trim();
-  tft.add_text(tft_string.width() > TFT_WIDTH ? 0 : (TFT_WIDTH - tft_string.width()) / 2, 0, COLOR_KILL_SCREEN_TEXT, tft_string);
+  tft.add_text(tft_string.center(TFT_WIDTH), 0, COLOR_KILL_SCREEN_TEXT, tft_string);
 
   tft.canvas(0, 160, TFT_WIDTH, 20);
   tft.set_background(COLOR_KILL_SCREEN_BG);
   tft_string.set(GET_TEXT(MSG_PLEASE_RESET));
   tft_string.trim();
-  tft.add_text(tft_string.width() > TFT_WIDTH ? 0 : (TFT_WIDTH - tft_string.width()) / 2, 0, COLOR_KILL_SCREEN_TEXT, tft_string);
+  tft.add_text(tft_string.center(TFT_WIDTH), 0, COLOR_KILL_SCREEN_TEXT, tft_string);
 
   tft.queue.sync();
 }
@@ -187,13 +187,13 @@ void draw_heater_status(uint16_t x, uint16_t y, const int8_t Heater) {
   tft_string.set((uint8_t *)i16tostr3rj(currentTemperature + 0.5));
   tft_string.add(LCD_STR_DEGREE);
   tft_string.trim();
-  tft.add_text(34 - tft_string.width() / 2, 72, Color, tft_string);
+  tft.add_text(tft_string.center(64) + 2, 72, Color, tft_string);
 
   if (targetTemperature >= 0) {
     tft_string.set((uint8_t *)i16tostr3rj(targetTemperature + 0.5));
     tft_string.add(LCD_STR_DEGREE);
     tft_string.trim();
-    tft.add_text(34 - tft_string.width() / 2, 8, Color, tft_string);
+    tft.add_text(tft_string.center(64) + 2, 8, Color, tft_string);
 
   }
 }
@@ -213,11 +213,11 @@ void draw_fan_status(uint16_t x, uint16_t y, const bool blink) {
   else
     image = imgFanIdle;
 
-  tft.add_image(0, 10, image, COLOR_AQUA);
+  tft.add_image(0, 10, image, COLOR_FAN);
 
   tft_string.set((uint8_t *)ui8tostr4pctrj(thermalManager.fan_speed[0]));
   tft_string.trim();
-  tft.add_text(38 - tft_string.width() / 2, 72, COLOR_FAN, tft_string);
+  tft.add_text(tft_string.center(64) + 6, 72, COLOR_FAN, tft_string);
 }
 
 void MarlinUI::draw_status_screen() {
@@ -317,7 +317,7 @@ void MarlinUI::draw_status_screen() {
   tft.canvas(96, 176, 128, 20);
   tft.set_background(COLOR_BACKGROUND);
   tft_string.set(buffer);
-  tft.add_text(64 - tft_string.width() / 2, 0, COLOR_PRINT_TIME, tft_string);
+  tft.add_text(tft_string.center(128), 0, COLOR_PRINT_TIME, tft_string);
 
   // progress bar
   const uint8_t progress = ui.get_progress_percent();
@@ -332,7 +332,7 @@ void MarlinUI::draw_status_screen() {
   tft.set_background(COLOR_BACKGROUND);
   tft_string.set(status_message);
   tft_string.trim();
-  tft.add_text(tft_string.width() > 320 ? 0 : 160 - tft_string.width() / 2 , 0, COLOR_STATUS_MESSAGE, tft_string);
+  tft.add_text(tft_string.center(TFT_WIDTH), 0, COLOR_STATUS_MESSAGE, tft_string);
 
   #if ENABLED(TOUCH_SCREEN)
     add_control(256, 130, menu_main, imgSettings);
@@ -346,7 +346,7 @@ void MenuItem_static::draw(const uint8_t row, PGM_P const pstr, const uint8_t st
   tft_string.set(pstr, itemIndex);
   if (valstr)
     tft_string.add(valstr);
-  tft.add_text(tft_string.width() > 320 ? 2 : 160 - tft_string.width() / 2, MENU_TEXT_Y_OFFSET, COLOR_YELLOW, tft_string);
+  tft.add_text(tft_string.center(TFT_WIDTH), MENU_TEXT_Y_OFFSET, COLOR_YELLOW, tft_string);
 }
 
 // Draw a generic menu item with pre_char (if selected) and post_char
@@ -379,7 +379,7 @@ void MenuEditItemBase::draw(const bool sel, const uint8_t row, PGM_P const pstr,
   tft.add_text(MENU_TEXT_X_OFFSET, MENU_TEXT_Y_OFFSET, COLOR_MENU_TEXT, tft_string);
   if (data) {
     tft_string.set(data);
-    tft.add_text(310 - tft_string.width(), MENU_TEXT_Y_OFFSET, COLOR_MENU_VALUE, tft_string);
+    tft.add_text(TFT_WIDTH - MENU_TEXT_X_OFFSET - tft_string.width(), MENU_TEXT_Y_OFFSET, COLOR_MENU_VALUE, tft_string);
   }
 }
 
@@ -393,14 +393,14 @@ void MenuEditItemBase::draw_edit_screen(PGM_P const pstr, const char* const valu
   menu_line(line++);
   tft_string.set(pstr, itemIndex);
   tft_string.trim();
-  tft.add_text(tft_string.width() > 320 ? 0 : 160 - tft_string.width() / 2, MENU_TEXT_Y_OFFSET, COLOR_MENU_TEXT, tft_string);
+  tft.add_text(tft_string.center(TFT_WIDTH), MENU_TEXT_Y_OFFSET, COLOR_MENU_TEXT, tft_string);
 
   TERN_(AUTO_BED_LEVELING_UBL, if (ui.external_control) line++);  // ftostr52() will overwrite *value so *value has to be displayed first
 
   menu_line(line);
   tft_string.set(value);
   tft_string.trim();
-  tft.add_text(tft_string.width() > 320 ? 0 : 160 - tft_string.width() / 2, MENU_TEXT_Y_OFFSET, COLOR_MENU_VALUE, tft_string);
+  tft.add_text(tft_string.center(TFT_WIDTH), MENU_TEXT_Y_OFFSET, COLOR_MENU_VALUE, tft_string);
 
   #if ENABLED(AUTO_BED_LEVELING_UBL)
     if (ui.external_control) {
@@ -457,20 +457,20 @@ void MenuItem_confirm::draw_select_screen(PGM_P const yes, PGM_P const no, const
   menu_line(line++);
   tft_string.set(pref);
   tft_string.trim();
-  tft.add_text(tft_string.width() > 320 ? 0 : 160 - tft_string.width() / 2, MENU_TEXT_Y_OFFSET, COLOR_MENU_TEXT, tft_string);
+  tft.add_text(tft_string.center(TFT_WIDTH), MENU_TEXT_Y_OFFSET, COLOR_MENU_TEXT, tft_string);
 
   if (string) {
     menu_line(line++);
     tft_string.set(string);
     tft_string.trim();
-    tft.add_text(tft_string.width() > 320 ? 0 : 160 - tft_string.width() / 2, MENU_TEXT_Y_OFFSET, COLOR_MENU_TEXT, tft_string);
+    tft.add_text(tft_string.center(TFT_WIDTH), MENU_TEXT_Y_OFFSET, COLOR_MENU_TEXT, tft_string);
   }
 
   if (suff) {
     menu_line(line);
     tft_string.set(suff);
     tft_string.trim();
-    tft.add_text(tft_string.width() > 320 ? 0 : 160 - tft_string.width() / 2, MENU_TEXT_Y_OFFSET, COLOR_MENU_TEXT, tft_string);
+    tft.add_text(tft_string.center(TFT_WIDTH), MENU_TEXT_Y_OFFSET, COLOR_MENU_TEXT, tft_string);
   }
   #if ENABLED(TOUCH_SCREEN)
     add_control(48, 176, CANCEL, imgCancel, true, yesno ? HALF(COLOR_CONTROL_CANCEL) : COLOR_CONTROL_CANCEL);
@@ -488,7 +488,6 @@ void MenuItem_confirm::draw_select_screen(PGM_P const yes, PGM_P const no, const
 #endif
 
 #if ENABLED(ADVANCED_PAUSE_FEATURE)
-
   void MarlinUI::draw_hotend_status(const uint8_t row, const uint8_t extruder) {
     #if ENABLED(TOUCH_SCREEN)
       touch.clear();
@@ -507,10 +506,9 @@ void MenuItem_confirm::draw_select_screen(PGM_P const yes, PGM_P const no, const
     tft_string.add(i16tostr3rj(thermalManager.degTargetHotend(extruder)));
     tft_string.add(LCD_STR_DEGREE);
     tft_string.trim();
-    tft.add_text(tft_string.width() > 320 ? 0 : 160 - tft_string.width() / 2, MENU_TEXT_Y_OFFSET, COLOR_MENU_TEXT, tft_string);
+    tft.add_text(tft_string.center(TFT_WIDTH), MENU_TEXT_Y_OFFSET, COLOR_MENU_TEXT, tft_string);
   }
-
-#endif
+#endif // ADVANCED_PAUSE_FEATURE
 
 #if ENABLED(AUTO_BED_LEVELING_UBL)
   #define GRID_WIDTH  144
@@ -561,13 +559,13 @@ void MenuItem_confirm::draw_select_screen(PGM_P const yes, PGM_P const no, const
     tft.set_background(COLOR_BACKGROUND);
     tft_string.set(ui8tostr3rj(x_plot));
     tft_string.trim();
-    tft.add_text(16 - tft_string.width() / 2, MENU_TEXT_Y_OFFSET, COLOR_MENU_VALUE, tft_string);
+    tft.add_text(tft_string.center(32), MENU_TEXT_Y_OFFSET, COLOR_MENU_VALUE, tft_string);
 
     tft.canvas(160, 64, 32, 32);
     tft.set_background(COLOR_BACKGROUND);
     tft_string.set(ui8tostr3rj(y_plot));
     tft_string.trim();
-    tft.add_text(15 - tft_string.width() / 2, MENU_TEXT_Y_OFFSET, COLOR_MENU_VALUE, tft_string);
+    tft.add_text(tft_string.center(32) - 1, MENU_TEXT_Y_OFFSET, COLOR_MENU_VALUE, tft_string);
 
     #if ENABLED(TOUCH_SCREEN)
       touch.clear();
@@ -582,6 +580,53 @@ void MenuItem_confirm::draw_select_screen(PGM_P const yes, PGM_P const no, const
   }
 #endif // AUTO_BED_LEVELING_UBL
 
+#if ENABLED(TOUCH_SCREEN_CALIBRATION)
+  void MarlinUI::touch_calibration() {
+    static uint16_t x, y;
+
+    calibrationState calibration_stage = touch.get_calibration_state();
+
+    if (calibration_stage == CALIBRATION_NONE) {
+      defer_status_screen(true);
+      clear_lcd();
+      calibration_stage = touch.calibration_start();
+    }
+    else {
+      tft.canvas(x - 15, y - 15, 31, 31);
+      tft.set_background(COLOR_BACKGROUND);
+    }
+
+    x = 20; y = 20;
+    touch.clear();
+
+    if (calibration_stage < CALIBRATION_SUCCESS) {
+      switch(calibration_stage) {
+        case CALIBRATION_POINT_1: tft_string.set("Top Left"); break;
+        case CALIBRATION_POINT_2: y = TFT_HEIGHT - 21; tft_string.set("Bottom Left"); break;
+        case CALIBRATION_POINT_3: x = TFT_WIDTH  - 21; tft_string.set("Top Right"); break;
+        case CALIBRATION_POINT_4: x = TFT_WIDTH  - 21; y = TFT_HEIGHT - 21; tft_string.set("Bottom Right"); break;
+        default: break;
+      }
+
+      tft.canvas(x - 15, y - 15, 31, 31);
+      tft.set_background(COLOR_BACKGROUND);
+      tft.add_bar(0, 15, 31, 1, COLOR_TOUCH_CALIBRATION);
+      tft.add_bar(15, 0, 1, 31, COLOR_TOUCH_CALIBRATION);
+
+      touch.add_control(CALIBRATE, 0, 0, TFT_WIDTH, TFT_HEIGHT, uint32_t(x) << 16 | uint32_t(y));
+    }
+    else {
+      tft_string.set(calibration_stage == CALIBRATION_SUCCESS ? "Calibration Completed" : "Calibration Failed");
+      defer_status_screen(false);
+      touch.calibration_end();
+      touch.add_control(BACK, 0, 0, TFT_WIDTH, TFT_HEIGHT);
+    }
+
+    tft.canvas(0, (TFT_HEIGHT - tft_string.font_height()) >> 1, TFT_WIDTH, tft_string.font_height());
+    tft.set_background(COLOR_BACKGROUND);
+    tft.add_text(tft_string.center(TFT_WIDTH), 0, COLOR_MENU_TEXT, tft_string);
+  }
+#endif // TOUCH_SCREEN_CALIBRATION
 
 void menu_line(const uint8_t row, uint16_t color) {
   tft.canvas(0, 2 + 34 * row, TFT_WIDTH, 32);
@@ -594,7 +639,7 @@ void menu_item(const uint8_t row, bool sel ) {
   #if ENABLED(TOUCH_SCREEN)
     if (row == 0) {
       touch.clear();
-      draw_menu_navigation = ui.currentScreen != menu_pause_option;
+      draw_menu_navigation = TERN(ADVANCED_PAUSE_FEATURE, ui.currentScreen != menu_pause_option, true);
     }
   #endif
 
@@ -622,4 +667,4 @@ void menu_item(const uint8_t row, bool sel ) {
   }
 #endif // TOUCH_SCREEN
 
-#endif // TFT_320x240
+#endif // UI_320x240

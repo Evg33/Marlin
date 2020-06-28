@@ -2131,6 +2131,8 @@
 //
 #define TFT_320x240
 //#define TFT_320x240_SPI
+//#define TFT_480x320
+//#define TFT_480x320_SPI
 
 //
 // Skip autodetect and force specific TFT driver
@@ -2173,6 +2175,8 @@
 #if ENABLED(TOUCH_SCREEN)
   #define BUTTON_DELAY_EDIT  50 // (ms) Button repeat delay for edit screens
   #define BUTTON_DELAY_MENU 250 // (ms) Button repeat delay for menus
+
+  #define TOUCH_SCREEN_CALIBRATION
 
   #define XPT2046_X_CALIBRATION   12316
   #define XPT2046_Y_CALIBRATION  -8981
