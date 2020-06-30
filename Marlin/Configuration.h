@@ -2138,7 +2138,8 @@
 // Available drivers are: ST7735, ST7789, ST7796, ILI9328, ILI9341, ILI9488
 //
 //#define TFT_DRIVER AUTO
-#define TFT_DRIVER ST7796
+//#define TFT_DRIVER ST7796
+#define TFT_DRIVER LERDGE_ST7796
 
 
 //
