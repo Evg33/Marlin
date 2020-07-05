@@ -526,9 +526,13 @@
   //#define DEFAULT_Kd 50.93
 
   //200620  UNI Mini M303 E0 C10 S230 U (Mosquito@50W and camera)
-  #define DEFAULT_Kp 17.38
-  #define DEFAULT_Ki 0.98
-  #define DEFAULT_Kd 77.28
+  //#define DEFAULT_Kp 17.38
+  //#define DEFAULT_Ki 0.98
+  //#define DEFAULT_Kd 77.28
+  //200705  UNI Mini M303 E0 C10 S240 U (Hardened Steel)
+  #define DEFAULT_Kp 16.70
+  #define DEFAULT_Ki 0.97
+  #define DEFAULT_Kd 72.07
 
   // Ultimaker
   //#define DEFAULT_Kp 22.2
