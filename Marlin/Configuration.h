@@ -191,11 +191,11 @@
  * For additional configuration see Configuration_adv.h
  */
 //#define PRUSA_MMU2
-#if ENABLED(PRUSA_MMU2)
- #undef EXTRUDERS
- #define EXTRUDERS 5
- #define SINGLENOZZLE
-#endif
+//#if ENABLED(PRUSA_MMU2)
+// #undef EXTRUDERS
+// #define EXTRUDERS 5
+// #define SINGLENOZZLE
+//#endif
 
 // A dual extruder that uses a single stepper motor
 //#define SWITCHING_EXTRUDER
