@@ -72,7 +72,7 @@
 // @section info
 
 // Author info of this build printed to the host during boot and M115
-#define STRING_CONFIG_H_AUTHOR "(Evg33, UNI_Mini)" // Who made the changes.
+#define STRING_CONFIG_H_AUTHOR "(Evg33, UNI)" // Who made the changes.
 //#define CUSTOM_VERSION_FILE Version.h // Path from the root directory (no quotes)
 
 /**
@@ -137,12 +137,12 @@
 #endif
 
 // Name displayed in the LCD "Ready" message and Info menu
-#define CUSTOM_MACHINE_NAME "UNIMini/SKR14T"
+#define CUSTOM_MACHINE_NAME "UNI / SKR14T"
 
 // Printer's unique ID, used by some programs to differentiate between machines.
 // Choose your own or use a service like http://www.uuidgenerator.net/version4
 //#define MACHINE_UUID "00000000-0000-0000-0000-000000000000"
-#define MACHINE_UUID "ca2bc359-8b4e-4a15-9d97-cf525fd251e7"
+#define MACHINE_UUID "4809c956-b1a0-4a46-a65b-1c48455ae973"
 
 // @section extruder
 
@@ -344,24 +344,23 @@
  * Enable and connect the power supply to the PS_ON_PIN.
  * Specify whether the power supply is active HIGH or active LOW.
  */
-//#define PSU_CONTROL
+#define PSU_CONTROL
 //#define PSU_NAME "Power Supply"
 
 #if ENABLED(PSU_CONTROL)
-  #define PSU_ACTIVE_HIGH false     // Set 'false' for ATX, 'true' for X-Box
-
+  #define PSU_ACTIVE_HIGH true     // Set 'false' for ATX, 'true' for X-Box
   //#define PSU_DEFAULT_OFF         // Keep power off until enabled directly with M80
   //#define PSU_POWERUP_DELAY 250   // (ms) Delay for the PSU to warm up to full power
-
-  //#define AUTO_POWER_CONTROL      // Enable automatic control of the PS_ON pin
+  #define AUTO_POWER_CONTROL      // Enable automatic control of the PS_ON pin
   #if ENABLED(AUTO_POWER_CONTROL)
     #define AUTO_POWER_FANS         // Turn on PSU if fans need power
     #define AUTO_POWER_E_FANS
-    #define AUTO_POWER_CONTROLLERFAN
-    #define AUTO_POWER_CHAMBER_FAN
-    //#define AUTO_POWER_E_TEMP        50 // (°C) Turn on PSU over this temperature
+    //#define AUTO_POWER_CONTROLLERFAN
+    //#define AUTO_POWER_CHAMBER_FAN
+    #define AUTO_POWER_E_TEMP        50 // (°C) Turn on PSU over this temperature
     //#define AUTO_POWER_CHAMBER_TEMP  30 // (°C) Turn on PSU over this temperature
-    #define POWER_TIMEOUT 30
+    //#define POWER_TIMEOUT 30
+    #define POWER_TIMEOUT 180
   #endif
 #endif
 
@@ -434,8 +433,8 @@
  *   998 : Dummy Table that ALWAYS reads 25°C or the temperature defined below.
  *   999 : Dummy Table that ALWAYS reads 100°C or the temperature defined below.
  */
-//#define TEMP_SENSOR_0 1 //evg dual
-#define TEMP_SENSOR_0 5 // evg mosq 5 - ATC Semitec 104GT-2 https://aliexpress.ru/item/32843785247.html
+#define TEMP_SENSOR_0 1
+//#define TEMP_SENSOR_0 5 // evg mosq 5 - ATC Semitec 104GT-2 https://aliexpress.ru/item/32843785247.html
 #define TEMP_SENSOR_1 0
 #define TEMP_SENSOR_2 0
 #define TEMP_SENSOR_3 0
@@ -479,15 +478,15 @@
 // Above this temperature the heater will be switched off.
 // This can protect components from overheating, but NOT from shorts and failures.
 // (Use MINTEMP for thermistor short/failure protection.)
-#define HEATER_0_MAXTEMP 285
-#define HEATER_1_MAXTEMP 285
-#define HEATER_2_MAXTEMP 285
-#define HEATER_3_MAXTEMP 285
-#define HEATER_4_MAXTEMP 285
-#define HEATER_5_MAXTEMP 285
-#define HEATER_6_MAXTEMP 285
-#define HEATER_7_MAXTEMP 285
-#define BED_MAXTEMP      160
+#define HEATER_0_MAXTEMP 275
+#define HEATER_1_MAXTEMP 275
+#define HEATER_2_MAXTEMP 275
+#define HEATER_3_MAXTEMP 275
+#define HEATER_4_MAXTEMP 275
+#define HEATER_5_MAXTEMP 275
+#define HEATER_6_MAXTEMP 275
+#define HEATER_7_MAXTEMP 275
+#define BED_MAXTEMP      150
 
 //===========================================================================
 //============================= PID Settings ================================
@@ -508,32 +507,6 @@
 
   // If you are using a pre-configured hotend then you can use one of the value sets by uncommenting it
 
-  //200509  UNI Mini M303 E0 C8 S230 U1
-  //#define DEFAULT_Kp 23.85
-  //#define DEFAULT_Ki 1.84
-  //#define DEFAULT_Kd 77.49
-  //200516  UNI Mini M303 E0 C8 S230 U1 (Mosquito@50W)
-  //#define DEFAULT_Kp 16.72
-  //#define DEFAULT_Ki 0.98
-  //#define DEFAULT_Kd 71.52
-  //200606  UNI Mini M303 E0 C8 S230 U (Mosquito@50W and camera)
-  //#define DEFAULT_Kp 16.66
-  //#define DEFAULT_Ki 0.93
-  //#define DEFAULT_Kd 74.51
-  //200516  UNI Mini M303 E0 C8 S230 U1 (dual@40W)
-  //#define DEFAULT_Kp 12.86
-  //#define DEFAULT_Ki 0.81
-  //#define DEFAULT_Kd 50.93
-
-  //200620  UNI Mini M303 E0 C10 S230 U (Mosquito@50W and camera)
-  //#define DEFAULT_Kp 17.38
-  //#define DEFAULT_Ki 0.98
-  //#define DEFAULT_Kd 77.28
-  //200705  UNI Mini M303 E0 C10 S240 U (Hardened Steel)
-  #define DEFAULT_Kp 16.70
-  #define DEFAULT_Ki 0.97
-  #define DEFAULT_Kd 72.07
-
   // Ultimaker
   //#define DEFAULT_Kp 22.2
   //#define DEFAULT_Ki 1.08
@@ -549,6 +522,10 @@
   //#define DEFAULT_Ki 2.25
   //#define DEFAULT_Kd 440
 
+  // UNI 200312 M303 E0 C8 S240 U1 (camera)
+  #define DEFAULT_Kp 20.53
+  #define DEFAULT_Ki 2.05
+  #define DEFAULT_Kd 51.34
 #endif // PIDTEMP
 
 //===========================================================================
@@ -583,18 +560,6 @@
 #if ENABLED(PIDTEMPBED)
   //#define MIN_BED_POWER 0
   //#define PID_BED_DEBUG // Sends debug data to the serial port.
-  //200509  UNI Mini M303 E-1 C8 S70 U1
-  //#define DEFAULT_bedKp 109.88
-  //#define DEFAULT_bedKi 17.27
-  //#define DEFAULT_bedKd 465.98
-  //200606  UNI Mini M303 E-1 C8 S90 U (camera)
-  //#define DEFAULT_bedKp 131.91
-  //#define DEFAULT_bedKi 21.55
-  //#define DEFAULT_bedKd 538.26
-  //200620  UNI Mini M303 E-1 C10 S90 U (camera)
-  #define DEFAULT_bedKp 134.30
-  #define DEFAULT_bedKi 22.91
-  #define DEFAULT_bedKd 524.77
 
   //120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   //from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
@@ -609,6 +574,11 @@
   //#define DEFAULT_bedKd 1675.16
 
   // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
+  // UNI 200312 M303 E0 C8 S240 U1 (camera)
+  #define DEFAULT_Kp 20.53
+  #define DEFAULT_Ki 2.05
+  #define DEFAULT_Kd 51.34
+
 #endif // PIDTEMPBED
 
 #if EITHER(PIDTEMP, PIDTEMPBED)
@@ -636,7 +606,7 @@
  * Note: For Bowden Extruders make this large enough to allow load/unload.
  */
 #define PREVENT_LENGTHY_EXTRUDE
-#define EXTRUDE_MAXLENGTH 700
+#define EXTRUDE_MAXLENGTH 900
 
 //===========================================================================
 //======================== Thermal Runaway Protection =======================
@@ -723,7 +693,7 @@
 #define X_MAX_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
 #define Y_MAX_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
 #define Z_MAX_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
-#define Z_MIN_PROBE_ENDSTOP_INVERTING true // Set to true to invert the logic of the probe.
+#define Z_MIN_PROBE_ENDSTOP_INVERTING false // Set to true to invert the logic of the probe.
 
 /**
  * Stepper Drivers
@@ -741,11 +711,8 @@
  *          TMC5130, TMC5130_STANDALONE, TMC5160, TMC5160_STANDALONE
  * :['A4988', 'A5984', 'DRV8825', 'LV8729', 'L6470', 'L6474', 'POWERSTEP01', 'TB6560', 'TB6600', 'TMC2100', 'TMC2130', 'TMC2130_STANDALONE', 'TMC2160', 'TMC2160_STANDALONE', 'TMC2208', 'TMC2208_STANDALONE', 'TMC2209', 'TMC2209_STANDALONE', 'TMC26X', 'TMC26X_STANDALONE', 'TMC2660', 'TMC2660_STANDALONE', 'TMC5130', 'TMC5130_STANDALONE', 'TMC5160', 'TMC5160_STANDALONE']
  */
-#define X_DRIVER_TYPE  TMC2209 //TMC2225 SENSE  0.15
-//#define X_DRIVER_TYPE  TMC5160
-#define Y_DRIVER_TYPE  TMC2209 //TMC2225 SENSE  0.15
-//#define Y_DRIVER_TYPE  TMC5160
-//#define Z_DRIVER_TYPE  TMC2209
+#define X_DRIVER_TYPE  TMC2209
+#define Y_DRIVER_TYPE  TMC2209
 #define Z_DRIVER_TYPE  TMC2209
 //#define X2_DRIVER_TYPE A4988
 //#define Y2_DRIVER_TYPE A4988
@@ -753,8 +720,7 @@
 //#define Z3_DRIVER_TYPE A4988
 //#define Z4_DRIVER_TYPE A4988
 #define E0_DRIVER_TYPE TMC2209
-//#define E0_DRIVER_TYPE TMC5160
-//#define E1_DRIVER_TYPE TMC5160
+//#define E1_DRIVER_TYPE A4988
 //#define E2_DRIVER_TYPE A4988
 //#define E3_DRIVER_TYPE A4988
 //#define E4_DRIVER_TYPE A4988
@@ -809,21 +775,16 @@
  *                                      X, Y, Z, E0 [, E1[, E2...]]
  */
 //#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 4000, 500 }
-//#define DEFAULT_AXIS_STEPS_PER_UNIT   { (400*USER_STEPS_XY)/(2.0*20), (400*USER_STEPS_XY)/(2.0*20), (200*USER_STEPS_Z/4), (25.5*USER_STEPS_E0), (8.5*USER_STEPS_E1) }
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { (400*X_MICROSTEPS)/(2.0*20), (400*Y_MICROSTEPS)/(2.0*20), (200*Z_MICROSTEPS/4), (25.5*E0_MICROSTEPS) }
-//http://3dtoday.ru/blogs/akdzg/custom-firmware-marlin-and-pour-it-into-a-3d-printer/
-//#define USER_STEPS_E1 16 //32 //16 //8 BMG Mini 68@8 136@16 272@32
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { (400*X_MICROSTEPS)/(2.0*20), (400*Y_MICROSTEPS)/(2.0*20), (200*Z_MICROSTEPS/2), (26*E0_MICROSTEPS) }
+
 
 /**
  * Default Max Feed Rate (mm/s)
  * Override with M203
  *                                      X, Y, Z, E0 [, E1[, E2...]]
  */
-//#define DEFAULT_MAX_FEEDRATE          { 300, 300, 10, 25 }
-//#define DEFAULT_MAX_FEEDRATE          { 300, 300, 10, 40 }
-//#define DEFAULT_MAX_FEEDRATE          { 150, 150, 16, 120 }
-//#define DEFAULT_MAX_FEEDRATE          { 95, 95, 20, 100 } //silent mode
-#define DEFAULT_MAX_FEEDRATE          { 100, 100, 17, 50 }
+//#define DEFAULT_MAX_FEEDRATE          { 300, 300, 5, 25 }
+#define DEFAULT_MAX_FEEDRATE          { 350, 350, 40, 50 } //M203
 
 //#define LIMITED_MAX_FR_EDITING        // Limit edit via M203 or LCD to DEFAULT_MAX_FEEDRATE * 2
 #if ENABLED(LIMITED_MAX_FR_EDITING)
@@ -836,10 +797,7 @@
  * Override with M201
  *                                      X, Y, Z, E0 [, E1[, E2...]]
  */
-//#define DEFAULT_MAX_ACCELERATION      { 3000, 3000, 100, 10000 }
-//#define DEFAULT_MAX_ACCELERATION      { 3000, 3000, 100, 5000 }
-//#define DEFAULT_MAX_ACCELERATION      { 2000, 2000, 100, 2000 } //Lerdge defaults
-#define DEFAULT_MAX_ACCELERATION      { 5000, 5000, 100, 5000 }
+#define DEFAULT_MAX_ACCELERATION      { 3000, 3000, 100, 5000 }
 
 //#define LIMITED_MAX_ACCEL_EDITING     // Limit edit via M201 or LCD to DEFAULT_MAX_ACCELERATION * 2
 #if ENABLED(LIMITED_MAX_ACCEL_EDITING)
@@ -854,11 +812,7 @@
  *   M204 R    Retract Acceleration
  *   M204 T    Travel Acceleration
  */
-//Lerdge defaults
-//#define DEFAULT_ACCELERATION          1200    // X, Y, Z and E acceleration for printing moves
-//#define DEFAULT_RETRACT_ACCELERATION  1500    // E acceleration for retracts
-//#define DEFAULT_TRAVEL_ACCELERATION   2000    // X, Y, Z acceleration for travel (non printing) moves
-#define DEFAULT_ACCELERATION          2700    // X, Y, Z and E acceleration for printing moves
+#define DEFAULT_ACCELERATION          2500    // X, Y, Z and E acceleration for printing moves
 #define DEFAULT_RETRACT_ACCELERATION  3000    // E acceleration for retracts
 #define DEFAULT_TRAVEL_ACCELERATION   3000    // X, Y, Z acceleration for travel (non printing) moves
 
@@ -870,7 +824,7 @@
  * When changing speed and direction, if the difference is less than the
  * value set here, it may happen instantaneously.
  */
-//#define CLASSIC_JERK
+#define CLASSIC_JERK
 #if ENABLED(CLASSIC_JERK)
   #define DEFAULT_XJERK 10.0
   #define DEFAULT_YJERK 10.0
@@ -1061,7 +1015,7 @@
  * Specify a Probe position as { X, Y, Z }
  */
 //#define NOZZLE_TO_PROBE_OFFSET { 10, 10, 0 }
-#define NOZZLE_TO_PROBE_OFFSET { 0, 0, -0.1 }
+
 
 // Most probes should stay away from the edges of the bed, but
 // with NOZZLE_AS_PROBE this can be negative for a wider probing area.
@@ -1105,7 +1059,7 @@
 #define Z_CLEARANCE_DEPLOY_PROBE   10 // Z Clearance for Deploy/Stow
 #define Z_CLEARANCE_BETWEEN_PROBES  5 // Z Clearance between probe points
 #define Z_CLEARANCE_MULTI_PROBE     5 // Z Clearance between multiple probes
-#define Z_AFTER_PROBING           5 // Z position after probing is done
+//#define Z_AFTER_PROBING           5 // Z position after probing is done
 
 #define Z_PROBE_LOW_POINT          -2 // Farthest distance below the trigger-point to go before stopping
 
@@ -1161,15 +1115,15 @@
 // @section machine
 
 // Invert the stepper direction. Change (or reverse the motor connector) if an axis goes the wrong way.
-#define INVERT_X_DIR false //5160 true / 2209 2225 false
-#define INVERT_Y_DIR false
+#define INVERT_X_DIR true
+#define INVERT_Y_DIR true
 #define INVERT_Z_DIR true
 
 // @section extruder
 
 // For direct drive extruder v9 set to true, for geared extruder set to false.
 #define INVERT_E0_DIR true //dir 2209 true / dir 5160 false / bdn 2209 false //5160 umi dir false 
-#define INVERT_E1_DIR true
+#define INVERT_E1_DIR false
 #define INVERT_E2_DIR false
 #define INVERT_E3_DIR false
 #define INVERT_E4_DIR false
@@ -1198,19 +1152,16 @@
 // @section machine
 
 // The size of the print bed
-#define X_BED_SIZE 160
-#define Y_BED_SIZE 158
+#define X_BED_SIZE 293
+#define Y_BED_SIZE 203
 
 // Travel limits (mm) after homing, corresponding to endstop positions.
 #define X_MIN_POS 0
 #define Y_MIN_POS 0
 #define Z_MIN_POS 0
 #define X_MAX_POS X_BED_SIZE
-//#define X_MAX_POS 240
 #define Y_MAX_POS Y_BED_SIZE
-//#define Z_MAX_POS 200
-#define Z_MAX_POS 163.6
-
+#define Z_MAX_POS 257
 
 
 /**
@@ -1472,7 +1423,7 @@
 #endif
 
 // Homing speeds (mm/m)
-#define HOMING_FEEDRATE_XY (60*60)
+#define HOMING_FEEDRATE_XY (50*60)
 #define HOMING_FEEDRATE_Z  (17*60)
 
 // Validate that endstops are triggered on homing moves
@@ -1611,9 +1562,7 @@
 
 #if ENABLED(NOZZLE_PARK_FEATURE)
   // Specify a park position as { X, Y, Z_raise }
-  //#define NOZZLE_PARK_POINT { (X_MIN_POS + 10), (Y_MAX_POS - 10), 20 }
-  //#define NOZZLE_PARK_POINT { (X_MIN_POS + 20), (Y_MAX_POS - 20), 5 }
-  #define NOZZLE_PARK_POINT { (X_MAX_POS - 15), (Y_MIN_POS + 15), 5 }
+  #define NOZZLE_PARK_POINT { (X_MIN_POS + 10), (Y_MAX_POS - 100), 5 }
   //#define NOZZLE_PARK_X_ONLY          // X move only is required to park
   //#define NOZZLE_PARK_Y_ONLY          // Y move only is required to park
   #define NOZZLE_PARK_Z_RAISE_MIN   2   // (mm) Always raise Z by at least this distance
@@ -2298,7 +2247,6 @@
 // :[0,1,2,3,4,5,6,7]
 #define SOFT_PWM_SCALE 0
 
-
 // If SOFT_PWM_SCALE is set to a value higher than 0, dithering can
 // be used to mitigate the associated resolution loss. If enabled,
 // some of the PWM cycles are stretched so on average the desired
@@ -2358,7 +2306,7 @@
 #endif
 
 // Support for Adafruit Neopixel LED driver
-#define NEOPIXEL_LED
+//#define NEOPIXEL_LED
 #if ENABLED(NEOPIXEL_LED)
   //#define NEOPIXEL_TYPE   NEO_GRBW // NEO_GRBW / NEO_GRB - four/three channel driver type (defined in Adafruit_NeoPixel.h)
   #define NEOPIXEL_TYPE   NEO_GRB // NEO_GRBW / NEO_GRB / NEO_RGB- four/three channel driver type (defined in Adafruit_NeoPixel.h)

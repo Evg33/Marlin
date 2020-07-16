@@ -460,8 +460,8 @@
 #define CHAMBER_AUTO_FAN_PIN -1
 
 #define EXTRUDER_AUTO_FAN_TEMPERATURE 51
-//#define EXTRUDER_AUTO_FAN_SPEED 255   // 255 == full speed
-#define EXTRUDER_AUTO_FAN_SPEED (255*80/100)   // 80%
+#define EXTRUDER_AUTO_FAN_SPEED 255   // 255 == full speed
+//#define EXTRUDER_AUTO_FAN_SPEED (255*80/100)   // 80%
 #define CHAMBER_AUTO_FAN_TEMPERATURE 30
 #define CHAMBER_AUTO_FAN_SPEED 255
 
@@ -484,9 +484,9 @@
   //#define CASE_LIGHT_PIN 4                  // Override the default pin if needed
   #define INVERT_CASE_LIGHT false             // Set true if Case Light is ON when pin is LOW
   #define CASE_LIGHT_DEFAULT_ON true          // Set default power-up state on
-  #define CASE_LIGHT_DEFAULT_BRIGHTNESS 105   // Set default power-up brightness (0-255, requires PWM pin)
+  #define CASE_LIGHT_DEFAULT_BRIGHTNESS 127   // Set default power-up brightness (0-255, requires PWM pin)
   //#define CASE_LIGHT_MAX_PWM 128            // Limit pwm
-  //#define CASE_LIGHT_MENU                   // Add Case Light options to the LCD menu
+  #define CASE_LIGHT_MENU                   // Add Case Light options to the LCD menu
   //#define CASE_LIGHT_NO_BRIGHTNESS          // Disable brightness control. Enable for non-PWM lighting.
   //#define CASE_LIGHT_USE_NEOPIXEL           // Use Neopixel LED as case light, requires NEOPIXEL_LED.
   #if ENABLED(CASE_LIGHT_USE_NEOPIXEL)
@@ -841,7 +841,7 @@
  * See http://hydraraptor.blogspot.com/2010/12/frequency-limit.html
  * Use M201 F<freq> G<min%> to change limits at runtime.
  */
-#define XY_FREQUENCY_LIMIT      20 // (Hz) Maximum frequency of small zigzag infill moves. Set with M201 F<hertz>.
+//#define XY_FREQUENCY_LIMIT      20 // (Hz) Maximum frequency of small zigzag infill moves. Set with M201 F<hertz>.
 #ifdef XY_FREQUENCY_LIMIT
   #define XY_FREQUENCY_MIN_PERCENT 5 // (percent) Minimum FR percentage to apply. Set with M201 G<min%>.
 #endif
@@ -1018,7 +1018,7 @@
 // @section lcd
 
 #if EITHER(ULTIPANEL, EXTENSIBLE_UI)
-  #define MANUAL_FEEDRATE { (50*60), (50*60), (10*60), 60 } // Feedrates for manual moves along X, Y, Z, E from panel
+  #define MANUAL_FEEDRATE { (50*60), (50*60), (10*60), 9*60 } // Feedrates for manual moves along X, Y, Z, E from panel
   #define SHORT_MANUAL_Z_MOVE 0.025 // (mm) Smallest manual Z move (< 0.1mm)
   #if ENABLED(ULTIPANEL)
     #define MANUAL_E_MOVES_RELATIVE // Display extruder move distance rather than "position"
@@ -1055,7 +1055,7 @@
    * LED Control Menu
    * Add LED Control to the LCD menu
    */
-  #define LED_CONTROL_MENU
+  //#define LED_CONTROL_MENU
   #if ENABLED(LED_CONTROL_MENU)
     #define LED_COLOR_PRESETS                 // Enable the Preset Color menu option
     #if ENABLED(LED_COLOR_PRESETS)
@@ -1226,7 +1226,7 @@
   /**
    * Auto-report SdCard status with M27 S<seconds>
    */
-  //#define AUTO_REPORT_SD_STATUS
+  #define AUTO_REPORT_SD_STATUS
 
   /**
    * Support for USB thumb drives using an Arduino USB Host Shield or
@@ -1244,8 +1244,8 @@
    */
   //#define USB_FLASH_DRIVE_SUPPORT
   #if ENABLED(USB_FLASH_DRIVE_SUPPORT)
-    #define USB_CS_PIN    P0_16 //SDSS
-    #define USB_INTR_PIN  P1_31 //SD_DETECT_PIN
+    #define USB_CS_PIN    SDSS
+    #define USB_INTR_PIN  SD_DETECT_PIN
 
     /**
      * USB Host Shield Library
@@ -2045,7 +2045,7 @@
                                                   // This short retract is done immediately, before parking the nozzle.
   #define FILAMENT_CHANGE_UNLOAD_FEEDRATE     30  // (mm/s) Unload filament feedrate. This can be pretty fast.
   #define FILAMENT_CHANGE_UNLOAD_ACCEL        25  // (mm/s^2) Lower acceleration may allow a faster feedrate.
-  #define FILAMENT_CHANGE_UNLOAD_LENGTH      155  //550  // (mm) The length of filament for a complete unload.  // 685 mosq / 653 dual / 155 dir
+  #define FILAMENT_CHANGE_UNLOAD_LENGTH      700  // (mm) The length of filament for a complete unload.
                                                   //   For Bowden, the full length of the tube and nozzle.
                                                   //   For direct drive, the full length of the nozzle.
                                                   //   Set to 0 for manual unloading.
@@ -2054,7 +2054,7 @@
                                                   // 0 to disable start loading and skip to fast load only
   #define FILAMENT_CHANGE_FAST_LOAD_FEEDRATE  35  // (mm/s) Load filament feedrate. This can be pretty fast.
   #define FILAMENT_CHANGE_FAST_LOAD_ACCEL     25  // (mm/s^2) Lower acceleration may allow a faster feedrate.
-  #define FILAMENT_CHANGE_FAST_LOAD_LENGTH   120  //470  // (mm) Load length of filament, from extruder gear to nozzle. // 640 mosq / 600 dual / 120 dir
+  #define FILAMENT_CHANGE_FAST_LOAD_LENGTH   640  // (mm) Load length of filament, from extruder gear to nozzle.
                                                   //   For Bowden, the full length of the tube and nozzle.
                                                   //   For direct drive, the full length of the nozzle.
   //#define ADVANCED_PAUSE_CONTINUOUS_PURGE       // Purge continuously up to the purge length until interrupted.
@@ -2217,7 +2217,7 @@
   #if AXIS_IS_TMC(X) // StepperOnline 17HM19-2004S 0.9deg 2.0A 3.0mH
     #define X_CURRENT    (2000*55/100)  //1200(1150)// (mA) RMS current. Multiply by 1.414 for peak current. 
     #define X_CURRENT_HOME  X_CURRENT  // (mA) RMS current for sensorless homing
-    #define X_MICROSTEPS    64  // 0..256
+    #define X_MICROSTEPS    16  // 0..256
     #if AXIS_DRIVER_TYPE_X(TMC5160)
      #define X_RSENSE 0.075
     #else
@@ -2237,7 +2237,7 @@
   #if AXIS_IS_TMC(Y) // StepperOnline 17HM19-2004S 0.9deg 2.0A 3.0mH
     #define Y_CURRENT    (2000*55/100)
     #define Y_CURRENT_HOME  Y_CURRENT
-    #define Y_MICROSTEPS    64
+    #define Y_MICROSTEPS    16
     #if AXIS_DRIVER_TYPE_Y(TMC5160)
      #define Y_RSENSE 0.075
     #else
@@ -2254,10 +2254,10 @@
     #define Y2_CHAIN_POS     -1
   #endif
 
-  #if AXIS_IS_TMC(Z) // WANTAI 42byghw609 1.8deg 1.7A 3.0mH + 0.4mm/rev
-    #define Z_CURRENT     (1700*60/100)
+  #if AXIS_IS_TMC(Z) // Oukeda OK42STH38-1684A 400ST82 2018-09-18-01 1.8deg 1.68A 3.2mH
+    #define Z_CURRENT    (1500*60/100)
     #define Z_CURRENT_HOME  Z_CURRENT
-    #define Z_MICROSTEPS    32
+    #define Z_MICROSTEPS    8
     #if AXIS_DRIVER_TYPE_Z(TMC5160)
      #define Z_RSENSE 0.075
     #else
@@ -2290,11 +2290,9 @@
     #define Z4_CHAIN_POS     -1
   #endif
 
-//  #if AXIS_IS_TMC(E0) // StepperOnline 17HS19-2004S1 1.8deg 2.0A 3.0mH
-//    #define E0_CURRENT   (2000*65/100)
-  #if AXIS_IS_TMC(E0) // StepperOnline 17HS08-1004S 1.8deg 1.0A 4.5mH
-    #define E0_CURRENT   500 //(1000*60/100)
-    #define E0_MICROSTEPS   16
+    #if AXIS_IS_TMC(E0) // StepperOnline 17HS19-2004S1 1.8deg 2.0A 3.0mH 
+    #define E0_CURRENT   (2000*65/100)
+    #define E0_MICROSTEPS 8
     #if AXIS_DRIVER_TYPE_E0(TMC5160)
      #define E0_RSENSE 0.075
     #else
@@ -2303,14 +2301,10 @@
     #define E0_CHAIN_POS   -1
   #endif
 
-  #if AXIS_IS_TMC(E1) // https://aliexpress.ru/item/32768043304.html Nema 17 22 1.8deg 0.8A 3.8mH 120nM
-    #define E1_CURRENT   (800*70/100)
-    #define E1_MICROSTEPS   16
-    #if AXIS_DRIVER_TYPE_E1(TMC5160)
-     #define E1_RSENSE 0.075
-    #else
-     #define E1_RSENSE  0.11
-    #endif
+  #if AXIS_IS_TMC(E1) // StepperOnline 17HS19-2004S1 1.8deg 2.0A 3.0mH
+    #define E1_CURRENT      800
+    #define E1_MICROSTEPS    8
+    #define E1_RSENSE         0.11
     #define E1_CHAIN_POS     -1
   #endif
 
@@ -2428,7 +2422,7 @@
    * Use Trinamic's ultra quiet stepping mode.
    * When disabled, Marlin will use spreadCycle stepping mode.
    */
-  #define STEALTHCHOP_XY //silent mode
+  #define STEALTHCHOP_XY
   #define STEALTHCHOP_Z
   #define STEALTHCHOP_E
 
@@ -2465,7 +2459,7 @@
   #if ENABLED(MONITOR_DRIVER_STATUS)
     #define CURRENT_STEP_DOWN     50  // [mA]
     #define REPORT_CURRENT_CHANGE
-    #define STOP_ON_ERROR
+    //#define STOP_ON_ERROR
   #endif
 
   /**
@@ -2517,7 +2511,7 @@
    * IMPROVE_HOMING_RELIABILITY tunes acceleration and jerk when
    * homing and adds a guard period for endstop triggering.
    */
-  #define SENSORLESS_HOMING // StallGuard capable drivers only
+  //#define SENSORLESS_HOMING // StallGuard capable drivers only
 
   #if EITHER(SENSORLESS_HOMING, SENSORLESS_PROBING)
     // TMC2209: 0...255. TMC2130: -64...63
@@ -2567,6 +2561,10 @@
    * #define TMC_ADV() { \
    *   stepperX.diag0_otpw(1); \
    *   stepperY.intpol(0); \
+   * }
+   * #define TMC_ADV() { \
+   *   stepperE0.intpol(0); \
+   *   stepperZ.intpol(0); \
    * }
    */
   //#define TMC_ADV() {  }
@@ -3396,7 +3394,7 @@
  * WiFi Support (Espressif ESP32 WiFi)
  */
 //#define WIFISUPPORT         // Marlin embedded WiFi managenent
-#define ESP3D_WIFISUPPORT   // ESP3D Library WiFi management (https://github.com/luc-github/ESP3DLib)
+//#define ESP3D_WIFISUPPORT   // ESP3D Library WiFi management (https://github.com/luc-github/ESP3DLib)
 
 #if EITHER(WIFISUPPORT, ESP3D_WIFISUPPORT)
   //#define WEBSUPPORT          // Start a webserver (which may include auto-discovery)
