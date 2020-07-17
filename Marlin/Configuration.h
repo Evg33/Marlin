@@ -523,9 +523,14 @@
   //#define DEFAULT_Kd 440
 
   // UNI 200312 M303 E0 C8 S240 U1 (camera)
-  #define DEFAULT_Kp 20.53
-  #define DEFAULT_Ki 2.05
-  #define DEFAULT_Kd 51.34
+  //#define DEFAULT_Kp 20.53
+  //#define DEFAULT_Ki 2.05
+  //#define DEFAULT_Kd 51.34
+  // UNI22 200717 M303 E0 C10 S240 U1
+  #define DEFAULT_Kp 18.55
+  #define DEFAULT_Ki 1.72 
+  #define DEFAULT_Kd 50.05
+
 #endif // PIDTEMP
 
 //===========================================================================
@@ -575,9 +580,13 @@
 
   // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
   // UNI 200312 M303 E-1 C8 S80 U1 (camera)
-  #define DEFAULT_bedKp 90.87
-  #define DEFAULT_bedKi 17.21
-  #define DEFAULT_bedKd 319.85
+  //#define DEFAULT_bedKp 90.87
+  //#define DEFAULT_bedKi 17.21
+  //#define DEFAULT_bedKd 319.85
+  // UNI22 200717 M303 E-1 C10 S80 U1
+  #define DEFAULT_bedKp 106.13
+  #define DEFAULT_bedKi 20.66
+  #define DEFAULT_bedKd 363.40
 
 #endif // PIDTEMPBED
 
