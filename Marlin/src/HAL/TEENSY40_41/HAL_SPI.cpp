@@ -19,7 +19,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  *
  */
-#if defined(__MK64FX512__) || defined(__MK66FX1M0__)
+#ifdef __IMXRT1062__
 
 #include "HAL.h"
 #include <SPI.h>
@@ -29,14 +29,31 @@
 
 static SPISettings spiConfig;
 
+// ------------------------
+// Public functions
+// ------------------------
+
+#if ENABLED(SOFTWARE_SPI)
+  // ------------------------
+  // Software SPI
+  // ------------------------
+  #error "Software SPI not supported for Teensy 4. Use Hardware SPI."
+#else
+
+// ------------------------
+// Hardware SPI
+// ------------------------
+
 void spiBegin() {
-  #if !PIN_EXISTS(SS)
-    #error "SS_PIN not defined!"
+  #ifndef SS_PIN
+    #error "SS_PIN is not defined!"
   #endif
+
   OUT_WRITE(SS_PIN, HIGH);
-  SET_OUTPUT(SCK_PIN);
-  SET_INPUT(MISO_PIN);
-  SET_OUTPUT(MOSI_PIN);
+
+  //SET_OUTPUT(SCK_PIN);
+  //SET_INPUT(MISO_PIN);
+  //SET_OUTPUT(MOSI_PIN);
 
   #if 0 && DISABLED(SOFTWARE_SPI)
     // set SS high - may be chip select for another SPI device
@@ -117,4 +134,5 @@ void spiBeginTransaction(uint32_t spiClock, uint8_t bitOrder, uint8_t dataMode) 
   SPI.beginTransaction(spiConfig);
 }
 
-#endif // __MK64FX512__ || __MK66FX1M0__
+#endif // SOFTWARE_SPI
+#endif // __IMXRT1062__
