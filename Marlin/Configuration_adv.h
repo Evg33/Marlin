@@ -2233,7 +2233,7 @@
   #define INTERPOLATE       false //true  // Interpolate X/Y/Z_MICROSTEPS to 256
 
   #if AXIS_IS_TMC(X) // StepperOnline 17HM19-2004S 0.9deg 2.0A 3.0mH
-    #define X_CURRENT    (2000*60/100)  //1200(1150)// (mA) RMS current. Multiply by 1.414 for peak current. 
+    #define X_CURRENT    (2000*58/100)  //1200(1150)// (mA) RMS current. Multiply by 1.414 for peak current. 
     #define X_CURRENT_HOME  X_CURRENT  // (mA) RMS current for sensorless homing
     #define X_MICROSTEPS    USER_STEPS_XY  // 0..256
     #if AXIS_DRIVER_TYPE_X(TMC5160)
@@ -2253,7 +2253,7 @@
   #endif
 
   #if AXIS_IS_TMC(Y) // StepperOnline 17HM19-2004S 0.9deg 2.0A 3.0mH
-    #define Y_CURRENT    (2000*60/100) //1200(1100)
+    #define Y_CURRENT    (2000*58/100) //1200(1100)
     #define Y_CURRENT_HOME  Y_CURRENT
     #define Y_MICROSTEPS    USER_STEPS_XY
     #if AXIS_DRIVER_TYPE_Y(TMC5160)
