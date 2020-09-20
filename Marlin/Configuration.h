@@ -497,44 +497,20 @@
   #define PID_AUTOTUNE_MENU     // Add PID auto-tuning to the "Advanced Settings" menu. (~250 bytes of PROGMEM)
   //#define PID_PARAMS_PER_HOTEND // Uses separate PID parameters for each extruder (useful for mismatched extruders)
                                   // Set/get with gcode: M301 E[extruder number, 0-2]
-
-  // If you are using a pre-configured hotend then you can use one of the value sets by uncommenting it
-
-  // ZAV Mini M303 E0 C8 S230 U1
-  // M301 P12.63 I0.70 D56.76
-  // M301 P13.41 I0.80 D56.54
-  //#define DEFAULT_Kp 13.41
-  //#define DEFAULT_Ki  0.80
-  //#define DEFAULT_Kd 56.54
-  //200224  ZAV Mini M303 E0 C8 S190 U1
-  //#define DEFAULT_Kp 14.45
-  //#define DEFAULT_Ki 0.84
-  //#define DEFAULT_Kd 61.81
-  //200228  ZAV Mini M303 E0 C8 S230 U1
-  #define DEFAULT_Kp 12.96
-  #define DEFAULT_Ki 0.76
-  #define DEFAULT_Kd 55.09
-
-  // UNI M303 E0 C8 S230 U1
-  //#define DEFAULT_Kp 15.28
-  //#define DEFAULT_Ki 1.39
-  //#define DEFAULT_Kd 41.91
-  
-  // Ultimaker
-  //#define DEFAULT_Kp 22.2
-  //#define DEFAULT_Ki 1.08
-  //#define DEFAULT_Kd 114
-
-  // MakerGear
-  //#define DEFAULT_Kp 7.0
-  //#define DEFAULT_Ki 0.1
-  //#define DEFAULT_Kd 12
-
-  // Mendel Parts V9 on 12V
-  //#define DEFAULT_Kp 63.0
-  //#define DEFAULT_Ki 2.25
-  //#define DEFAULT_Kd 440
-
+  #if ENABLED(PID_PARAMS_PER_HOTEND)
+    // Specify between 1 and HOTENDS values per array.
+    // If fewer than EXTRUDER values are provided, the last element will be repeated.
+    #define DEFAULT_Kp_LIST {  22.20,  20.0 }
+    #define DEFAULT_Ki_LIST {   1.08,   1.0 }
+    #define DEFAULT_Kd_LIST { 114.00, 112.0 }
+  #else
+    //#define DEFAULT_Kp  22.20
+    //#define DEFAULT_Ki   1.08
+    //#define DEFAULT_Kd 114.00
+    #define DEFAULT_Kp 12.96
+    #define DEFAULT_Ki 0.76
+    #define DEFAULT_Kd 55.09    
+  #endif
 #endif // PIDTEMP
 
 //===========================================================================
