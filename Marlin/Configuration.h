@@ -803,7 +803,7 @@
 //#define DISTINCT_E_FACTORS
 
 #define USER_STEPS_XY 64 //32
-#define USER_STEPS_Z 32 //8
+#define USER_STEPS_Z 16 //8
 #define USER_STEPS_E0 32 //8
 
 /**
