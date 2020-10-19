@@ -35,7 +35,7 @@
  *
  * Advanced settings can be found in Configuration_adv.h
  */
-#define CONFIGURATION_H_VERSION 020007
+#define CONFIGURATION_H_VERSION 020008
 
 //===========================================================================
 //============================= Getting Started =============================
@@ -696,23 +696,15 @@
  *          TMC5130, TMC5130_STANDALONE, TMC5160, TMC5160_STANDALONE
  * :['A4988', 'A5984', 'DRV8825', 'LV8729', 'L6470', 'L6474', 'POWERSTEP01', 'TB6560', 'TB6600', 'TMC2100', 'TMC2130', 'TMC2130_STANDALONE', 'TMC2160', 'TMC2160_STANDALONE', 'TMC2208', 'TMC2208_STANDALONE', 'TMC2209', 'TMC2209_STANDALONE', 'TMC26X', 'TMC26X_STANDALONE', 'TMC2660', 'TMC2660_STANDALONE', 'TMC5130', 'TMC5130_STANDALONE', 'TMC5160', 'TMC5160_STANDALONE']
  */
-//#define X_DRIVER_TYPE  TMC2208 //TMC2225 SENSE  0.15
 #define X_DRIVER_TYPE  TMC2209
-//#define X_DRIVER_TYPE  TMC5160
-
-//#define Y_DRIVER_TYPE  TMC2208 //TMC2225 SENSE  0.15
 #define Y_DRIVER_TYPE  TMC2209
-//#define Y_DRIVER_TYPE  TMC5160
-
 #define Z_DRIVER_TYPE  TMC2209
-//#define Z_DRIVER_TYPE  TMC5160
 //#define X2_DRIVER_TYPE A4988
 //#define Y2_DRIVER_TYPE A4988
 //#define Z2_DRIVER_TYPE A4988
 //#define Z3_DRIVER_TYPE A4988
 //#define Z4_DRIVER_TYPE A4988
 #define E0_DRIVER_TYPE TMC2209
-//#define E0_DRIVER_TYPE TMC5160
 //#define E1_DRIVER_TYPE A4988
 //#define E2_DRIVER_TYPE A4988
 //#define E3_DRIVER_TYPE A4988
@@ -2255,22 +2247,83 @@
 //=============================================================================
 
 /**
- * TFT Type - Select your Display type
- *
- * Available options are:
- *   MKS_TS35_V2_0,
- *   MKS_ROBIN_TFT24, MKS_ROBIN_TFT28, MKS_ROBIN_TFT32, MKS_ROBIN_TFT35,
- *   MKS_ROBIN_TFT43, MKS_ROBIN_TFT_V1_1R
- *   TFT_TRONXY_X5SA, ANYCUBIC_TFT35, LONGER_LK_TFT28
- *   TFT_GENERIC
- *
- * For TFT_GENERIC, you need to configure these 3 options:
- *   Driver:     TFT_DRIVER
- *               Current Drivers are: AUTO, ST7735, ST7789, ST7796, R61505, ILI9328, ILI9341, ILI9488
- *   Resolution: TFT_WIDTH and TFT_HEIGHT
- *   Interface:  TFT_INTERFACE_FSMC or TFT_INTERFACE_SPI
+ * Specific TFT Model Presets. Enable one of the following options
+ * or enable TFT_GENERIC and set sub-options.
  */
+
+//
+// 480x320, 3.5", SPI Display From MKS
+// Normally used in MKS Robin Nano V2
+//
+//#define MKS_TS35_V2_0
+
+//
+// 320x240, 2.4", FSMC Display From MKS
+// Normally used in MKS Robin Nano V1.2
+//
+//#define MKS_ROBIN_TFT24
+
+//
+// 320x240, 2.8", FSMC Display From MKS
+// Normally used in MKS Robin Nano V1.2
+//
+//#define MKS_ROBIN_TFT28
+
+//
+// 320x240, 3.2", FSMC Display From MKS
+// Normally used in MKS Robin Nano V1.2
+//
+//#define MKS_ROBIN_TFT32
+
+//
+// 480x320, 3.5", FSMC Display From MKS
+// Normally used in MKS Robin Nano V1.2
+//
+//#define MKS_ROBIN_TFT35
+
+//
+// 480x272, 4.3", FSMC Display From MKS
+//
+//#define MKS_ROBIN_TFT43
+
+//
+// 320x240, 3.2", FSMC Display From MKS
+// Normally used in MKS Robin
+//
+//#define MKS_ROBIN_TFT_V1_1R
+
+//
+// 480x320, 3.5", FSMC Stock Display from TronxXY
+//
+//#define TFT_TRONXY_X5SA
+
+//
+// 480x320, 3.5", FSMC Stock Display from AnyCubic
+//
+//#define ANYCUBIC_TFT35
+
+//
+// 320x240, 2.8", FSMC Stock Display from Longer/Alfawise
+//
+//#define LONGER_LK_TFT28
+
+//
+// Generic TFT with detailed options
+//
 //#define TFT_GENERIC
+#if ENABLED(TFT_GENERIC)
+  // :[ 'AUTO', 'ST7735', 'ST7789', 'ST7796', 'R61505', 'ILI9328', 'ILI9341', 'ILI9488' ]
+  #define TFT_DRIVER AUTO
+
+  // Interface. Enable one of the following options:
+  //#define TFT_INTERFACE_FSMC
+  //#define TFT_INTERFACE_SPI
+
+  // TFT Resolution. Enable one of the following options:
+  //#define TFT_RES_320x240
+  //#define TFT_RES_480x272
+  //#define TFT_RES_480x320
+#endif
 
 /**
  * TFT UI - User Interface Selection. Enable one of the following options:
