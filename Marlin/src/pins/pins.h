@@ -49,7 +49,9 @@
   #define IS_RAMPS_SF
 #endif
 
-#define HAS_FREE_AUX2_PINS !(BOTH(ULTRA_LCD, NEWPANEL) && ANY(PANEL_ONE, VIKI2, miniVIKI, MINIPANEL, REPRAPWORLD_KEYPAD))
+#if !(BOTH(IS_ULTRA_LCD, IS_NEWPANEL) && ANY(PANEL_ONE, VIKI2, miniVIKI, MINIPANEL, REPRAPWORLD_KEYPAD))
+  #define HAS_FREE_AUX2_PINS 1
+#endif
 
 // Test the target within the included pins file
 #ifdef __MARLIN_DEPS__
@@ -579,7 +581,7 @@
 #elif MB(TEENSY31_32)
   #include "teensy3/pins_TEENSY31_32.h"         // TEENSY31_32                            env:teensy31
 #elif MB(TEENSY35_36)
-  #include "teensy3/pins_TEENSY35_36.h"         // TEENSY35_36                            env:teensy35
+  #include "teensy3/pins_TEENSY35_36.h"         // TEENSY35_36                            env:teensy35 env:teensy36
 
 //
 // STM32 ARM Cortex-M4F
