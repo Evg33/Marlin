@@ -510,9 +510,13 @@
     #define DEFAULT_Ki_LIST {   1.08,   1.08 }
     #define DEFAULT_Kd_LIST { 114.00, 114.00 }
   #else
-    #define DEFAULT_Kp 16.97
-    #define DEFAULT_Ki 0.94
-    #define DEFAULT_Kd 76.50
+    //#define DEFAULT_Kp 16.97
+    //#define DEFAULT_Ki 0.94
+    //#define DEFAULT_Kd 76.50
+    //201129  UNI Mini M303 E0 C10 S240 U (Hardened Steel)
+    #define DEFAULT_Kp 16.25
+    #define DEFAULT_Ki 0.90
+    #define DEFAULT_Kd 73.27
   #endif
 #endif // PIDTEMP
 
@@ -557,10 +561,13 @@
   //#define DEFAULT_bedKi 21.55
   //#define DEFAULT_bedKd 538.26
   //200620  UNI Mini M303 E-1 C10 S90 U (camera)
-  #define DEFAULT_bedKp 134.30
-  #define DEFAULT_bedKi 22.91
-  #define DEFAULT_bedKd 524.77
-
+  //#define DEFAULT_bedKp 134.30
+  //#define DEFAULT_bedKi 22.91
+  //#define DEFAULT_bedKd 524.77
+  //201129  UNI Mini M303 E-1 C10 S90 U (camera)
+  #define DEFAULT_bedKp 129.39
+  #define DEFAULT_bedKi 21.35
+  #define DEFAULT_bedKd 522.84
 
   // 120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   // from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
