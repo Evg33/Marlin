@@ -513,10 +513,15 @@
     //#define DEFAULT_Kp 16.97
     //#define DEFAULT_Ki 0.94
     //#define DEFAULT_Kd 76.50
-    //201129  UNI Mini M303 E0 C10 S240 U (Hardened Steel)
-    #define DEFAULT_Kp 16.25
-    #define DEFAULT_Ki 0.90
-    #define DEFAULT_Kd 73.27
+    //201129 UNI Mini M303 E0 C10 S240 U
+    //#define DEFAULT_Kp 16.25
+    //#define DEFAULT_Ki 0.90
+    //#define DEFAULT_Kd 73.27
+    //201229 UNI Mini M303 E0 C10 S230 U (w fan)
+    #define DEFAULT_Kp 17.46
+    #define DEFAULT_Ki 0.95
+    #define DEFAULT_Kd 79.92
+
   #endif
 #endif // PIDTEMP
 
