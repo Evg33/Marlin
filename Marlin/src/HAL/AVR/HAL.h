@@ -97,6 +97,13 @@ typedef int8_t pin_t;
   #endif
 #endif
 
+#ifdef MMU2_SERIAL_PORT
+  #if !WITHIN(MMU2_SERIAL_PORT, -1, 3)
+    #error "MMU2_SERIAL_PORT must be from -1 to 3. Please update your configuration."
+  #endif
+  #define MMU2_SERIAL mmuSerial
+#endif
+
 #ifdef LCD_SERIAL_PORT
   #if !WITHIN(LCD_SERIAL_PORT, -1, 3)
     #error "LCD_SERIAL_PORT must be from -1 to 3. Please update your configuration."
@@ -122,12 +129,16 @@ inline uint8_t HAL_get_reset_source() { return MCUSR; }
 
 inline void HAL_reboot() {}  // reboot the board or restart the bootloader
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wunused-function"
-extern "C" {
-  int freeMemory();
-}
-#pragma GCC diagnostic pop
+#if GCC_VERSION <= 50000
+  #pragma GCC diagnostic push
+  #pragma GCC diagnostic ignored "-Wunused-function"
+#endif
+
+extern "C" int freeMemory();
+
+#if GCC_VERSION <= 50000
+  #pragma GCC diagnostic pop
+#endif
 
 // ADC
 #ifdef DIDR2

@@ -99,6 +99,18 @@
   #endif
 #endif
 
+#ifdef MMU2_SERIAL_PORT
+  #if MMU2_SERIAL_PORT == -1
+    #define MMU2_SERIAL UsbSerial
+  #elif WITHIN(MMU2_SERIAL_PORT, 1, NUM_UARTS)
+    #define MMU2_SERIAL MSERIAL(MMU2_SERIAL_PORT)
+  #elif NUM_UARTS == 5
+    #error "MMU2_SERIAL_PORT must be -1 or from 1 to 5. Please update your configuration."
+  #else
+    #error "MMU2_SERIAL_PORT must be -1 or from 1 to 3. Please update your configuration."
+  #endif
+#endif
+
 #ifdef LCD_SERIAL_PORT
   #if LCD_SERIAL_PORT == -1
     #define LCD_SERIAL UsbSerial
@@ -108,6 +120,9 @@
     #error "LCD_SERIAL_PORT must be -1 or from 1 to 5. Please update your configuration."
   #else
     #error "LCD_SERIAL_PORT must be -1 or from 1 to 3. Please update your configuration."
+  #endif
+  #if HAS_DGUS_LCD
+    #define SERIAL_GET_TX_BUFFER_FREE() LCD_SERIAL.availableForWrite()
   #endif
 #endif
 
@@ -200,17 +215,9 @@ extern "C" {
 
 extern "C" char* _sbrk(int incr);
 
-/*
-static int freeMemory() {
-  volatile int top;
-  top = (int)((char*)&top - reinterpret_cast<char*>(_sbrk(0)));
-  return top;
-}
-*/
-
-static int freeMemory() {
+static inline int freeMemory() {
   volatile char top;
-  return &top - reinterpret_cast<char*>(_sbrk(0));
+  return &top - _sbrk(0);
 }
 
 #pragma GCC diagnostic pop
