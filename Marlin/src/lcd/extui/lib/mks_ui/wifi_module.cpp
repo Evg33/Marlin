@@ -21,14 +21,12 @@
  */
 #include "../../../../inc/MarlinConfigPre.h"
 
-#if HAS_TFT_LVGL_UI
+#if BOTH(HAS_TFT_LVGL_UI, MKS_WIFI_MODULE)
 
 #include "draw_ui.h"
 #include "wifi_module.h"
 #include "wifi_upload.h"
 #include "SPI_TFT.h"
-
-#if ENABLED(MKS_WIFI_MODULE)
 
 #include "../../../../MarlinCore.h"
 #include "../../../../module/temperature.h"
@@ -459,7 +457,6 @@ int package_to_wifi(WIFI_RET_TYPE type, uint8_t *buf, int len) {
   return 1;
 }
 
-
 #define SEND_OK_TO_WIFI send_to_wifi((uint8_t *)"ok\r\n", strlen("ok\r\n"))
 int send_to_wifi(uint8_t *buf, int len) { return package_to_wifi(WIFI_TRANS_INF, buf, len); }
 
@@ -552,7 +549,6 @@ typedef struct {
   uint8_t *data;
   uint8_t tail;
 } ESP_PROTOC_FRAME;
-
 
 static int cut_msg_head(uint8_t *msg, uint16_t msgLen, uint16_t cutLen) {
   if (msgLen < cutLen) return 0;
@@ -878,38 +874,64 @@ static void wifi_gcode_exec(uint8_t *cmd_line) {
             }
           }
           break;
+
         case 105:
         case 991:
           ZERO(tempBuf);
           if (cmd_value == 105) {
-            SEND_OK_TO_WIFI;
-            sprintf_P((char *)tempBuf, PSTR("T:%.1f /%.1f B:%.1f /%.1f T0:%.1f /%.1f T1:%.1f /%.1f @:0 B@:0\r\n"),
 
-            (float)thermalManager.temp_hotend[0].celsius, (float)thermalManager.temp_hotend[0].target,
+            SEND_OK_TO_WIFI;
+
+            char *outBuf = (char *)tempBuf;
+            char str_1[16], tbuf[34];
+
+            dtostrf(thermalManager.temp_hotend[0].celsius, 1, 1, tbuf);
+            strcat_P(tbuf, PSTR(" /"));
+            strcat(tbuf, dtostrf(thermalManager.temp_hotend[0].target, 1, 1, str_1));
+
+            const int tlen = strlen(tbuf);
+
+            sprintf_P(outBuf, PSTR("T:%s"), tbuf);
+            outBuf += 2 + tlen;
+
+            strcpy_P(outBuf, PSTR(" B:"));
+            outBuf += 3;
             #if HAS_HEATED_BED
-              (float)thermalManager.temp_bed.celsius, (float)thermalManager.temp_bed.target,
+              strcpy(outBuf, dtostrf(thermalManager.temp_bed.celsius, 1, 1, str_1));
+              strcat_P(outBuf, PSTR(" /"));
+              strcat(outBuf, dtostrf(thermalManager.temp_bed.target, 1, 1, str_1));
             #else
-              0.0f, 0.0f,
+              strcpy_P(outBuf, PSTR("0 /0"));
             #endif
-            (float)thermalManager.temp_hotend[0].celsius, (float)thermalManager.temp_hotend[0].target,
-            #if DISABLED(SINGLENOZZLE) && HAS_MULTI_EXTRUDER
-              (float)thermalManager.temp_hotend[1].celsius, (float)thermalManager.temp_hotend[1].target
+            outBuf += 4;
+
+            strcat_P(outBuf, PSTR(" T0:"));
+            strcat(outBuf, tbuf);
+            outBuf += 4 + tlen;
+
+            strcat_P(outBuf, PSTR(" T1:"));
+            outBuf += 4;
+            #if HAS_MULTI_HOTEND
+              strcat(outBuf, dtostrf(thermalManager.temp_hotend[1].celsius, 1, 1, str_1));
+              strcat_P(outBuf, PSTR(" /"));
+              strcat(outBuf, dtostrf(thermalManager.temp_hotend[1].target, 1, 1, str_1));
             #else
-              0.0f, 0.0f
+              strcat_P(outBuf, PSTR("0 /0"));
             #endif
-            );
+            outBuf += 4;
+
+            strcat_P(outBuf, PSTR(" @:0 B@:0\r\n"));
           }
           else {
             sprintf_P((char *)tempBuf, PSTR("T:%d /%d B:%d /%d T0:%d /%d T1:%d /%d @:0 B@:0\r\n"),
-
-            (int)thermalManager.temp_hotend[0].celsius, (int)thermalManager.temp_hotend[0].target,
-            #if HAS_HEATED_BED
-              (int)thermalManager.temp_bed.celsius, (int)thermalManager.temp_bed.target,
-            #else
-              0, 0,
-            #endif
-            (int)thermalManager.temp_hotend[0].celsius, (int)thermalManager.temp_hotend[0].target,
-              #if DISABLED(SINGLENOZZLE) && HAS_MULTI_EXTRUDER
+              (int)thermalManager.temp_hotend[0].celsius, (int)thermalManager.temp_hotend[0].target,
+              #if HAS_HEATED_BED
+                (int)thermalManager.temp_bed.celsius, (int)thermalManager.temp_bed.target,
+              #else
+                0, 0,
+              #endif
+              (int)thermalManager.temp_hotend[0].celsius, (int)thermalManager.temp_hotend[0].target,
+              #if HAS_MULTI_HOTEND
                 (int)thermalManager.temp_hotend[1].celsius, (int)thermalManager.temp_hotend[1].target
               #else
                 0, 0
@@ -1707,7 +1729,6 @@ void mks_esp_wifi_init() {
   wifi_link_state = WIFI_NOT_CONFIG;
 }
 
-
 void mks_wifi_firmware_update() {
   card.openFileRead((char *)ESP_FIRMWARE_FILE);
 
@@ -1826,5 +1847,4 @@ int readWifiBuf(int8_t *buf, int32_t len) {
   return i;
 }
 
-#endif // MKS_WIFI_MODULE
-#endif // HAS_TFT_LVGL_UI
+#endif // HAS_TFT_LVGL_UI && MKS_WIFI_MODULE

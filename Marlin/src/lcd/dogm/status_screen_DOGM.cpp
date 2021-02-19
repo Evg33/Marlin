@@ -40,6 +40,10 @@
 
 #include "../../gcode/parser.h" // for units (and volumetric)
 
+#if ENABLED(LCD_SHOW_E_TOTAL)
+  #include "../../MarlinCore.h" // for printingIsActive(), marlin_state and MF_SD_COMPLETE
+#endif
+
 #if ENABLED(FILAMENT_LCD_DISPLAY)
   #include "../../feature/filwidth.h"
   #include "../../module/planner.h"
@@ -703,7 +707,6 @@ void MarlinUI::draw_status_screen() {
           lcd_put_u8str(estimation_x_pos, EXTRAS_BASELINE, estimation_string);
         }
         else if (elapsed_string[0]) {
-          extern const char E_LBL[];
           lcd_put_u8str_P(PROGRESS_BAR_X, EXTRAS_BASELINE, E_LBL);
           lcd_put_u8str(elapsed_x_pos, EXTRAS_BASELINE, elapsed_string);
         }
