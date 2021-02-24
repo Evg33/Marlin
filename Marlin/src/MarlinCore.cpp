@@ -230,18 +230,7 @@
   #include "feature/password/password.h"
 #endif
 
-PGMSTR(NUL_STR, "");
 PGMSTR(M112_KILL_STR, "M112 Shutdown");
-PGMSTR(G28_STR, "G28");
-PGMSTR(M21_STR, "M21");
-PGMSTR(M23_STR, "M23 %s");
-PGMSTR(M24_STR, "M24");
-PGMSTR(SP_P_STR, " P");  PGMSTR(SP_T_STR, " T");
-PGMSTR(X_STR,     "X");  PGMSTR(Y_STR,     "Y");  PGMSTR(Z_STR,     "Z");  PGMSTR(E_STR,     "E");
-PGMSTR(X_LBL,     "X:"); PGMSTR(Y_LBL,     "Y:"); PGMSTR(Z_LBL,     "Z:"); PGMSTR(E_LBL,     "E:");
-PGMSTR(SP_A_STR, " A");  PGMSTR(SP_B_STR, " B");  PGMSTR(SP_C_STR, " C");
-PGMSTR(SP_X_STR, " X");  PGMSTR(SP_Y_STR, " Y");  PGMSTR(SP_Z_STR, " Z");  PGMSTR(SP_E_STR, " E");
-PGMSTR(SP_X_LBL, " X:"); PGMSTR(SP_Y_LBL, " Y:"); PGMSTR(SP_Z_LBL, " Z:"); PGMSTR(SP_E_LBL, " E:");
 
 MarlinState marlin_state = MF_INITIALIZING;
 
@@ -373,19 +362,19 @@ void startOrResumeJob() {
   inline void abortSDPrinting() {
     IF_DISABLED(NO_SD_AUTOSTART, card.autofile_cancel());
     card.endFilePrint(TERN_(SD_RESORT, true));
+
     queue.clear();
     quickstop_stepper();
     print_job_timer.stop();
-    #if DISABLED(SD_ABORT_NO_COOLDOWN)
-      thermalManager.disable_all_heaters();
-    #endif
-    #if !HAS_CUTTER
-      thermalManager.zero_fan_speeds();
-    #else
-      cutter.kill();              // Full cutter shutdown including ISR control
-    #endif
+
+    IF_DISABLED(SD_ABORT_NO_COOLDOWN, thermalManager.disable_all_heaters());
+
+    TERN(HAS_CUTTER, cutter.kill(), thermalManager.zero_fan_speeds()); // Full cutter shutdown including ISR control
+
     wait_for_heatup = false;
+
     TERN_(POWER_LOSS_RECOVERY, recovery.purge());
+
     #ifdef EVENT_GCODE_SD_ABORT
       queue.inject_P(PSTR(EVENT_GCODE_SD_ABORT));
     #endif
@@ -794,6 +783,7 @@ void minkill(const bool steppers_off/*=false*/) {
  */
 void stop() {
   thermalManager.disable_all_heaters(); // 'unpause' taken care of in here
+
   print_job_timer.stop();
 
   #if ENABLED(PROBING_FANS_OFF)
@@ -964,7 +954,7 @@ void setup() {
   #endif
 
   #if HAS_SUICIDE
-    SETUP_LOG("SUICIDE_PIN")
+    SETUP_LOG("SUICIDE_PIN");
     OUT_WRITE(SUICIDE_PIN, !SUICIDE_PIN_INVERTING);
   #endif
 
