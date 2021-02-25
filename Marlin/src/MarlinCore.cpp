@@ -900,6 +900,10 @@ void setup() {
   #endif
   SERIAL_ECHOLNPGM("start");
 
+  TERN_(DYNAMIC_VECTORTABLE, hook_cpu_exceptions()); // If supported, install Marlin exception handlers at runtime
+
+  SETUP_RUN(HAL_init());
+
   // Set up these pins early to prevent suicide
   #if HAS_KILL
     SETUP_LOG("KILL_PIN");
@@ -938,10 +942,6 @@ void setup() {
     serial_connect_timeout = millis() + 1000UL;
     while (/*!WIFISERIAL && */PENDING(millis(), serial_connect_timeout)) { /*nada*/ }
   #endif
-
-  TERN_(DYNAMIC_VECTORTABLE, hook_cpu_exceptions()); // If supported, install Marlin exception handlers at runtime
-
-  SETUP_RUN(HAL_init());
 
   // Init and disable SPI thermocouples; this is still needed
   #if TEMP_SENSOR_0_IS_MAX_TC
