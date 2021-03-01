@@ -36,6 +36,7 @@
 
 #include "HAL/shared/Delay.h"
 #include "HAL/shared/esp_wifi.h"
+#include "HAL/shared/cpu_exception/exception_hook.h"
 
 #ifdef ARDUINO
   #include <pins_arduino.h>
@@ -230,6 +231,10 @@
   #include "feature/password/password.h"
 #endif
 
+#if ENABLED(DGUS_LCD_UI_MKS)
+  #include "lcd/extui/lib/dgus/DGUSScreenHandler.h"
+#endif
+
 PGMSTR(M112_KILL_STR, "M112 Shutdown");
 
 MarlinState marlin_state = MF_INITIALIZING;
@@ -365,7 +370,8 @@ void startOrResumeJob() {
 
     queue.clear();
     quickstop_stepper();
-    print_job_timer.stop();
+
+    print_job_timer.abort();
 
     IF_DISABLED(SD_ABORT_NO_COOLDOWN, thermalManager.disable_all_heaters());
 
@@ -386,6 +392,7 @@ void startOrResumeJob() {
     if (queue.enqueue_one_P(PSTR("M1001"))) {
       marlin_state = MF_RUNNING;
       TERN_(PASSWORD_AFTER_SD_PRINT_END, password.lock_machine());
+      TERN_(DGUS_LCD_UI_MKS, ScreenHandler.SDPrintingFinished());
     }
   }
 
@@ -405,7 +412,7 @@ void startOrResumeJob() {
  */
 inline void manage_inactivity(const bool ignore_stepper_queue=false) {
 
-  if (queue.length < BUFSIZE) queue.get_available_commands();
+  queue.get_available_commands();
 
   const millis_t ms = millis();
 
@@ -418,8 +425,7 @@ inline void manage_inactivity(const bool ignore_stepper_queue=false) {
   if (parked_or_ignoring) gcode.reset_stepper_timeout(ms);
 
   if (gcode.stepper_max_timed_out(ms)) {
-    SERIAL_ERROR_START();
-    SERIAL_ECHOLNPAIR(STR_KILL_INACTIVE_TIME, parser.command_ptr);
+    SERIAL_ERROR_MSG(STR_KILL_INACTIVE_TIME, parser.command_ptr);
     kill();
   }
 
@@ -613,8 +619,8 @@ inline void manage_inactivity(const bool ignore_stepper_queue=false) {
  */
 void idle(TERN_(ADVANCED_PAUSE_FEATURE, bool no_stepper_sleep/*=false*/)) {
   #if ENABLED(MARLIN_DEV_MODE)
-    static uint8_t idle_depth = 0;
-    if (++idle_depth > 5) SERIAL_ECHOLNPAIR("idle() call depth: ", int(idle_depth));
+    static uint16_t idle_depth = 0;
+    if (++idle_depth > 5) SERIAL_ECHOLNPAIR("idle() call depth: ", idle_depth);
   #endif
 
   // Core Marlin activities
@@ -686,8 +692,8 @@ void idle(TERN_(ADVANCED_PAUSE_FEATURE, bool no_stepper_sleep/*=false*/)) {
   // Auto-report Temperatures / SD Status
   #if HAS_AUTO_REPORTING
     if (!gcode.autoreport_paused) {
-      TERN_(AUTO_REPORT_TEMPERATURES, thermalManager.auto_report_temperatures());
-      TERN_(AUTO_REPORT_SD_STATUS, card.auto_report_sd_status());
+      TERN_(AUTO_REPORT_TEMPERATURES, thermalManager.auto_reporter.tick());
+      TERN_(AUTO_REPORT_SD_STATUS, card.auto_reporter.tick());
     }
   #endif
 
@@ -869,6 +875,9 @@ inline void tmc_standby_setup() {
  *    • Max7219
  */
 void setup() {
+  #ifdef BOARD_PREINIT
+    BOARD_PREINIT(); // Low-level init (before serial init)
+  #endif
 
   tmc_standby_setup();  // TMC Low Power Standby pins must be set early or they're not usable
 
@@ -876,14 +885,39 @@ void setup() {
     auto log_current_ms = [&](PGM_P const msg) {
       SERIAL_ECHO_START();
       SERIAL_CHAR('['); SERIAL_ECHO(millis()); SERIAL_ECHOPGM("] ");
-      serialprintPGM(msg);
-      SERIAL_EOL();
+      SERIAL_ECHOLNPGM_P(msg);
     };
     #define SETUP_LOG(M) log_current_ms(PSTR(M))
   #else
     #define SETUP_LOG(...) NOOP
   #endif
   #define SETUP_RUN(C) do{ SETUP_LOG(STRINGIFY(C)); C; }while(0)
+
+  MYSERIAL0.begin(BAUDRATE);
+  millis_t serial_connect_timeout = millis() + 1000UL;
+  while (!MYSERIAL0.connected() && PENDING(millis(), serial_connect_timeout)) { /*nada*/ }
+
+  #if HAS_MULTI_SERIAL && !HAS_ETHERNET
+    MYSERIAL1.begin(BAUDRATE);
+    serial_connect_timeout = millis() + 1000UL;
+    while (!MYSERIAL1.connected() && PENDING(millis(), serial_connect_timeout)) { /*nada*/ }
+  #endif
+  SERIAL_ECHOLNPGM("start");
+
+  // Set up these pins early to prevent suicide
+  #if HAS_KILL
+    SETUP_LOG("KILL_PIN");
+    #if KILL_PIN_STATE
+      SET_INPUT_PULLDOWN(KILL_PIN);
+    #else
+      SET_INPUT_PULLUP(KILL_PIN);
+    #endif
+  #endif
+
+  #if HAS_SUICIDE
+    SETUP_LOG("SUICIDE_PIN");
+    OUT_WRITE(SUICIDE_PIN, !SUICIDE_PIN_INVERTING);
+  #endif
 
   #if EITHER(DISABLE_DEBUG, DISABLE_JTAG)
     // Disable any hardware debug to free up pins for IO
@@ -896,17 +930,6 @@ void setup() {
     #endif
   #endif
 
-  MYSERIAL0.begin(BAUDRATE);
-  millis_t serial_connect_timeout = millis() + 1000UL;
-  while (!MYSERIAL0 && PENDING(millis(), serial_connect_timeout)) { /*nada*/ }
-
-  #if HAS_MULTI_SERIAL && !HAS_ETHERNET
-    MYSERIAL1.begin(BAUDRATE);
-    serial_connect_timeout = millis() + 1000UL;
-    while (!MYSERIAL1 && PENDING(millis(), serial_connect_timeout)) { /*nada*/ }
-  #endif
-  SERIAL_ECHOLNPGM("start");
-
   #if BOTH(HAS_TFT_LVGL_UI, MKS_WIFI_MODULE)
     mks_esp_wifi_init();
     WIFISERIAL.begin(WIFI_BAUDRATE);
@@ -914,18 +937,16 @@ void setup() {
     while (/*!WIFISERIAL && */PENDING(millis(), serial_connect_timeout)) { /*nada*/ }
   #endif
 
+  TERN_(DYNAMIC_VECTORTABLE, hook_cpu_exceptions()); // If supported, install Marlin exception handlers at runtime
+
   SETUP_RUN(HAL_init());
 
-  // Init and disable SPI thermocouples
-  #if HEATER_0_USES_MAX6675
+  // Init and disable SPI thermocouples; this is still needed
+  #if TEMP_SENSOR_0_IS_MAX_TC
     OUT_WRITE(MAX6675_SS_PIN, HIGH);  // Disable
   #endif
-  #if HEATER_1_USES_MAX6675
+  #if TEMP_SENSOR_1_IS_MAX_TC
     OUT_WRITE(MAX6675_SS2_PIN, HIGH); // Disable
-  #endif
-
-  #if HAS_L64XX
-    SETUP_RUN(L64xxManager.init());  // Set up SPI, init drivers
   #endif
 
   #if ENABLED(DUET_SMART_EFFECTOR) && PIN_EXISTS(SMART_EFFECTOR_MOD)
@@ -936,32 +957,22 @@ void setup() {
     SETUP_RUN(runout.setup());
   #endif
 
-  #if ENABLED(POWER_LOSS_RECOVERY)
-    SETUP_RUN(recovery.setup());
-  #endif
-
-  #if HAS_KILL
-    SETUP_LOG("KILL_PIN");
-    #if KILL_PIN_STATE
-      SET_INPUT_PULLDOWN(KILL_PIN);
-    #else
-      SET_INPUT_PULLUP(KILL_PIN);
-    #endif
-  #endif
-
-  #if HAS_TMC220x
-    SETUP_RUN(tmc_serial_begin());
-  #endif
-
-  #if HAS_SUICIDE
-    SETUP_LOG("SUICIDE_PIN");
-    OUT_WRITE(SUICIDE_PIN, !SUICIDE_PIN_INVERTING);
-  #endif
-
   #if ENABLED(PSU_CONTROL)
     SETUP_LOG("PSU_CONTROL");
     powersupply_on = ENABLED(PSU_DEFAULT_OFF);
     if (ENABLED(PSU_DEFAULT_OFF)) PSU_OFF(); else PSU_ON();
+  #endif
+
+  #if ENABLED(POWER_LOSS_RECOVERY)
+    SETUP_RUN(recovery.setup());
+  #endif
+
+  #if HAS_L64XX
+    SETUP_RUN(L64xxManager.init());  // Set up SPI, init drivers
+  #endif
+
+  #if HAS_TMC220x
+    SETUP_RUN(tmc_serial_begin());
   #endif
 
   #if HAS_STEPPER_RESET
@@ -991,7 +1002,7 @@ void setup() {
   if (mcu & RST_SOFTWARE) SERIAL_ECHOLNPGM(STR_SOFTWARE_RESET);
   HAL_clear_reset_source();
 
-  serialprintPGM(GET_TEXT(MSG_MARLIN));
+  SERIAL_ECHOPGM_P(GET_TEXT(MSG_MARLIN));
   SERIAL_CHAR(' ');
   SERIAL_ECHOLNPGM(SHORT_BUILD_VERSION);
   SERIAL_EOL();
@@ -1002,7 +1013,10 @@ void setup() {
     );
   #endif
   SERIAL_ECHO_MSG("Compiled: " __DATE__);
-  SERIAL_ECHO_MSG(STR_FREE_MEMORY, freeMemory(), STR_PLANNER_BUFFER_BYTES, (int)sizeof(block_t) * (BLOCK_BUFFER_SIZE));
+  SERIAL_ECHO_MSG(STR_FREE_MEMORY, freeMemory(), STR_PLANNER_BUFFER_BYTES, sizeof(block_t) * (BLOCK_BUFFER_SIZE));
+
+  // Some HAL need precise delay adjustment
+  calibrate_delay_loop();
 
   // Init buzzer pin(s)
   #if USE_BEEPER
@@ -1126,10 +1140,7 @@ void setup() {
   #endif
 
   #if ENABLED(CASE_LIGHT_ENABLE)
-    #if DISABLED(CASE_LIGHT_USE_NEOPIXEL)
-      if (PWM_PIN(CASE_LIGHT_PIN)) SET_PWM(CASE_LIGHT_PIN); else SET_OUTPUT(CASE_LIGHT_PIN);
-    #endif
-    SETUP_RUN(caselight.update_brightness());
+    SETUP_RUN(caselight.init());
   #endif
 
   #if HAS_PRUSA_MMU1
