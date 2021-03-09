@@ -2481,9 +2481,7 @@
 #if ENABLED(TFT_GENERIC)
   // :[ 'AUTO', 'ST7735', 'ST7789', 'ST7796', 'R61505', 'ILI9328', 'ILI9341', 'ILI9488' ]
   #define TFT_DRIVER AUTO
-  //#define TFT_DRIVER LERDGE_ST7796
-
-  
+   
   // Interface. Enable one of the following options:
   #define TFT_INTERFACE_FSMC
   //#define TFT_INTERFACE_SPI
@@ -2538,7 +2536,7 @@
 //
 // ADS7843/XPT2046 ADC Touchscreen such as ILI9341 2.8
 //
-//#define TOUCH_SCREEN
+#define TOUCH_SCREEN
 #if ENABLED(TOUCH_SCREEN)
   #define BUTTON_DELAY_EDIT  50 // (ms) Button repeat delay for edit screens
   #define BUTTON_DELAY_MENU 250 // (ms) Button repeat delay for menus
@@ -2550,6 +2548,12 @@
   //#define TOUCH_OFFSET_X        -43
   //#define TOUCH_OFFSET_Y        257
   //#define TOUCH_ORIENTATION TOUCH_LANDSCAPE
+
+  #define TOUCH_CALIBRATION_X -17546
+  #define TOUCH_CALIBRATION_Y -12335
+  #define TOUCH_OFFSET_X 516
+  #define TOUCH_OFFSET_Y 360
+  #define TOUCH_ORIENTATION TOUCH_LANDSCAPE
 
   #if BOTH(TOUCH_SCREEN_CALIBRATION, EEPROM_SETTINGS)
     #define TOUCH_CALIBRATION_AUTO_SAVE // Auto save successful calibration values to EEPROM
