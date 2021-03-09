@@ -549,10 +549,10 @@ void openFailed(const char * const fname) {
 
 void announceOpen(const uint8_t doing, const char * const path) {
   if (doing) {
-    PORT_REDIRECT(SERIAL_ALL);
+    PORT_REDIRECT(SerialMask::All);
     SERIAL_ECHO_START();
     SERIAL_ECHOPGM("Now ");
-    serialprintPGM(doing == 1 ? PSTR("doing") : PSTR("fresh"));
+    SERIAL_ECHOPGM_P(doing == 1 ? PSTR("doing") : PSTR("fresh"));
     SERIAL_ECHOLNPAIR(" file: ", path);
   }
 }
@@ -615,7 +615,7 @@ void CardReader::openFileRead(char * const path, const uint8_t subcall_type/*=0*
     sdpos = 0;
 
     { // Don't remove this block, as the PORT_REDIRECT is a RAII
-      PORT_REDIRECT(SERIAL_ALL);
+      PORT_REDIRECT(SerialMask::All);
       SERIAL_ECHOLNPAIR(STR_SD_FILE_OPENED, fname, STR_SD_SIZE, filesize);
       SERIAL_ECHOLNPGM(STR_SD_FILE_SELECTED);
     }
@@ -1251,7 +1251,7 @@ void CardReader::fileHasFinished() {
       removeFile(recovery.filename);
       #if ENABLED(DEBUG_POWER_LOSS_RECOVERY)
         SERIAL_ECHOPGM("Power-loss file delete");
-        serialprintPGM(jobRecoverFileExists() ? PSTR(" failed.\n") : PSTR("d.\n"));
+        SERIAL_ECHOPGM_P(jobRecoverFileExists() ? PSTR(" failed.\n") : PSTR("d.\n"));
       #endif
     }
   }

@@ -132,6 +132,9 @@ const uint8_t adc_pins[] = {
   #if HAS_TEMP_CHAMBER
     TEMP_CHAMBER_PIN,
   #endif
+  #if HAS_TEMP_COOLER
+    TEMP_COOLER_PIN,
+  #endif
   #if HAS_TEMP_ADC_1
     TEMP_1_PIN,
   #endif
@@ -188,6 +191,9 @@ enum TempPinIndex : char {
   #endif
   #if HAS_TEMP_CHAMBER
     TEMP_CHAMBER,
+  #endif
+  #if HAS_TEMP_COOLER
+    TEMP_COOLER_PIN,
   #endif
   #if HAS_TEMP_ADC_1
     TEMP_1,
@@ -272,6 +278,8 @@ static void NVIC_SetPriorityGrouping(uint32_t PriorityGroup) {
   } }
 #endif
 
+TERN_(POSTMORTEM_DEBUGGING, extern void install_min_serial());
+
 void HAL_init() {
   NVIC_SetPriorityGrouping(0x3);
   #if PIN_EXISTS(LED)
@@ -287,6 +295,7 @@ void HAL_init() {
     delay(1000);                                         // Give OS time to notice
     OUT_WRITE(USB_CONNECT_PIN, USB_CONNECT_INVERTING);
   #endif
+  TERN_(POSTMORTEM_DEBUGGING, install_min_serial());    // Install the minimal serial handler
 }
 
 // HAL idle task
@@ -381,6 +390,9 @@ void HAL_adc_start_conversion(const uint8_t adc_pin) {
     #endif
     #if HAS_TEMP_CHAMBER
       case TEMP_CHAMBER_PIN: pin_index = TEMP_CHAMBER; break;
+    #endif
+    #if HAS_TEMP_COOLER
+      case TEMP_COOLER_PIN: pin_index = TEMP_COOLER; break;
     #endif
     #if HAS_TEMP_ADC_1
       case TEMP_1_PIN: pin_index = TEMP_1; break;
