@@ -1402,7 +1402,7 @@
    *
    * [1] On AVR an interrupt-capable pin is best for UHS3 compatibility.
    */
-  //#define USB_FLASH_DRIVE_SUPPORT
+  #define USB_FLASH_DRIVE_SUPPORT
   #if ENABLED(USB_FLASH_DRIVE_SUPPORT)
     /**
      * USB Host Shield Library
@@ -1420,7 +1420,7 @@
     /**
      * Native USB Host supported by some boards (USB OTG)
      */
-    //#define USE_OTG_USB_HOST
+    #define USE_OTG_USB_HOST
 
     #if DISABLED(USE_OTG_USB_HOST)
       #define USB_CS_PIN    SDSS
@@ -2401,6 +2401,16 @@
  * https://github.com/teemuatlut/TMCStepper
  */
 #if HAS_TRINAMIC_CONFIG
+  #define X_SERIAL_TX_PIN                PB2
+  #define X_SERIAL_RX_PIN                PB2
+  #define Y_SERIAL_TX_PIN                PE2
+  #define Y_SERIAL_RX_PIN                PE2
+  #define Z_SERIAL_TX_PIN                PE3
+  #define Z_SERIAL_RX_PIN                PE3
+  #define E0_SERIAL_TX_PIN               PE4
+  #define E0_SERIAL_RX_PIN               PE4
+  #define E1_SERIAL_TX_PIN               PE1
+  #define E1_SERIAL_RX_PIN               PE1
 
   #define HOLD_MULTIPLIER    0.5  // Scales down the holding current from run current
 
