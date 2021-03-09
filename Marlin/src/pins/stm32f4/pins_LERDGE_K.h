@@ -223,12 +223,8 @@
 
 #define TFT_RESET_PIN                       PD6
 #define TFT_BACKLIGHT_PIN                   PD3
-
 #define TFT_CS_PIN                          PD7
 #define TFT_RS_PIN                          PD11
-//#define TFT_SCK_PIN                       PB3   //e
-//#define TFT_MOSI_PIN                      PB5   //e
-//#define TFT_MISO_PIN                      PB4   //e
 
 #define TOUCH_CS_PIN                        PG15
 #define TOUCH_SCK_PIN                       PB3
