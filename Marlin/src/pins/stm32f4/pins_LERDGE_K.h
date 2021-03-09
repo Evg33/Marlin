@@ -100,25 +100,53 @@
   /**
    * TMC2208/TMC2209 stepper drivers
    *
-   * Hardware serial communication ports.
-   * If undefined software serial is used according to the pins below
    */
 
-  //
-  // Software serial
-  //
-
   #ifndef X_SERIAL_TX_PIN
-    #define X_SERIAL_TX_PIN                PE0
+    #define X_SERIAL_TX_PIN                PB2
   #endif
   #ifndef X_SERIAL_RX_PIN
-    #define X_SERIAL_RX_PIN                PE0
+    #define X_SERIAL_RX_PIN                PB2
+  #endif
+  #ifndef Y_SERIAL_TX_PIN
+    #define Y_SERIAL_TX_PIN                PE2
+  #endif
+  #ifndef Y_SERIAL_RX_PIN
+    #define Y_SERIAL_RX_PIN                PE2
+  #endif
+  #ifndef Z_SERIAL_TX_PIN
+    #define Z_SERIAL_TX_PIN                PE3
+  #endif
+  #ifndef Z_SERIAL_RX_PIN
+    #define Z_SERIAL_RX_PIN                PE3
+  #endif
+
+
+  #ifndef E0_SERIAL_TX_PIN
+    #define E0_SERIAL_TX_PIN               PE4
+  #endif
+  #ifndef E0_SERIAL_RX_PIN
+    #define E0_SERIAL_RX_PIN               PE4
+  #endif
+
+  #ifndef E1_SERIAL_TX_PIN
+    #define E1_SERIAL_TX_PIN               PE1
+  #endif
+  #ifndef E1_SERIAL_RX_PIN
+    #define E1_SERIAL_RX_PIN               PE1
+  #endif
+
+  #ifndef E2_SERIAL_TX_PIN
+    #define E2_SERIAL_TX_PIN               PE0
+  #endif
+  #ifndef E2_SERIAL_RX_PIN
+    #define E2_SERIAL_RX_PIN               PE0
   #endif
 
   // Reduce baud rate to improve software serial reliability
   #define TMC_BAUD_RATE                    19200
 #endif
-
+//https://user-images.githubusercontent.com/52065997/79123923-21dcbb80-7d93-11ea-81b7-c336990b8e58.jpg
 
 
 //
@@ -199,6 +227,9 @@
 
 #define TFT_CS_PIN                          PD7
 #define TFT_RS_PIN                          PD11
+//#define TFT_SCK_PIN                       PB3   //e
+//#define TFT_MOSI_PIN                      PB5   //e
+//#define TFT_MISO_PIN                      PB4   //e
 
 #define TOUCH_CS_PIN                        PG15
 #define TOUCH_SCK_PIN                       PB3
