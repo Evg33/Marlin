@@ -96,6 +96,31 @@
 //  #define E1_CS_PIN                       PE4
 //#endif
 
+#if HAS_TMC_UART
+  /**
+   * TMC2208/TMC2209 stepper drivers
+   *
+   * Hardware serial communication ports.
+   * If undefined software serial is used according to the pins below
+   */
+
+  //
+  // Software serial
+  //
+
+  #ifndef X_SERIAL_TX_PIN
+    #define X_SERIAL_TX_PIN                PE0
+  #endif
+  #ifndef X_SERIAL_RX_PIN
+    #define X_SERIAL_RX_PIN                PE0
+  #endif
+
+  // Reduce baud rate to improve software serial reliability
+  #define TMC_BAUD_RATE                    19200
+#endif
+
+
+
 //
 // Temperature Sensors
 //
