@@ -2401,6 +2401,16 @@
  * https://github.com/teemuatlut/TMCStepper
  */
 #if HAS_TRINAMIC_CONFIG
+  #define X_SERIAL_TX_PIN                PB2
+  #define X_SERIAL_RX_PIN                PB2
+  #define Y_SERIAL_TX_PIN                PE2
+  #define Y_SERIAL_RX_PIN                PE2
+  #define Z_SERIAL_TX_PIN                PE3
+  #define Z_SERIAL_RX_PIN                PE3
+  #define E0_SERIAL_TX_PIN               PE4
+  #define E0_SERIAL_RX_PIN               PE4
+  #define E1_SERIAL_TX_PIN               PE1
+  #define E1_SERIAL_RX_PIN               PE1
 
   #define HOLD_MULTIPLIER    0.5  // Scales down the holding current from run current
 
@@ -2666,12 +2676,12 @@
    * M912 - Clear stepper driver overtemperature pre-warn condition flag.
    * M122 - Report driver parameters (Requires TMC_DEBUG)
    */
-  //#define MONITOR_DRIVER_STATUS
+  #define MONITOR_DRIVER_STATUS
 
   #if ENABLED(MONITOR_DRIVER_STATUS)
     #define CURRENT_STEP_DOWN     50  // [mA]
     #define REPORT_CURRENT_CHANGE
-    #define STOP_ON_ERROR
+    //#define STOP_ON_ERROR
   #endif
 
   /**
@@ -2763,7 +2773,7 @@
    * Enable M122 debugging command for TMC stepper drivers.
    * M122 S0/1 will enable continous reporting.
    */
-  //#define TMC_DEBUG
+  #define TMC_DEBUG
 
   /**
    * You can set your own advanced settings by filling in predefined functions.
