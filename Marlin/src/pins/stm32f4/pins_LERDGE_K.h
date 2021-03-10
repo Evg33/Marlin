@@ -28,7 +28,7 @@
 #define BOARD_INFO_NAME      "Lerdge K"
 #define DEFAULT_MACHINE_NAME "LERDGE"
 
-#define I2C_EEPROM
+//#define I2C_EEPROM
 
 // USB Flash Drive support
 #define HAS_OTG_USB_HOST_SUPPORT
