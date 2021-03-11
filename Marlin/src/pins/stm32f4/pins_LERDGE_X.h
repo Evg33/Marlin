@@ -32,14 +32,9 @@
 #define TEMP_TIMER                             2
 
 #define I2C_EEPROM
-//K #define I2C_SCL_PIN                         PG14
-//K #define I2C_SDA_PIN                         PG13
 #define I2C_SCL_PIN                     PB8
 #define I2C_SDA_PIN                     PB9
-#define EEPROM_WRITE_DELAY              10
-#define EEPROM_DEVICE_ADDRESS           0x50
-//#define MARLIN_EEPROM_SIZE            0x10000 // FM24CL64 F-RAM 64K (8Kx8)
-#define MARLIN_EEPROM_SIZE              0x1000  // 4KB for testing
+#define MARLIN_EEPROM_SIZE            0x10000 // FM24CL64 F-RAM 64K (8Kx8)
 
 
 // USB Flash Drive support
