@@ -29,6 +29,13 @@
 #define DEFAULT_MACHINE_NAME "LERDGE"
 
 #define I2C_EEPROM
+#define I2C_SCL_PIN                         PG14
+#define I2C_SDA_PIN                         PG13
+#define EEPROM_WRITE_DELAY              10
+#define EEPROM_DEVICE_ADDRESS           0x50
+//#define MARLIN_EEPROM_SIZE            0x10000 // FM24CL64 F-RAM 64K (8Kx8)
+#define MARLIN_EEPROM_SIZE              0x1000  // 4KB for testing
+
 
 // USB Flash Drive support
 #define HAS_OTG_USB_HOST_SUPPORT
